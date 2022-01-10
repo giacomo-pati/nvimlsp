@@ -49,11 +49,11 @@ function M.setup()
     -- Telescope
     require("plugins-telescope").setup(use)
 
+    -- Completion
+    require("plugins-completion").setup(use)
+
     -- LSP
     require("plugins-lsp").setup(use)
-
-    -- Completion
-    -- require("plugins-completion").setup(use)
 
     if packer_bootstrap then
       print "Setting up Neovim. Restart required after installation!"

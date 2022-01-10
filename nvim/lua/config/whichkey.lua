@@ -165,7 +165,7 @@ local mappings = {
   ["s"] = {
     name = "Search",
     w = {
-      "<Cmd>lua require('telescope').extensions.arecibo.websearch()<CR>",
+      -- "<Cmd>lua require('telescope').extensions.arecibo.websearch()<CR>",
       "Web search",
     },
     s = { "<Cmd>lua require('spectre').open()<CR>", "Search file" },
@@ -447,10 +447,10 @@ end
 
 function M.setup()
   local wk = require "which-key"
-  wk.setup {}
-  wk.register(mappings, opts)
-  wk.register(vmappings, vopts)
-  wk.register(xmappings, xopts)
+  -- wk.setup {}
+  -- wk.register(mappings, opts)
+  -- wk.register(vmappings, vopts)
+  -- wk.register(xmappings, xopts)
 end
 
 return M

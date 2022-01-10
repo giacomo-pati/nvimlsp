@@ -20,12 +20,12 @@ function M.setup()
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
     extensions = {
-      arecibo = {
-        ["selected_engine"] = "google",
-        ["url_open_command"] = "xdg-open",
-        ["show_http_headers"] = false,
-        ["show_domain_icons"] = false,
-      },
+      -- arecibo = {
+      --   ["selected_engine"] = "google",
+      --   ["url_open_command"] = "xdg-open",
+      --   ["show_http_headers"] = false,
+      --   ["show_domain_icons"] = false,
+      -- },
       fzf = {
         override_generic_sorter = false,
         override_file_sorter = true,
@@ -62,10 +62,10 @@ function M.setup()
   require("telescope").load_extension "ultisnips"
   require("telescope").load_extension "repo"
   require("telescope").load_extension "gh"
-  require("telescope").load_extension "arecibo"
+  -- require("telescope").load_extension "arecibo"
   require("telescope").load_extension "media_files"
-  require("telescope").load_extension "frecency"
-  require("telescope").load_extension "gkeep"
+  -- require("telescope").load_extension "frecency"
+  -- require("telescope").load_extension "gkeep"
 
   M.search_dotfiles = function()
     require("telescope.builtin").find_files {

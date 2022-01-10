@@ -1,12 +1,12 @@
 local M = {}
 
 local lsp_providers = {
-  rust_analyzer = true,
-  tsserver = true,
-  pyright = true,
+  rust_analyzer = false,
+  tsserver = false,
+  pyright = false,
   gopls = true,
-  sumneko_lua = true,
-  jsonls = true,
+  sumneko_lua = false,
+  jsonls = false,
 }
 
 local function setup_servers()

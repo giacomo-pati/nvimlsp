@@ -70,14 +70,14 @@ function M.setup()
   M.search_dotfiles = function()
     require("telescope.builtin").find_files {
       prompt_title = "< VimRC >",
-      cwd = "$HOME/workspace/alpha2phi/dotfiles/",
+      cwd = "$HOME/.config/nvim",
     }
   end
 
   M.switch_projects = function()
     require("telescope.builtin").find_files {
       prompt_title = "< Switch Project >",
-      cwd = "$HOME/workspace/dev/",
+      cwd = "$HOME/projects",
     }
   end
 

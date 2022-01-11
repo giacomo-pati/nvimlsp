@@ -72,8 +72,8 @@ function M.setup(use)
   --   end,
   }
   -- Lua development
-  use { "tjdevries/nlua.nvim" }
-  use { "folke/lua-dev.nvim", event = "VimEnter" }
+  -- use { "tjdevries/nlua.nvim" }
+  -- use { "folke/lua-dev.nvim", event = "VimEnter" }
   -- use { "simrat39/symbols-outline.nvim",
   --   event = "VimEnter",
   --   config = function()

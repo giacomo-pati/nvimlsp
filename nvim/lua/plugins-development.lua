@@ -1,6 +1,22 @@
 local M = {}
 
 function M.setup(use)
+  use { "tpope/vim-fugitive" }
+  use { "tpope/vim-surround" }
+  use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
+  use {
+    "numToStr/Comment.nvim",
+    keys = { "gc", "gcc", "gbc" },
+    config = function()
+      require("config.comment").setup()
+    end,
+  }
+  use { "tpope/vim-rhubarb" }
+  use { "tpope/vim-unimpaired" }
+  use { "tpope/vim-vinegar" }
+  use { "tpope/vim-sleuth" }
+  use { "wellle/targets.vim" }
+  use { "easymotion/vim-easymotion" }
   use { "lewis6991/gitsigns.nvim",
     -- event = "BufReadPre",
     -- wants = "plenary.nvim",
@@ -15,11 +31,22 @@ function M.setup(use)
       require("config.neogit").setup()
     end,
   }
+  use { "zeertzjq/which-key.nvim", -- fixes issue https://github.com/folke/which-key.nvim/issues/226
   -- use { "folke/which-key.nvim",
-  --   config = function()
-  --     require("which-key").setup{}
-  --   end,
-  -- }
+    branch = "patch-1",
+    config = function()
+      -- require("which-key").setup{}
+      require("config.whichkey").setup()
+    end,
+  }
+    -- Project settings
+    use {
+      "ahmedkhalf/project.nvim",
+      event = "VimEnter",
+      config = function()
+        require("config.project").setup()
+      end,
+    }
 end
 
 return M

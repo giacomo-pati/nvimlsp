@@ -28,9 +28,9 @@ Neovim configuration system
     apt update
     apt install -y neovim python3-dev python3-pip nodejs npm ruby-full cpanminus \ 
       luarocks sqlite3 locate ripgrep fd-find daemonize dbus-user-session fontconfig \
-      dos2unix
+      dos2unix shellcheck cargo black flake8 default-jdk
     pip3 install --upgrade pynvim msgpack
-    npm install -g npm@latest neovim
+    npm install -g npm@latest neovim @fsouza/prettierd eslint_d
     gem install neovim
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
     mkdir -p ~/.fonts
@@ -42,12 +42,14 @@ Neovim configuration system
 ## Installation of Prereqs on WSL/Ubuntu (user level)
 - open shell
 - cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)
+- cargo install stylua
 - Make sure the following environment variables get set next time you login by executing:
 ```bash
     echo export PERL5LIB=/home/giacomo/perl5/lib/perl5 >>~/.profile
     echo export PERL_LOCAL_LIB_ROOT=/home/giacomo/perl5 >>~/.profile
     echo export PERL_MB_OPT=\"--install_base /home/giacomo/perl5\" >>~/.profile
     echo export PERL_MM_OPT=INSTALL_BASE=/home/giacomo/perl5 >>~/.profile
+    echo export PATH=$PATH:$HOME/.cargo/bin
 ```
 - nvim --cmd checkhealth # there shouldn't be any errors except:
     - A warning we do not have a `init.vim` file yet

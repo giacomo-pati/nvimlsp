@@ -19,12 +19,12 @@ function M.setup(use)
       },
       { "nvim-treesitter/nvim-treesitter-textobjects" },
       { "RRethy/nvim-treesitter-textsubjects" },
-      { "windwp/nvim-autopairs",
-        run = "make",
-        config = function()
-          require("nvim-autopairs").setup {}
-        end,
-      },
+      -- { "windwp/nvim-autopairs",
+      --   run = "make",
+      --   config = function()
+      --     require("nvim-autopairs").setup {}
+      --   end,
+      -- },
       { "windwp/nvim-ts-autotag",
         config = function()
           require("nvim-ts-autotag").setup { enable = true }

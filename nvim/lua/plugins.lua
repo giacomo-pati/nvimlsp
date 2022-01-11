@@ -1,11 +1,14 @@
 local M = {}
 
+local fn = vim.fn
+local cmd = vim.cmd
+
 local packer_bootstrap = false
 
 local function packer_init()
-  local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    packer_bootstrap = vim.fn.system {
+  local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    packer_bootstrap = fn.system {
       "git",
       "clone",
       "--depth",
@@ -13,16 +16,16 @@ local function packer_init()
       "https://github.com/wbthomason/packer.nvim",
       install_path,
     }
-    vim.cmd [[packadd packer.nvim]]
+    cmd [[packadd packer.nvim]]
   end
-  vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+  cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
 end
 
 packer_init()
 
 function M.setup()
   local conf = {
-    compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+    compile_path = fn.stdpath "config" .. "/lua/packer_compiled.lua",
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }

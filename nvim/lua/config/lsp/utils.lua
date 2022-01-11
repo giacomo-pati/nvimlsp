@@ -93,8 +93,8 @@ function M.lsp_config(client, bufnr)
   end
 
   -- LSP and DAP menu
-  -- local whichkey = require "config.whichkey"
-  -- whichkey.register_lsp(client)
+  local whichkey = require "config.whichkey"
+  whichkey.register_lsp(client)
 
   if client.name == "tsserver" or client.name == "jsonls" then
     client.resolved_capabilities.document_formatting = false

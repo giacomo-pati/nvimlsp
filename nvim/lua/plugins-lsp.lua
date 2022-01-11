@@ -4,13 +4,13 @@ function M.setup(use)
   -- LSP and completion
 use { "williamboman/nvim-lsp-installer" }
 use { "jose-elias-alvarez/null-ls.nvim" }
+use { "hrsh7th/cmp-nvim-lsp" }
 use { "neovim/nvim-lspconfig",
     as = "nvim-lspconfig",
     after = { "nvim-treesitter", "nvim-lsp-installer", "cmp" },
     opt = true,
     requires = {
       "ray-x/lsp_signature.nvim",
-      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       require("config.lsp").setup()

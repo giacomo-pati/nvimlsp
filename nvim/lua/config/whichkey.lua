@@ -96,8 +96,7 @@ local mappings = {
     r = { "<Cmd>Telescope frecency<Cr>", "Recent file" },
     s = { "<Cmd>Telescope symbols<Cr>", "Symbols" },
     a = { "<Cmd>xa<Cr>", "Save all & quit" },
-    e = { "<Cmd>NvimTreeToggle<CR>", "Explorer" },
-    z = { "<Cmd>lefta 20vsp ~/workspace/dev/alpha2phi<CR>", "Netrw" },
+    e = { "<Cmd>NERDTreeToggle<CR>", "Explorer" },
     v = { "<Cmd>Telescope media_files<CR>", "View media files" },
     t = { "<Cmd>Telescope<CR>", "Telescope" },
     l = { "<Cmd>e!<CR>", "Reload file" },
@@ -141,6 +140,30 @@ local mappings = {
   -- eSpeak
   e = { name = "eSpeak", s = { "<Cmd>call tts#Speak()<CR>", "Speak" } },
 
+  -- Git signs
+  h = {
+    name = "Git signs",
+    b = "Blame line",
+    p = "Preview hunk",
+    R = "Reset buffer",
+    r = "Reset buffer",
+    s = "Stage hunk",
+    S = "Stage buffer",
+    u = "Undo stage hunk",
+    U = "Reset buffer index",
+  },
+
+  -- Magma
+  m = {
+    name = "Magma",
+    l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
+    r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
+    d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
+    o = { "<Cmd>MagmaShowOutput<Cr>", "Show output" },
+    i = { "<Cmd>MagmaInit<Cr>", "Init" },
+    u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
+  },
+
   -- Project
   p = {
     name = "Project",
@@ -156,6 +179,14 @@ local mappings = {
       "<Cmd>Telescope projects<Cr>",
       "Recent projects",
     },
+  },
+
+  -- Run
+  r = {
+    name = "Run",
+    x = "Swap next parameter",
+    X = "Swap previous parameter",
+    s = { "<Cmd>lua require'sniprun'.run()<CR>", "Run snippets" },
   },
 
   -- Easymotion
@@ -196,53 +227,10 @@ local mappings = {
     v = { "<Cmd>w<CR>:TestVisit<CR>", "Test visit" },
   },
 
-  -- Run
-  r = {
-    name = "Run",
-    x = "Swap next parameter",
-    X = "Swap previous parameter",
-    s = { "<Cmd>lua require'sniprun'.run()<CR>", "Run snippets" },
-  },
-
-  -- Git signs
-  h = {
-    name = "Git signs",
-    b = "Blame line",
-    p = "Preview hunk",
-    R = "Reset buffer",
-    r = "Reset buffer",
-    s = "Stage hunk",
-    S = "Stage buffer",
-    u = "Undo stage hunk",
-    U = "Reset buffer index",
-  },
-
-  -- Notes
-  n = {
-    name = "Notes",
-    n = {
-      "<Cmd>FloatermNew nvim ~/workspace/dev/notes/<Cr>",
-      "New note",
-    },
-    o = { "<Cmd>GkeepOpen<Cr>", "GKeep Open" },
-    c = { "<Cmd>GkeepClose<Cr>", "GKeep Close" },
-    r = { "<Cmd>GkeepRefresh<Cr>", "GKeep Refresh" },
-    s = { "<Cmd>GkeepSync<Cr>", "GKeep Sync" },
-    p = { "<Cmd>MarkdownPreview<Cr>", "Preview markdown" },
-    z = { "<Cmd>ZenMode<Cr>", "Zen Mode" },
-    h = { "<Cmd>Twilight<Cr>", "Twilight" },
-    g = { "<Cmd>GrammarousCheck<Cr>", "Grammar check" },
-  },
-
-  -- Magma
-  m = {
-    name = "Magma",
-    l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
-    r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
-    d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
-    o = { "<Cmd>MagmaShowOutput<Cr>", "Show output" },
-    i = { "<Cmd>MagmaInit<Cr>", "Init" },
-    u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
+  -- Viewer
+  v = {
+    name = "View",
+    v = { "<Cmd>vsplit term://vd <cfile><CR>", "VisiData" },
   },
 
   -- Database
@@ -252,12 +240,6 @@ local mappings = {
     f = { "<Cmd>DBUIFindBuffer<Cr>", "Find buffer" },
     r = { "<Cmd>DBUIRenameBuffer<Cr>", "Rename buffer" },
     q = { "<Cmd>DBUILastQueryInfo<Cr>", "Last query info" },
-  },
-
-  -- Viewer
-  v = {
-    name = "View",
-    v = { "<Cmd>vsplit term://vd <cfile><CR>", "VisiData" },
   },
   -- K = {name = "Cheatsheet"},
   -- C = {name = "Cheatsheet (toggle comment)"},
@@ -447,10 +429,11 @@ end
 
 function M.setup()
   local wk = require "which-key"
-  -- wk.setup {}
-  -- wk.register(mappings, opts)
-  -- wk.register(vmappings, vopts)
-  -- wk.register(xmappings, xopts)
+  wk.setup {}
+  wk.register(mappings, opts)
+  wk.register(vmappings, vopts)
+  wk.register(xmappings, xopts)
+  wk.register(xmappings, xopts)
 end
 
 return M

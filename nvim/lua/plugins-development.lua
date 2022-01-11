@@ -49,6 +49,13 @@ function M.setup(use)
   use { "iamcco/markdown-preview.nvim", 
     run = 'cd app && yarn install',
   }
+  use { "rmagatti/session-lens",
+    requires = { "rmagatti/auto-session" },
+    config = function()
+      require("config.auto-session").setup()
+      require("session-lens").setup {}
+    end,
+  }
 end
 
 return M

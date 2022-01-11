@@ -58,4 +58,5 @@ Neovim configuration system
 
 ## Installation of this Neovim configuration 
 - mkdir -p ~/.config
-- cp -a [PATH-OF-NEOVIM_LUA_CHECKOUT]/nvim ~/.config/
+- rm -rf ~/.local/share/nvim/ ~/.config/nvim/ ~/.cache/nvim/
+- cp -a [PATH-TO-THIS-REPO-CHECKOUT]/nvim ~/.config/

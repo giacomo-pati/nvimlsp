@@ -39,14 +39,16 @@ function M.setup(use)
       require("config.whichkey").setup()
     end,
   }
-    -- Project settings
-    use {
-      "ahmedkhalf/project.nvim",
-      event = "VimEnter",
-      config = function()
-        require("config.project").setup()
-      end,
-    }
+  -- Project settings
+  use { "ahmedkhalf/project.nvim",
+    event = "VimEnter",
+    config = function()
+      require("config.project").setup()
+    end,
+  }
+  use { "iamcco/markdown-preview.nvim", 
+    run = 'cd app && yarn install',
+  }
 end
 
 return M

@@ -67,3 +67,10 @@ Neovim configuration system
     nvim # will install the Treesitter binaries
 ```
 - Now you should have a working Neovim development setup
+
+## Install Golang:
+```bash
+    wget https://golang.org/dl/go1.17.6.linux-amd64.tar.gz
+    sudo tar xzf go1.17.6.linux-amd64.tar.gz -C /usr/local/
+    echo export PATH=\$PATH:/usr/local/go/bin >>~/.profile
+    rm go1.17.6.linux-amd64.tar.gz

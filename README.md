@@ -21,7 +21,7 @@ Neovim configuration system
     apt update
     apt upgrade -y
     do-release-upgrade # if it fails, skip it, follow instaructions: for Mail config chose "No configuration"
-    apt install snapd -y # reinstall to make MS happy 
+    apt install snapd -y # reinstall to make MS happy
 ```
 
 - if you want to stay on 20.04 do the following:
@@ -61,6 +61,7 @@ Neovim configuration system
     fc-cache -fv
     # cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)
     cargo install stylua
+    curl -sS https://webinstall.dev/zoxide | bash
 ```
 
 - Make sure the following environment variables get set next time you login by executing:

@@ -4,8 +4,7 @@ function M.setup(use)
   use { "tpope/vim-fugitive" }
   use { "tpope/vim-surround" }
   use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
-  use {
-    "numToStr/Comment.nvim",
+  use { "numToStr/Comment.nvim",
     keys = { "gc", "gcc", "gbc" },
     config = function()
       require("config.comment").setup()

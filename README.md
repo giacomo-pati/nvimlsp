@@ -121,3 +121,10 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
 ## Install kubelogin
 
 see [here](https://github.com/int128/kubelogin/releases)
+
+## Install tmux
+
+```bash
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    cp [PATH-TO-THIS-REPO-CHECKOUT]/wsl/.tmux.conf ~/
+```

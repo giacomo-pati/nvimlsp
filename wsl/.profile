@@ -35,3 +35,4 @@ export AZURE_STORAGE_ACCOUNT=aahdsapulumi
 export AZURE_STORAGE_KEY="..."
 export PULUMI_ACCESS_TOKEN="..."
 export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-d-kv-pulumi.vault.azure.net/keys/azapphost
+eval "$(zoxide init bash)"

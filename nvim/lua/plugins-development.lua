@@ -30,9 +30,9 @@ function M.setup(use)
       require("config.neogit").setup()
     end,
   }
-  use { "zeertzjq/which-key.nvim", -- fixes issue https://github.com/folke/which-key.nvim/issues/226
-  -- use { "folke/which-key.nvim",
-    branch = "patch-1",
+  -- use { "zeertzjq/which-key.nvim", -- fixes issue https://github.com/folke/which-key.nvim/issues/226
+  use { "folke/which-key.nvim",
+    -- branch = "patch-1",
     config = function()
       -- require("which-key").setup{}
       require("config.whichkey").setup()
@@ -47,6 +47,13 @@ function M.setup(use)
   }
   use { "iamcco/markdown-preview.nvim", 
     run = 'cd app && yarn install',
+    ft = "markdown",
+    cmd = { "MarkdownPreview" },
+  }
+  use { "plasticboy/vim-markdown",
+    event = "VimEnter",
+    ft = "markdown",
+    requires = { "godlygeek/tabular" },
   }
   -- use { "rmagatti/session-lens",
   --   requires = { "rmagatti/auto-session" },
@@ -55,6 +62,25 @@ function M.setup(use)
   --     require("session-lens").setup {}
   --   end,
   -- }
+
+  -- Workflows
+  use { "voldikss/vim-browser-search", event = "VimEnter" }
+  use { "tyru/open-browser.vim", event = "VimEnter" }
+  use { "michaelb/sniprun",
+    cmd = { "SnipRun" },
+    run = "bash install.sh",
+    config = function()
+      require("config.sniprun").setup()
+    end,
+  }
+
+  -- Testing
+  use {
+    "rcarriga/vim-ultest",
+    config = "require('config.test').setup()",
+    run = ":UpdateRemotePlugins",
+    requires = { "vim-test/vim-test" },
+  }
 end
 
 return M

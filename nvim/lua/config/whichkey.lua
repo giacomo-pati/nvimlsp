@@ -138,7 +138,7 @@ local mappings = {
   },
 
   -- eSpeak
-  e = { name = "eSpeak", s = { "<Cmd>call tts#Speak()<CR>", "Speak" } },
+  -- e = { name = "eSpeak", s = { "<Cmd>call tts#Speak()<CR>", "Speak" } },
 
   -- Git signs
   h = {
@@ -154,15 +154,15 @@ local mappings = {
   },
 
   -- Magma
-  m = {
-    name = "Magma",
-    l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
-    r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
-    d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
-    o = { "<Cmd>MagmaShowOutput<Cr>", "Show output" },
-    i = { "<Cmd>MagmaInit<Cr>", "Init" },
-    u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
-  },
+  -- m = {
+  --   name = "Magma",
+  --   l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
+  --   r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
+  --   d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
+  --   o = { "<Cmd>MagmaShowOutput<Cr>", "Show output" },
+  --   i = { "<Cmd>MagmaInit<Cr>", "Init" },
+  --   u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
+  -- },
 
   -- Project
   p = {
@@ -253,7 +253,7 @@ local vmappings = {
     c = { "<Cmd>lua require('utils.codex').complete()<CR>", "Codex complete" },
   },
   h = { name = "Git signs" },
-  e = { name = "eSpeak", s = { "<Cmd>call tts#Speak(1)<CR>", "Speak" } },
+  -- e = { name = "eSpeak", s = { "<Cmd>call tts#Speak(1)<CR>", "Speak" } },
   r = {
     name = "Run",
     s = { "<Cmd>lua require'sniprun'.run('v')<CR>", "Run snippets" },
@@ -269,10 +269,10 @@ local vmappings = {
 }
 
 local xmappings = {
-  m = {
-    name = "Magma",
-    e = { "<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate" },
-  },
+  -- m = {
+  --   name = "Magma",
+  --   e = { "<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate" },
+  -- },
 }
 
 local lsp_mappings = {

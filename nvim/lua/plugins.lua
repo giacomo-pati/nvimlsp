@@ -3,25 +3,25 @@ local M = {}
 local fn = vim.fn
 local cmd = vim.cmd
 
-local packer_bootstrap = false
+-- local packer_bootstrap = false
 
-local function packer_init()
-  local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-  if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system {
-      "git",
-      "clone",
-      "--depth",
-      "1",
-      "https://github.com/wbthomason/packer.nvim",
-      install_path,
-    }
-    cmd [[packadd packer.nvim]]
-  end
-  cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
-end
+-- local function packer_init()
+--   local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+--   if fn.empty(fn.glob(install_path)) > 0 then
+--     packer_bootstrap = fn.system {
+--       "git",
+--       "clone",
+--       "--depth",
+--       "1",
+--       "https://github.com/wbthomason/packer.nvim",
+--       install_path,
+--     }
+--     cmd [[packadd packer.nvim]]
+--   end
+--   cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+-- end
 
-packer_init()
+-- packer_init()
 
 function M.setup()
   local conf = {
@@ -35,7 +35,7 @@ function M.setup()
 
   local function plugins(use)
     use { "lewis6991/impatient.nvim" } -- speed up loading Lua modules
-    use { "wbthomason/packer.nvim" }   -- plugin manager
+    -- use { "wbthomason/packer.nvim" }   -- plugin manager
 
     -- Color scheme
     require("plugins-colorscheme").setup(use)
@@ -66,8 +66,9 @@ function M.setup()
 
   pcall(require, "impatient")
   pcall(require, "packer_compiled")
-  require("packer").init(conf)
-  require("packer").startup(plugins)
+  -- require("packer").init(conf)
+  -- require("packer").startup(plugins)
+  return require("packer").startup(plugins,conf)
 end
 
 return M

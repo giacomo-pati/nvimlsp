@@ -32,6 +32,6 @@ export PATH=$PATH:$HOME/go/bin
 export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true
 export AZURE_STORAGE_ACCOUNT=aahdsapulumi
-export AZURE_STORAGE_KEY="+zjWzqZq5hAFX8YE/AkvcQoCWSycJgSloqig5rlBiCt4uPcaCu+UE9hD0S/bOosSvF6uZfWSmAgYqsSsqvQtUg=="
+export AZURE_STORAGE_KEY="..."
 export PULUMI_ACCESS_TOKEN=pul-d17432f4bd47c776de688a7bfc03ae69b0d4b2a0
 export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-d-kv-pulumi.vault.azure.net/keys/azapphost

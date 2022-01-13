@@ -125,6 +125,7 @@ see [here](https://github.com/int128/kubelogin/releases)
 ## Install tmux
 
 ```bash
+    sudo apt install tmux
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     cp [PATH-TO-THIS-REPO-CHECKOUT]/wsl/.tmux.conf ~/
 ```

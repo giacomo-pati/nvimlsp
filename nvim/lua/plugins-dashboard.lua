@@ -54,12 +54,18 @@ function M.setup(use)
   }
 
   -- Filesystem
-  use { "scrooloose/nerdtree", 
+  use { "preservim/nerdtree",
     config = function()
       require("config.nerdtree").setup()
     end,
   }
-
+  use { "windwp/nvim-spectre",
+    event = "VimEnter",
+    config = function()
+      require("spectre").setup()
+    end,
+  }
+  use { "Xuyuanp/nerdtree-git-plugin" }
   use { "AckslD/nvim-neoclip.lua",
     config = function()
       require("neoclip").setup()

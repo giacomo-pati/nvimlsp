@@ -113,6 +113,7 @@ see [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=a
 ## Install kubectl
 
 see [https://kubernetes.io/docs/tasks/tools/install-kubectl-linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management)
+for Ubuntu `hirsute` release (21.10) see [https://issueexplorer.com/issue/Azure/azure-cli/20058](https://issueexplorer.com/issue/Azure/azure-cli/20058)
 
 ## Install Powershell
 

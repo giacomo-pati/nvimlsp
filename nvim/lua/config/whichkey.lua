@@ -58,7 +58,7 @@ local mappings = {
     f = { "<Cmd>FloatermNew<Cr>", "Floating terminal" },
     i = { "<Cmd>PackerUpdate<Cr>", "Packer update" },
     y = { "<Cmd>Telescope neoclip<Cr>", "Clipboard manager" },
-    x = { "<Cmd>Telescope bookmarks<Cr>", "Browser bookmarks" },
+    -- x = { "<Cmd>Telescope bookmarks<Cr>", "Browser bookmarks" },
   },
 
   -- Buffer
@@ -66,6 +66,7 @@ local mappings = {
     name = "Buffer",
     a = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
     d = { "<Cmd>bd<Cr>", "Delete current buffer" },
+    g = { '<Cmd>let &background = (&background == "dark"? "light" : "dark")<cr>', "Toggle background color" },
     l = { "<Cmd>ls<Cr>", "List buffers" },
     n = { "<Cmd>bn<Cr>", "Next buffer" },
     p = { "<Cmd>bp<Cr>", "Previous buffer" },
@@ -195,19 +196,23 @@ local mappings = {
   -- Search
   ["s"] = {
     name = "Search",
-    w = {
+    -- w = {
       -- "<Cmd>lua require('telescope').extensions.arecibo.websearch()<CR>",
-      "Web search",
-    },
+      -- "Web search",
+    -- },
     s = { "<Cmd>lua require('spectre').open()<CR>", "Search file" },
-    z = { "<Plug>SearchNormal", "Browser search" },
+    -- z = { "<Plug>SearchNormal", "Browser search" },
     v = {
       "<Cmd>lua require('spectre').open_visual({select_word=true})<CR>",
       "Visual search",
     },
-    f = {
+    r = {
       "viw:lua require('spectre').open_file_search()<Cr>",
-      "Open file search",
+      "Find/Replace",
+    },
+    f = {
+      "<Cmd>Telescope grep_string<CR>",
+      "Find word",
     },
     c = { "q:", "Command history" },
     g = { "q/", "Grep history" },

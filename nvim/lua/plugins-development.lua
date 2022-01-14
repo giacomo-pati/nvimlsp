@@ -45,15 +45,10 @@ function M.setup(use)
       require("config.project").setup()
     end,
   }
-  use { "iamcco/markdown-preview.nvim", 
+  use { "iamcco/markdown-preview.nvim",
     run = 'cd app && yarn install',
     ft = "markdown",
     cmd = { "MarkdownPreview" },
-  }
-  use { "plasticboy/vim-markdown",
-    event = "VimEnter",
-    ft = "markdown",
-    requires = { "godlygeek/tabular" },
   }
   -- use { "rmagatti/session-lens",
   --   requires = { "rmagatti/auto-session" },

@@ -4,14 +4,14 @@ function M.setup()
   -- Colors
   --  Override the search highlight color with a combination that is easier to
   --  read. The default PaperColor is dark green backgroun with black foreground.
-  -- 
+  --
   --  Reference:
   --  - http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
   vim.api.nvim_exec([[
       set background=dark
       highlight Search guibg=DeepPink4 guifg=White ctermbg=53 ctermfg=White
       highlight ColorColumn ctermbg=0 guibg=grey
-      map <leader>bg :let &background = (&background == "dark"? "light" : "dark")<cr>
+      " map <leader>bg :let &background = (&background == "dark"? "light" : "dark")<cr>
     ]], false)
 
   -- Highlight on yank
@@ -38,7 +38,7 @@ function M.setup()
 
   -- Clear search highlights
   vim.cmd 'map <leader>c :nohlsearch<cr>'
-  
+
   -- These mappings will make it so that going to the next one in a search will
   -- center on the line it's found in.
   vim.api.nvim_exec([[
@@ -91,15 +91,15 @@ function M.setup()
   -- require('dbg.python')
 
   -- local opt = { noremap = true, silent = true }
-  -- vim.api.nvim_set_keymap('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>dsv', '<cmd>lua require"dap".step_over()<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>dso', '<cmd>lua require"dap".step_out()<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>dtb', '<cmd>lua require"dap".toggle_breakpoint()<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>dsbr', '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>dsbm', '<cmd>lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>dro', '<cmd>lua require"dap".repl.open()<CR>', opt) 
-  -- vim.api.nvim_set_keymap('n', '<leader>drl', '<cmd>lua require"dap".repl.run_last()<CR>', opt) 
+  -- vim.api.nvim_set_keymap('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>dsv', '<cmd>lua require"dap".step_over()<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>dso', '<cmd>lua require"dap".step_out()<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>dtb', '<cmd>lua require"dap".toggle_breakpoint()<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>dsbr', '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>dsbm', '<cmd>lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>dro', '<cmd>lua require"dap".repl.open()<CR>', opt)
+  -- vim.api.nvim_set_keymap('n', '<leader>drl', '<cmd>lua require"dap".repl.run_last()<CR>', opt)
 
 -- telescope-dap
   -- vim.api.nvim_set_keymap('n', '<leader>dcc', '<cmd>lua require"telescope".extensions.dap.commands{}<CR>', opt)

@@ -35,7 +35,7 @@ function M.setup()
 
 	local function plugins(use)
 		-- plugin imaptient requires to restart nvim twice
-		-- use { "lewis6991/impatient.nvim" } -- speed up loading Lua modules
+		use { "lewis6991/impatient.nvim" } -- speed up loading Lua modules
 		use({ "wbthomason/packer.nvim" }) -- plugin manager
 
 		-- Color scheme

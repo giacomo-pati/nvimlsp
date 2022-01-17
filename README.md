@@ -45,6 +45,7 @@ Neovim configuration system
     pip3 install --upgrade pynvim msgpack
     npm install -g npm@latest neovim@latest @fsouza/prettierd@latest eslint_d@latest
     gem install neovim
+    snap install glow
 ```
 
 - exit all shells completely!

@@ -1,5 +1,5 @@
 ------------------------------------------------
--- Plugin: scrooloose/nerdtree
+-- Plugin: preservim/nerdtree
 ------------------------------------------------
 local M = {}
 
@@ -28,6 +28,9 @@ function M.setup()
 
     -- Allow NERDTree to change session root.
     vim.g.NERDTreeChDirMode = 2
+
+    -- Allow NERDTree to show git status using NERDFonts.
+    -- vim.g.NERDTreeGitStatusUseNerdFonts = 1
 end
 
 return M

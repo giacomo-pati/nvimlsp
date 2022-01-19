@@ -45,6 +45,7 @@ Neovim configuration system
     pip3 install --upgrade pynvim msgpack
     npm install -g npm@latest neovim@latest @fsouza/prettierd@latest eslint_d@latest
     gem install neovim
+    snap install glow
 ```
 
 - exit all shells completely!
@@ -113,6 +114,7 @@ see [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=a
 ## Install kubectl
 
 see [https://kubernetes.io/docs/tasks/tools/install-kubectl-linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management)
+for Ubuntu `hirsute` release (21.10) see [https://issueexplorer.com/issue/Azure/azure-cli/20058](https://issueexplorer.com/issue/Azure/azure-cli/20058)
 
 ## Install Powershell
 
@@ -121,3 +123,11 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
 ## Install kubelogin
 
 see [here](https://github.com/int128/kubelogin/releases)
+
+## Install tmux
+
+```bash
+    sudo apt install tmux
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    cp [PATH-TO-THIS-REPO-CHECKOUT]/wsl/.tmux.conf ~/
+```

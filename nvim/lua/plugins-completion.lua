@@ -9,7 +9,7 @@ function M.setup(use)
     after = "nvim-treesitter",
     opt = true,
     requires = {
-        -- "quangnguyen30192/cmp-nvim-ultisnips",
+      "quangnguyen30192/cmp-nvim-ultisnips",
       "hrsh7th/cmp-nvim-lua",
       "octaltree/cmp-look",
       "hrsh7th/cmp-path",
@@ -50,26 +50,26 @@ function M.setup(use)
 
   -- Snippets
   use { "SirVer/ultisnips",
-    requires = { 
+    requires = {
       { "honza/vim-snippets", rtp = "." },
       "mlaursen/vim-react-snippets"
     },
-  --   config = function()
-  --     vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-  --     vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
-  --     vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
-  --     vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
-  --     vim.g.UltiSnipsRemoveSelectModeMappings = 0
-  -- --     vim.opt.completeopt = "menuone,noinsert,noselect"
-  -- --     vim.g.completion_confirm_key = ""
-  -- --     vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
-  -- --     vim.g.diagnostic_enable_virtual_text = 1
-  -- --     vim.g.completion_enable_snippet = "UltiSnips"
-  -- --     vim.g.completion_enable_auto_popup = 1
-  -- --     vim.g.completion_enable_auto_hover = 1
-  -- --     vim.g.completion_enable_auto_signature = 0
-  -- --     vim.g.completion_matching_smart_case = 1
-  --   end,
+    config = function()
+      vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+      vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
+      vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
+      vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
+      vim.g.UltiSnipsRemoveSelectModeMappings = 0
+  --     vim.opt.completeopt = "menuone,noinsert,noselect"
+  --     vim.g.completion_confirm_key = ""
+  --     vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
+  --     vim.g.diagnostic_enable_virtual_text = 1
+  --     vim.g.completion_enable_snippet = "UltiSnips"
+  --     vim.g.completion_enable_auto_popup = 1
+  --     vim.g.completion_enable_auto_hover = 1
+  --     vim.g.completion_enable_auto_signature = 0
+  --     vim.g.completion_matching_smart_case = 1
+    end,
   }
   -- Lua development
   -- use { "tjdevries/nlua.nvim" }

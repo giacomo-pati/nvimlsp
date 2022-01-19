@@ -8,8 +8,13 @@ function M.setup(use)
     end,
   }
   use { "NLKNguyen/papercolor-theme",
+      -- config = function()
+      --     vim.cmd("colorscheme PaperColor")
+      -- end
+  }
+  use { "ray-x/aurora",
       config = function()
-          vim.cmd("colorscheme PaperColor")
+          vim.cmd("colorscheme aurora")
       end
   }
   -- use {

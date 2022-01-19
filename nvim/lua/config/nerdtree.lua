@@ -1,5 +1,5 @@
 ------------------------------------------------
--- Plugin: scrooloose/nerdtree
+-- Plugin: preservim/nerdtree
 ------------------------------------------------
 local M = {}
 
@@ -20,13 +20,17 @@ function M.setup()
     ]], false)
 
     -- Close vim if NERDTree is the only opened window.
-    vim.cmd 'autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif'
+    -- vim.cmd 'autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif'
+    vim.cmd 'autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif'
 
     -- Show hidden files by default.
     vim.g.NERDTreeShowHidden = 1
 
     -- Allow NERDTree to change session root.
     vim.g.NERDTreeChDirMode = 2
+
+    -- Allow NERDTree to show git status using NERDFonts.
+    -- vim.g.NERDTreeGitStatusUseNerdFonts = 1
 end
 
 return M

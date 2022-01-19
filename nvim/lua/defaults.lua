@@ -45,7 +45,11 @@ function M.setup()
 	opt.updatetime = 300 -- redraw the status bar often
 	opt.visualbell = false -- I said, no bells!
 
-	g.python3_host_prog = "/usr/bin/python3"
+	if vim.fn.has("win64") then
+		g.python3_host_prog = "/usr/bin/python3"
+	else
+		g.python3_host_prog = "c:Users/s3u3ix/AppData/Local/Microsoft/WindowsApps/python3"
+	end
 	g.loaded_python_provider = 0
 	g.loaded_perl_provider = 0
 

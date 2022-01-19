@@ -29,7 +29,7 @@ function M.setup(use)
   -- }
 
   -- debugging/DAP
-  use { "puremourning/vimspector", event = "BufWinEnter" }
+  -- use { "puremourning/vimspector", event = "BufWinEnter" }
   -- DAP
   use { "mfussenegger/nvim-dap", event = "BufWinEnter", as = "nvim-dap" }
   use { "mfussenegger/nvim-dap-python", after = "nvim-dap" }

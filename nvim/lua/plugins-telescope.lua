@@ -26,10 +26,10 @@ function M.setup(use)
       --   "nvim-telescope/telescope-frecency.nvim",
       --   requires = { "tami5/sql.nvim" },
       -- },
-      {
-        "nvim-telescope/telescope-vimspector.nvim",
-        event = "BufWinEnter",
-      },
+      -- {
+      --   "nvim-telescope/telescope-vimspector.nvim",
+      --   event = "BufWinEnter",
+      -- },
       { "nvim-telescope/telescope-dap.nvim" },
     },
     config = function()

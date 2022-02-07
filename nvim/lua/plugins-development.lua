@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup(use)
   use { "tpope/vim-fugitive" }
+  use { "kdheepak/lazygit.nvim" }
   use { "tpope/vim-surround" }
   use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
   use { "numToStr/Comment.nvim",

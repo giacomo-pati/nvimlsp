@@ -7,22 +7,22 @@ function M.setup(use)
       require("nvim-web-devicons").setup { default = true }
     end,
   }
-  use { "NLKNguyen/papercolor-theme",
+--  use { "NLKNguyen/papercolor-theme",
       -- config = function()
       --     vim.cmd("colorscheme PaperColor")
       -- end
-  }
+--  }
   use { "ray-x/aurora",
       config = function()
           vim.cmd("colorscheme aurora")
       end
   }
-  -- use {
-  --   "sainnhe/gruvbox-material",
-  --   config = function()
-  --     vim.cmd "colorscheme gruvbox-material"
-  --   end,
-  -- }
+--  use {
+--    "sainnhe/gruvbox-material",
+--    config = function()
+--      vim.cmd "colorscheme gruvbox-material"
+--    end,
+--  }
 end
 
 return M

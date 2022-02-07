@@ -121,12 +121,12 @@ local mappings = {
     ["r"] = {
       name = "Rebase",
       u = {
-        "<Cmd>Git rebase upstream/master<Cr>",
-        "Git rebase upstream/master",
+        "<Cmd>Git rebase upstream/develop<Cr>",
+        "Git rebase upstream/develop",
       },
       o = {
-        "<Cmd>Git rebase origin/master<Cr>",
-        "Git rebase origin/master",
+        "<Cmd>Git rebase origin/develop<Cr>",
+        "Git rebase origin/develop",
       },
     },
     x = {
@@ -134,7 +134,7 @@ local mappings = {
       ["2"] = { "<Cmd>diffget //2", "Diffget 2" },
       ["3"] = { "<Cmd>diffget //3", "Diffget 3" },
     },
-    g = { name = "Generate doc" },
+    g = { "<Cmd>LazyGit<Cr>", "Lazygit" },
     y = { name = "Git URL" },
   },
 

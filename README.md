@@ -111,7 +111,11 @@ see [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=a
     rm go1.17.6.linux-amd64.tar.gz
 ```
 
-## Install kubectl
+## Install kubectl & kubelogin
+
+```bash
+az aks install-cli
+```
 
 see [https://kubernetes.io/docs/tasks/tools/install-kubectl-linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management)
 for Ubuntu `hirsute` release (21.10) see [https://issueexplorer.com/issue/Azure/azure-cli/20058](https://issueexplorer.com/issue/Azure/azure-cli/20058)
@@ -130,4 +134,11 @@ see [here](https://github.com/int128/kubelogin/releases)
     sudo apt install tmux
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     cp [PATH-TO-THIS-REPO-CHECKOUT]/wsl/.tmux.conf ~/
+```
+
+## Install Lazygit
+
+```bash
+    pip install neovim-remote
+    go install github.com/jesseduffield/lazygit@latest
 ```

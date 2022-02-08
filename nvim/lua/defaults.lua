@@ -79,12 +79,6 @@ function M.setup()
 	--   + "j" -- Auto-remove comments if possible.
 	--   - "2" -- I'm not in gradeschool anymore
 
-	g.lazygit_floating_window_winblend = 0                        -- transparency of floating window
-  g.lazygit_floating_window_scaling_factor = 0.9                -- scaling factor for floating window
-  g.lazygit_floating_window_corner_chars = {'╭', '╮', '╰', '╯'} -- customize lazygit popup window corner characters
-  g.lazygit_floating_window_use_plenary = 0                     -- use plenary.nvim to manage floating window if available
-  g.lazygit_use_neovim_remote = 1                               -- fallback to 0 if neovim-remote is not installed
-
 	-- g.virtualedit = "all"
 	g.vim_markdown_fenced_languages = { "html", "javascript", "typescript", "css", "python", "lua", "vim" }
 	g.treesitter_parsers = { "python", "go", "javascript", "c" }

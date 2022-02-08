@@ -2,7 +2,11 @@ local M = {}
 
 function M.setup(use)
   use { "tpope/vim-fugitive" }
-  use { "kdheepak/lazygit.nvim" }
+  use { "kdheepak/lazygit.nvim",
+    config = function ()
+      require("config.lazygit").setup()
+    end
+  }
   use { "tpope/vim-surround" }
   use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
   use { "numToStr/Comment.nvim",
@@ -25,12 +29,12 @@ function M.setup(use)
       require("gitsigns").setup()
     end,
   }
-  use { "TimUntersberger/neogit",
-    cmd = "Neogit",
-    config = function()
-      require("config.neogit").setup()
-    end,
-  }
+--  use { "TimUntersberger/neogit",
+--    cmd = "Neogit",
+--    config = function()
+--      require("config.neogit").setup()
+--    end,
+--  }
   -- use { "zeertzjq/which-key.nvim", -- fixes issue https://github.com/folke/which-key.nvim/issues/226
   use { "folke/which-key.nvim",
     -- branch = "patch-1",

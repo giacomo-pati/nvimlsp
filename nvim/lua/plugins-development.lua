@@ -29,6 +29,7 @@ function M.setup(use)
       require("gitsigns").setup()
     end,
   }
+  use { "Pocco81/AutoSave.nvim" }
 --  use { "TimUntersberger/neogit",
 --    cmd = "Neogit",
 --    config = function()

@@ -29,8 +29,11 @@ function M.setup()
     -- Allow NERDTree to change session root.
     vim.g.NERDTreeChDirMode = 2
 
+    -- Close NERDTree window when a file has been selected
+    -- vim.g.NERDTreeQuitOnOpen=1
+
     -- Allow NERDTree to show git status using NERDFonts.
-    -- vim.g.NERDTreeGitStatusUseNerdFonts = 1
+    vim.g.NERDTreeGitStatusUseNerdFonts = 1
 end
 
 return M

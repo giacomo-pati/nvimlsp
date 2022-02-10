@@ -9,6 +9,15 @@ local opts = {
   nowait = true,
 }
 
+local fopts = {
+  mode = "n",
+  prefix = "",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = true,
+}
+
 local vopts = {
   mode = "v",
   prefix = "<leader>",
@@ -389,6 +398,14 @@ local dap_vimspector_mappings = {
   --                   '<cmd>lua require"dap".repl.run_last()<CR>')
 }
 
+local fmappings = {
+    ["<F8>"] = { ":lua require('dap').step_over()<CR>", "Step over" },
+    ["<S-F8>"] = { ":lua require('dap').step_out()<CR>", "Step out" },
+    ["<F7>"] = { ":lua require('dap').step_into()<CR>", "Step into" },
+    ["<F9>"] = { ":lua require('dap').continue()<CR>", "Continue" },
+}
+
+
 function M.register_lsp(client)
   local wk = require "which-key"
   wk.register(lsp_mappings, opts)
@@ -438,7 +455,7 @@ function M.setup()
   wk.register(mappings, opts)
   wk.register(vmappings, vopts)
   wk.register(xmappings, xopts)
-  wk.register(xmappings, xopts)
+  wk.register(fmappings, fopts)
 end
 
 return M

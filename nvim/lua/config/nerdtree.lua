@@ -20,8 +20,8 @@ function M.setup()
     ]], false)
 
     -- Close vim if NERDTree is the only opened window.
-    -- vim.cmd 'autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif'
-    vim.cmd 'autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif'
+    vim.cmd 'autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif'
+    -- vim.cmd 'autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif'
 
     -- Show hidden files by default.
     vim.g.NERDTreeShowHidden = 1

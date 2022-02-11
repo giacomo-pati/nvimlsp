@@ -80,6 +80,7 @@ function M.setup(use)
       require("spectre").setup()
     end,
   }
+  use { "djoshea/vim-autoread" }
 
 end
 

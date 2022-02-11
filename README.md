@@ -150,10 +150,13 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
 
 ```bash
     MAVEN_VERSION=3.8.4
-    cd /tmp
-    wget https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
-    sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
-    sudo ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven
+    (
+      cd /tmp
+      wget https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+      sudo tar xf /tmp/apache-maven-${MAVEN_VERSION}.tar.gz -C /opt
+      sudo ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven
+      rm /tmp/apache-maven-${MAVEN_VERSION}.tar.gz
+    )
     echo export JAVA_HOME=/usr/lib/jvm/default-java >>~/.profile
     echo export M2_HOME=/opt/maven >>~/.profile
     echo export MAVEN_HOME=/opt/maven >>~/.profile

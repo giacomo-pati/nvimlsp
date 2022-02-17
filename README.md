@@ -41,7 +41,7 @@ Neovim configuration system
     apt install -y neovim python3-dev python3-pip nodejs ruby-full cpanminus \
         luarocks sqlite3 locate ripgrep fd-find daemonize dbus-user-session \
         fontconfig dos2unix shellcheck cargo black flake8 default-jdk \
-        apt-transport-https default-jdk
+        apt-transport-https default-jdk lynx
     pip3 install --upgrade pynvim msgpack
     npm install -g npm@latest neovim@latest @fsouza/prettierd@latest eslint_d@latest
     gem install neovim
@@ -161,4 +161,12 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
     echo export M2_HOME=/opt/maven >>~/.profile
     echo export MAVEN_HOME=/opt/maven >>~/.profile
     echo export PATH=\${PATH}:\${M2_HOME}/bin >>~/.profile
+```
+
+## Install Gradle
+
+```bash
+    sudo add-apt-repository ppa:cwchien/gradle
+    sudo apt update
+    sudo apt -y install gradle
 ```

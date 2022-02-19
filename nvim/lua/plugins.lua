@@ -50,18 +50,24 @@ function M.setup()
 		--     vim.cmd("colorscheme PaperColor")
 		--   end
 		-- }
+		-- use({
+		--	"ray-x/aurora",
+		--	config = function()
+		-- vim.cmd("colorscheme aurora")
+		-- end,
+		-- })
+		-- use({
+		-- 	"sainnhe/gruvbox-material",
+		-- 	config = function()
+		-- 		vim.cmd("colorscheme gruvbox-material")
+		-- 	end,
+		-- })
 		use({
-			"ray-x/aurora",
+			"folke/tokyonight.nvim",
 			config = function()
-				vim.cmd("colorscheme aurora")
+				vim.cmd("colorscheme tokyonight")
 			end,
 		})
-		-- use {
-		--   "sainnhe/gruvbox-material",
-		--   config = function()
-		--     vim.cmd "colorscheme gruvbox-material"
-		--   end,
-		-- }
 
 		-- Development
 		use({ "tpope/vim-fugitive" })
@@ -118,11 +124,12 @@ function M.setup()
 				require("config.project").setup()
 			end,
 		})
-		-- use { "iamcco/markdown-preview.nvim",
-		-- 	run = 'cd app && yarn install',
-		-- 	ft = "markdown",
-		-- 	cmd = { "MarkdownPreview" },
-		-- }
+		use({
+			"iamcco/markdown-preview.nvim",
+			run = "cd app && yarn install",
+			ft = "markdown",
+			cmd = { "MarkdownPreview" },
+		})
 		-- use { "rmagatti/session-lens",
 		--   requires = { "rmagatti/auto-session" },
 		--   config = function()

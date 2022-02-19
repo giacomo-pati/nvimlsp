@@ -81,8 +81,8 @@ function M.setup()
 
 	-- g.virtualedit = "all"
 	g.vim_markdown_fenced_languages = { "html", "javascript", "typescript", "css", "python", "lua", "vim" }
-	g.treesitter_parsers = { "python", "go", "javascript", "c" }
-	-- g.treesitter_parsers = "maintained"
+	-- g.treesitter_parsers = { "python", "go", "javascript", "c" }
+	g.treesitter_parsers = "maintained"
 	-- on WSL 'choco install win32yank' and activate the following
 	-- g.clipboard = {
 	-- 	name = "win32yank-wsl",

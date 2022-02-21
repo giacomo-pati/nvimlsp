@@ -35,6 +35,7 @@ Neovim configuration system
 - execute the following commands to install Neovim universe:
 
 ```bash
+    sudo su -
     add-apt-repository ppa:neovim-ppa/stable # or unstable as you like
     curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
     apt update

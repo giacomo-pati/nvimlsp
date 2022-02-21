@@ -41,7 +41,7 @@ Neovim configuration system
     apt install -y neovim python3-dev python3-pip nodejs ruby-full cpanminus \
         luarocks sqlite3 locate ripgrep fd-find daemonize dbus-user-session \
         fontconfig dos2unix shellcheck cargo black flake8 default-jdk \
-        apt-transport-https default-jdk lynx
+        apt-transport-https default-jdk lynx zsh
     pip3 install --upgrade pynvim msgpack
     npm install -g npm@latest neovim@latest @fsouza/prettierd@latest eslint_d@latest
     gem install neovim
@@ -63,6 +63,8 @@ Neovim configuration system
     # cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)
     cargo install stylua
     curl -sS https://webinstall.dev/zoxide | bash
+    pip install neovim-remote
+    go install github.com/jesseduffield/lazygit@latest
 ```
 
 - Make sure the following environment variables get set next time you login by executing:
@@ -130,13 +132,6 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
     sudo apt install tmux
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     cp [PATH-TO-THIS-REPO-CHECKOUT]/wsl/.tmux.conf ~/
-```
-
-## Install Lazygit
-
-```bash
-    pip install neovim-remote
-    go install github.com/jesseduffield/lazygit@latest
 ```
 
 ## Install Pulumi

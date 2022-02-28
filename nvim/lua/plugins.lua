@@ -363,6 +363,14 @@ function M.setup()
 		})
 		use({ "kshenoy/vim-signature", event = "BufWinEnter" })
 		use({ "ray-x/lsp_signature.nvim" })
+		use({
+			"folke/trouble.nvim",
+			event = "VimEnter",
+			cmd = { "TroubleToggle", "Trouble" },
+			config = function()
+				require("trouble").setup({ auto_open = false })
+			end,
+		})
 		-- For vsnip users.
 		-- use { "hrsh7th/cmp-vsnip" }
 		-- use { "hrsh7th/vim-vsnip" }

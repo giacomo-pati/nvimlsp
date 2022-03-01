@@ -124,12 +124,13 @@ function M.setup()
 				require("config.project").setup()
 			end,
 		})
-		use({
-			"iamcco/markdown-preview.nvim",
-			run = "cd app && yarn install",
-			ft = "markdown",
-			cmd = { "MarkdownPreview" },
-		})
+		-- works for system having a graphical browser
+		-- use({
+		-- 	"iamcco/markdown-preview.nvim",
+		-- 	run = "cd app && yarn install",
+		-- 	ft = "markdown",
+		-- 	cmd = { "MarkdownPreview" },
+		-- })
 		-- use { "rmagatti/session-lens",
 		--   requires = { "rmagatti/auto-session" },
 		--   config = function()

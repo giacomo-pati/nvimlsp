@@ -64,7 +64,6 @@ function M.setup()
 	o.synmaxcol = 240
 	o.timeoutlen = 300
 
-	wo.colorcolumn = "81" -- highlight the 80th column as an indicator
 	wo.number = true -- show number ruler
 	wo.wrap = false
 

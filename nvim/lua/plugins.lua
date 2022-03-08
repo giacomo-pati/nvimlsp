@@ -45,27 +45,34 @@ function M.setup()
 				require("nvim-web-devicons").setup({ default = true })
 			end,
 		})
-		-- use { "NLKNguyen/papercolor-theme",
-		--   config = function()
-		--     vim.cmd("colorscheme PaperColor")
-		--   end
-		-- }
-		-- use({
-		--	"ray-x/aurora",
-		--	config = function()
-		-- vim.cmd("colorscheme aurora")
-		-- end,
-		-- })
-		-- use({
-		-- 	"sainnhe/gruvbox-material",
-		-- 	config = function()
-		-- 		vim.cmd("colorscheme gruvbox-material")
-		-- 	end,
-		-- })
+		use({
+			"NLKNguyen/papercolor-theme",
+			config = function()
+				-- vim.cmd("colorscheme PaperColor")
+			end,
+		})
+		use({
+			"ray-x/aurora",
+			config = function()
+				vim.cmd("colorscheme aurora")
+			end,
+		})
+		use({
+			"sainnhe/gruvbox-material",
+			config = function()
+				-- vim.cmd("colorscheme gruvbox-material")
+			end,
+		})
 		use({
 			"folke/tokyonight.nvim",
 			config = function()
-				vim.cmd("colorscheme tokyonight")
+				-- vim.cmd("colorscheme tokyonight")
+			end,
+		})
+		use({
+			"EdenEast/nightfox.nvim",
+			config = function()
+				-- vim.cmd("colorscheme nightfox")
 			end,
 		})
 
@@ -304,6 +311,7 @@ function M.setup()
 				"nvim-telescope/telescope-github.nvim",
 				"fhill2/telescope-ultisnips.nvim",
 				"cljoly/telescope-repo.nvim",
+				"kdheepak/lazygit.nvim",
 				"jvgrootveld/telescope-zoxide",
 				"dhruvmanila/telescope-bookmarks.nvim",
 				-- 'nvim-telescope/telescope-hop.nvim'

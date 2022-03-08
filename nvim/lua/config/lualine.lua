@@ -46,7 +46,8 @@ function M.setup()
 			--   normal = { c = { fg = colors.fg, bg = colors.bg } },
 			--   inactive = { c = { fg = colors.fg, bg = colors.bg } },
 			-- },
-			theme = "tokyonight",
+			-- theme = "tokyonight",
+			theme = "nightfox",
 		},
 		sections = {
 			-- these are to remove the defaults

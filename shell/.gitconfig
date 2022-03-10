@@ -1,16 +1,18 @@
 [user]
 	name = Giacomo Pati
 	email = giacomo_pati@swissre.com
+[credential]
+	helper = store
+	; credentialStore = plaintext
 [alias]
 	st = status
 	sync = fetch -p --all
 	trash = "!mkdir -p .trash ; git ls-files --others --exclude-standard | xargs mv -f -t .trash"
 	undo = checkout HEAD --
+	conflicted = !nvim +Conflicted
 [push]
 	default = simple
 [core]
 	longpaths = true
 [pull]
 	rebase = true
-[credential]
-	credentialStore = plaintext

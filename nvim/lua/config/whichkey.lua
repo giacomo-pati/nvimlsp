@@ -344,6 +344,7 @@ local dap_nvim_dap_mappings = {
 		name = "DAP",
 		b = { "<Cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle breakpoint" },
 		c = { "<Cmd>lua require('dap').continue()<CR>", "Continue" },
+		t = { "<Cmd>lua require('dap-go').debug_test()<CR>", "Continue Test" },
 		s = { "<Cmd>lua require('dap').step_over()<CR>", "Step over" },
 		i = { "<Cmd>lua require('dap').step_into()<CR>", "Step into" },
 		o = { "<Cmd>lua require('dap').step_out()<CR>", "Step out" },
@@ -404,6 +405,7 @@ local fmappings = {
 	["<S-F8>"] = { ":lua require('dap').step_out()<CR>", "Step out" },
 	["<F7>"] = { ":lua require('dap').step_into()<CR>", "Step into" },
 	["<F9>"] = { ":lua require('dap').continue()<CR>", "Continue" },
+	["<S-F9>"] = { ":lua require('dap-go').debug_test()<CR>", "Continue Test" },
 }
 
 function M.register_lsp(client)

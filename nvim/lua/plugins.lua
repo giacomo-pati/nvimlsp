@@ -469,11 +469,12 @@ function M.setup()
 		use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
 		use({ "Pocco81/DAPInstall.nvim", after = "nvim-dap" })
 		use({ "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" })
-		-- use { 'leoluz/nvim-dap-go',
-		--   config = function ()
-		--     require('dap-go').setup()
-		--   end
-		-- }
+		use({
+			"leoluz/nvim-dap-go",
+			config = function()
+				require("dap-go").setup()
+			end,
+		})
 
 		if packer_bootstrap then
 			print("Setting up Neovim. Restart required after installation!")

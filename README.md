@@ -183,5 +183,6 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
 ```sh
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     echo ZSH_CUSTOM=[PATH-TO-THIS-REPO-CHECKOUT]/nvim/shell/zshcustom >>~/.zshrc
+    sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="agnoster"/' ~/.zshrc
     sed -i 's/^plugins=.*$/plugins=(git kubectl zoxide)/' ~/.zshrc
 ```

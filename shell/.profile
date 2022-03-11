@@ -40,12 +40,11 @@ export AZURE_STORAGE_KEY="..."
 export PULUMI_ACCESS_TOKEN="..."
 export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-d-kv-pulumi.vault.azure.net/keys/azapphost
 
-
 if [ -n "$BASH_VERSION" ]; then
-    eval "$(zoxide init bash)"
     eval "$(stratum completion bash)"
-    eval "$(kubectl completion bash)"
     eval "$(pulumi gen-completion bash)"
+    eval "$(zoxide init bash)"
+    eval "$(kubectl completion bash)"
     complete -o default -F __start_stratum s
     complete -o default -F __start_kubectl k
 fi

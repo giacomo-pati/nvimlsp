@@ -42,7 +42,7 @@ Neovim configuration system
     apt install -y neovim python3-dev python3-pip nodejs ruby-full cpanminus \
         luarocks sqlite3 locate ripgrep fd-find daemonize dbus-user-session \
         fontconfig dos2unix shellcheck cargo black flake8 default-jdk \
-        apt-transport-https default-jdk lynx zsh silversearcher-ag
+        apt-transport-https default-jdk lynx zsh silversearcher-ag fzf
     pip3 install --upgrade pynvim msgpack
     npm install -g npm@latest neovim@latest @fsouza/prettierd@latest eslint_d@latest
     gem install neovim

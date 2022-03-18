@@ -96,6 +96,7 @@ function M.setup()
 	-- 	cache_enabled = 0,
 	-- }
 	-- make it extensible to individual users
+	g.NERDTreeWinSize = 50
 	pcall(require, "user.defaults")
 end
 

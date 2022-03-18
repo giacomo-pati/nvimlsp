@@ -469,10 +469,23 @@ function M.setup()
 		use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
 		use({ "Pocco81/DAPInstall.nvim", after = "nvim-dap" })
 		use({ "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" })
+		-- use({
+		-- 	"leoluz/nvim-dap-go",
+		-- 	config = function()
+		-- 		require("dap-go").setup()
+		-- 	end,
+		-- })
 		use({
-			"leoluz/nvim-dap-go",
+			"yriveiro/dap-go.nvim",
+			requires = { "nvim-lua/plenary.nvim" },
 			config = function()
-				require("dap-go").setup()
+				require("dap-go").setup({
+					external_config = {
+						enable = true,
+						path = require("lspconfig.util").find_git_ancestor(vim.loop.fs_realpath("."))
+							.. "/.vscode/dap-go.json",
+					},
+				})
 			end,
 		})
 

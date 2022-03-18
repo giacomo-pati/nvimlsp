@@ -14,9 +14,9 @@ local lsp_keymappings = {
 		["[e"] = "<Cmd>Lspsaga diagnostic_jump_next<CR>",
 		["]e"] = "<Cmd>Lspsaga diagnostic_jump_prev<CR>",
 	},
-	insert_mode = {
-		["<leader>,"] = "<C-x><C-o>",
-	},
+	-- insert_mode = {
+	-- 	["<leader>,"] = "<C-x><C-o>",
+	-- },
 }
 
 function M.lsp_diagnostics()

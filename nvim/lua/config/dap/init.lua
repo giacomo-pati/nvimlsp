@@ -19,7 +19,7 @@ function M.nvim_dap_setup()
 	-- languages
 	-- require("config.dap.python").setup()
 	-- require("config.dap.rust").setup()
-	-- require("config.dap.go").setup()
+	require("config.dap.go").setup()
 	-- require("config.dap.node").setup()
 	-- require("config.dap.lua").setup()
 

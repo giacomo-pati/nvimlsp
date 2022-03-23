@@ -59,9 +59,9 @@ alias kc="gk c"
 alias ks="gk s"
 
 # add Pulumi shortcut
-if [ -n "$BASH_VERSION" ]; then
+# if [ -n "$BASH_VERSION" ]; then
     function pl {
-	local argsx="--color=never --non-interactive --logtostderr"
+	local argsx="--color never --non-interactive --logtostderr"
 	local command=$1
 	shift
 	case $command in
@@ -82,6 +82,6 @@ if [ -n "$BASH_VERSION" ]; then
 		    ;;
 	esac
 	echo "Executing pulumi $command $@ $argsx $argsy"
-	pulumi $command $@ $argsx $argsy
+	eval pulumi $command $@ $argsx $argsy
     }
-fi
+# fi

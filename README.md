@@ -184,7 +184,7 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     sed -i 's#^.*ZSH_CUSTOM=.*$#ZSH_CUSTOM=[PATH-TO-THIS-REPO-CHECKOUT]/nvim/shell/zshcustom#' ~/.zshrc
     sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="agnoster"/' ~/.zshrc
-    sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z zoxide)/' ~/.zshrc
+    sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z)/' ~/.zshrc
 ```
 
 Put the following on top of your ~/.zshrc file:

@@ -182,9 +182,13 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
 
 ```sh
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    sed -i 's#^.*ZSH_CUSTOM=.*$#ZSH_CUSTOM=[PATH-TO-THIS-REPO-CHECKOUT]/nvim/shell/zshcustom#' ~/.zshrc
+    cp -a [PATH-TO-THIS-REPO-CHECKOUT]/shell/zshcustom/* ~/.oh-my-zsh/custom/
+    cp [PATH-TO-THIS-REPO-CHECKOUT]/shell/.*profile ~/
     sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="agnoster"/' ~/.zshrc
-    sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z)/' ~/.zshrc
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z zsh-autosuggestions history-substring-search zsh-syntax-highlighting)/' ~/.zshrc
 ```
 
 Put the following on top of your ~/.zshrc file:

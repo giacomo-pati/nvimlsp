@@ -108,5 +108,7 @@
       name:
       - glow
 
-  - name: gantsign.golang
-    golang_install_dir: /usr/local/go/
+  - name: Install Golang
+    gantsign.golang:
+      golang_install_dir: /usr/local/go/
+

@@ -205,10 +205,9 @@ znap source marlonrichert/zsh-autocomplete
 ## Installation and configuration via Ansible playbook
 
 ```sh
-sudo apt-get install software-properties-common
+sudo apt install software-properties-common
 sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
-sudo ansible-pull -U https://github.com/giacomo-pati/nvimlsp.git
-
+sudo apt update
+sudo apt install ansible
+sudo ansible-pull -U https://github.com/giacomo-pati/nvimlsp.git ansible.yaml
 ```

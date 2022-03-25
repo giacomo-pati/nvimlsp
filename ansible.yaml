@@ -71,16 +71,25 @@
     community.general.npm:
       name: neovim
       version: latest
+      state: latest
       global: yes
 
   - name: Install NPM package prettierd
     community.general.npm:
       name: "@fsouza/prettierd"
       version: latest
+      state: latest
       global: yes
 
   - name: Install NPM package eslint_d
     community.general.npm:
       name: eslint_d
       version: latest
+      state: latest
       global: yes
+
+  - name: Install latest neovim gem
+    community.general.gem:
+      name: neovim
+      state: latest
+

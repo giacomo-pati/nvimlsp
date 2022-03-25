@@ -51,11 +51,11 @@
   - name: Install python package pynvim
     pip:
       name: pynvim
-    extra_args: --upgrade
-    executable: pip3
+      extra_args: --upgrade
+      executable: pip3
 
   - name: Install python package pynvim
     pip:
       name: msgpack
-    extra_args: --upgrade
-    executable: pip3
+      extra_args: --upgrade
+      executable: pip3

@@ -5,8 +5,8 @@
   - name: Install roles
     command: ansible-galaxy role install gantsign.golang
 
-  - import_role:
-    name: gantsign.golang
+  # - import_role:
+  #   name: gantsign.golang
 
   - name: Install update-manager-core
     apt: name=update-manager-core

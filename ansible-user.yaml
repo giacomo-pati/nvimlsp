@@ -24,5 +24,5 @@
         name: stylua
 
   roles:
-     - role: gantsign.golang
-       golang_gopath: '$HOME/workspace-go'
+  - role: gantsign.golang
+    golang_gopath: '$HOME/workspace-go'

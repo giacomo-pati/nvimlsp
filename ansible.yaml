@@ -14,7 +14,7 @@
       upgrade: dist
       force_apt_get: yes
 
-  - name: Add nginx stable repository from PPA and install its signing key on Ubuntu target
+  - name: Add Neovim stable repository from PPA and install its signing key on Ubuntu target
     ansible.builtin.apt_repository:
       repo: ppa:neovim-ppa/stable
 
@@ -48,3 +48,9 @@
       - tmux
       - zsh
 
+  - name: Install python package
+  pip:
+    name:
+      - pynvim
+      - msgpack
+    extra_args: --upgrade

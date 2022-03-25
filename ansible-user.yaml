@@ -18,3 +18,11 @@
       src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
       dest: "{{ lookup('env', 'HOME') }}/.fonts/"
       remote_src: yes
+
+  - name: Install stylua Rust package
+    community.general.cargo:
+        name: stylua
+
+  roles:
+     - role: gantsign.golang
+       golang_gopath: '$HOME/workspace-go'

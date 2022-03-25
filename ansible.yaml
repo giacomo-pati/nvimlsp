@@ -49,8 +49,8 @@
       - zsh
 
   - name: Install python package
-  pip:
-    name:
+    pip:
+      name:
       - pynvim
       - msgpack
     extra_args: --upgrade

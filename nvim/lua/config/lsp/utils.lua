@@ -128,6 +128,7 @@ function M.lsp_attach(client, bufnr)
 	M.lsp_config(client, bufnr)
 	M.lsp_highlight(client, bufnr)
 	M.lsp_diagnostics()
+	require("aerial").on_attach(client, bufnr)
 end
 
 function M.get_capabilities()

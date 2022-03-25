@@ -165,6 +165,7 @@ function M.setup()
 			run = ":UpdateRemotePlugins",
 			requires = { "vim-test/vim-test" },
 		})
+		use({ "stevearc/stickybuf.nvim" })
 
 		-- Better syntax
 		use({
@@ -209,6 +210,12 @@ function M.setup()
 					end,
 				},
 			},
+		})
+		use({
+			"stevearc/aerial.nvim",
+			config = function()
+				require("config.aerial").setup()
+			end,
 		})
 
 		-- Dashboard
@@ -264,7 +271,7 @@ function M.setup()
 		})
 
 		-- Filesystem
-		if true then
+		if false then
 			use({
 				"preservim/nerdtree",
 				config = function()

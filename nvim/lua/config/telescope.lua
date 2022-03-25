@@ -65,6 +65,7 @@ function M.setup()
 	-- require("telescope").load_extension "lazygit"
 	-- require("telescope").load_extension "arecibo"
 	require("telescope").load_extension("media_files")
+	require("telescope").load_extension("aerial")
 	-- require("telescope").load_extension "frecency"
 	-- require("telescope").load_extension "gkeep"
 

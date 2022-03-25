@@ -79,6 +79,9 @@ alias ks="gk s"
 	    preview)
 		    local argsy="--refresh"
 		    ;;
+	    refresh)
+		    local argsy="--yes --skip-preview"
+		    ;;
 	    destroy)
 		    local argsy="--refresh --yes --skip-preview"
 		    ;;

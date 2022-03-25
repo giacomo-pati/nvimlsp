@@ -54,3 +54,4 @@
       - pynvim
       - msgpack
     extra_args: --upgrade
+    executable: pip3

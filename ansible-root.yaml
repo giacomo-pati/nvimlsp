@@ -2,13 +2,18 @@
   become: true
   gather_facts: False
   tasks:
+  - import_role:
+    name: gantsign.golang
+
   - name: Install update-manager-core
     apt: name=update-manager-core
+
   - name: Update apt repo and cache
     apt:
       update_cache: yes
       force_apt_get: yes
       cache_valid_time: 3600
+
   - name: Upgrade all packages on servers
     apt:
       upgrade: dist
@@ -97,3 +102,6 @@
     community.general.snap:
       name:
       - glow
+
+  - name: gantsign.golang
+    golang_install_dir: /usr/local/go/

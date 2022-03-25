@@ -1,0 +1,20 @@
+- hosts: localhost
+  become: true
+  gather_facts: False
+
+- name: ensure fonts directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.fonts"
+    state: directory
+
+- name: Caskaydia exists
+  shell: "ls {{ lookup('env', 'HOME') }}/.fonts/Caskaydia*Nerd*Font*Complete*"
+  register: hack_exists
+  ignore_errors: yes
+
+- name: Download Hack
+  when: hack_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+    remote_src: yes

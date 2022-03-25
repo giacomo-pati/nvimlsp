@@ -38,6 +38,7 @@
     - lynx
     - neovim
     - nodejs
+    - npm
     - python3-dev
     - python3-pip
     - ripgrep

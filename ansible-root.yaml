@@ -3,7 +3,7 @@
   gather_facts: False
   tasks:
   - import_role:
-    name: gantsign.golang
+      name: gantsign.golang
 
   - name: Install update-manager-core
     apt: name=update-manager-core

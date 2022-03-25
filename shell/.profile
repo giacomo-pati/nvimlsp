@@ -36,7 +36,12 @@ export PATH=$PATH:$HOME/.pulumi/bin
 export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true
 export AZURE_STORAGE_ACCOUNT=aahdsapulumi
-export AZURE_STORAGE_KEY="..."
+export AZURE_STORAGE_RESOURCE_GROUP=pulumi
+if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then
+  az storage account keys list --resource-group $AZURE_STORAGE_RESOURCE_GROUP --account-name $AZURE_STORAGE_ACCOUNT --query '[0].value' -o tsv > $HOME/.cache/AZURE_STORAGE_KEY
+fi
+export AZURE_STORAGE_KEY=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
+
 export PULUMI_ACCESS_TOKEN="..."
 export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-d-kv-pulumi.vault.azure.net/keys/azapphost
 

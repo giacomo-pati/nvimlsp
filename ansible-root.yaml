@@ -1,14 +1,15 @@
 - hosts: localhost
   become: true
-  gather_facts: False
+  gather_facts: yes
+  vars:
+    golang_version: 1.18
+
   tasks:
   - name: Install roles
     command: ansible-galaxy role install {{ item.item }}
     with_items:
     - gantsign.golang
-
-  # - import_role:
-  #   name: gantsign.golang
+    - nodesource.node
 
   - name: Install update-manager-core
     apt: name=update-manager-core
@@ -86,7 +87,7 @@
 
   - name: Install NPM package prettierd
     community.general.npm:
-      name: "@fsouza/prettierd"
+      name: '@fsouza/prettierd'
       version: latest
       state: latest
       global: yes
@@ -103,12 +104,31 @@
       name: neovim
       state: latest
 
-  - name: Install foo
+  - name: Install glow
     community.general.snap:
       name:
       - glow
 
-  - name: Install Golang
-    gantsign.golang:
-      golang_install_dir: /usr/local/go/
+  - name: Remove useless packages from the cache
+    apt:
+      autoclean: yes
 
+  - name: Remove dependencies that are no longer required
+    apt:
+      autoremove: yes
+
+# - name: download Go language SDK
+#   get_url:
+#     url: https://storage.googleapis.com/golang/go{{ golang_version }}.linux-arg64.tar.gz
+#     dest: /tmp/go{{ golang_version }}.linux-arg64.tar.gz
+#     # checksum: 7ac7b396a691e588c5fb57687759e6c4db84a2a3bbebb0765f4b38e5b1c5b00e
+#     force: no
+#     use_proxy: yes
+#     validate_certs: yes
+#     mode: 'u=rw,go=r'
+
+  roles:
+  - role: gantsign.golang
+    vars:
+    # - golang_version: {{ golang_version }}
+    - golang_install_dir: /usr/local/go

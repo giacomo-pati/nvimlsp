@@ -6,7 +6,9 @@
     install_pwsh: true
     install_go: true
     install_java: true
+    java_major_version: 11
     install_gradle: true
+    gradle_version: 7.4.2
     install_maven: true
     golang_version: 1.18
 
@@ -119,8 +121,12 @@
     # - golang_version: {{ golang_version }}
     - golang_install_dir: /opt/go
   - role: lean_delivery.java
+    transport: repositories
+    java_major_version: "{{ java_major_version }}"
     when: install_java or install_gradle or install_maven
   - role: shelleg.gradle
+    vars:
+    - gradle_version: "{{ gradle_version }}"
     when: install_gradle
 
   post_tasks:

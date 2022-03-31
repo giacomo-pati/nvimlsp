@@ -5,11 +5,11 @@
     golang_version: 1.18
 
   tasks:
-  - name: Install roles
-    command: ansible-galaxy role install {{ item.item }}
-    with_items:
-    - gantsign.golang
-    - nodesource.node
+  # - name: Install roles
+  #   command: ansible-galaxy role install {{ item.item }}
+  #   with_items:
+  #   - gantsign.golang
+  #   - nodesource.node
 
   - name: Install update-manager-core
     apt: name=update-manager-core
@@ -48,7 +48,7 @@
     - luarocks
     - lynx
     - neovim
-    - nodejs
+    # - nodejs
     - npm
     - python3-dev
     - python3-pip
@@ -62,9 +62,12 @@
 
   - name: Install python package pynvim
     pip:
-      name: pynvim
+      name: {{ item.item }}
       extra_args: --upgrade
       executable: pip3
+      with_items:
+      - pynvim
+      - msgpack
 
   - name: Install python package msgpack
     pip:
@@ -117,18 +120,9 @@
     apt:
       autoremove: yes
 
-# - name: download Go language SDK
-#   get_url:
-#     url: https://storage.googleapis.com/golang/go{{ golang_version }}.linux-arg64.tar.gz
-#     dest: /tmp/go{{ golang_version }}.linux-arg64.tar.gz
-#     # checksum: 7ac7b396a691e588c5fb57687759e6c4db84a2a3bbebb0765f4b38e5b1c5b00e
-#     force: no
-#     use_proxy: yes
-#     validate_certs: yes
-#     mode: 'u=rw,go=r'
-
   roles:
   - role: gantsign.golang
     vars:
     # - golang_version: {{ golang_version }}
     - golang_install_dir: /usr/local/go
+  - role: nodesource.node

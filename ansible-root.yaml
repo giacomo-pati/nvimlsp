@@ -95,7 +95,6 @@
   - name: Install glow
     community.general.snap:
       name: "{{ item }}"
-      state: latest
     with_items:
       - glow
 
@@ -103,7 +102,6 @@
     community.general.snap:
       name: "{{ item }}"
       extra_args: --classic
-      state: latest
     when: install_pwsh
     with_items:
       - powershell

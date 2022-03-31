@@ -94,17 +94,11 @@
 
   - name: Install glow
     community.general.snap:
-      name: "{{ item }}"
+      name: "{{ item.name }}"
+      classic: {{ item.classic }}
     with_items:
-      - glow
-
-  - name: Install powershell
-    community.general.snap:
-      name: "{{ item }}"
-      extra_args: --classic
-    when: install_pwsh
-    with_items:
-      - powershell
+    - { name: glow, classic: no }
+    - { name: powershell, classic: yes }
 
   - name: Install Azure CLI
     shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash

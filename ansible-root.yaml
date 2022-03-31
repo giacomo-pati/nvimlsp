@@ -95,7 +95,7 @@
   - name: Install glow
     community.general.snap:
       name: "{{ item.name }}"
-      classic: {{ item.classic }}
+      classic: "{{ item.classic }}"
     with_items:
     - { name: glow, classic: no }
     - { name: powershell, classic: yes }

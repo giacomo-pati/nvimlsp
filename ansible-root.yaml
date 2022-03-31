@@ -118,10 +118,10 @@
     vars:
     # - golang_version: {{ golang_version }}
     - golang_install_dir: /opt/go
-  - role: shelleg.gradle
-    when: install_gradle
   - role: lean_delivery.java
     when: install_java or install_gradle or install_maven
+  - role: shelleg.gradle
+    when: install_gradle
 
   post_tasks:
   - name: Install kubectl and kubelogin

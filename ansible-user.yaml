@@ -1,6 +1,6 @@
 - hosts: localhost
   become: true
-  gather_facts: False
+  gather_facts: yes
   tasks:
   - name: ensure fonts directory
     file:
@@ -21,4 +21,16 @@
 
   - name: Install stylua Rust package
     community.general.cargo:
-        name: stylua
+      name: stylua
+
+  - name: Install python packages
+    pip:
+      name: "{{ item }}"
+      extra_args: --upgrade
+      executable: pip3
+    with_items:
+    - neovim-remote
+
+  - name: Install lazygit
+    shell: "go install github.com/jesseduffield/lazygit@latest"
+

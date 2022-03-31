@@ -72,7 +72,7 @@
       state: present
   - name: add nodejs repository
     apt_repository:
-      repo: deb https://deb.nodesource.com/node_current.x {{ ansible_lsb.codename }} main
+      repo: deb https://deb.nodesource.com/node_18.x {{ ansible_lsb.codename }} main
       state: present
       update_cache: yes
   - name: install nodejs

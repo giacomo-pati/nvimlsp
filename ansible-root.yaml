@@ -28,9 +28,8 @@
     ansible.builtin.apt_repository:
       repo: ppa:neovim-ppa/stable
 
-  - name: install node ppa
-    shell: |
-      curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
+  - name: Install node ppa
+    shell: curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
 
   - name: Install packages
     apt: name={{ item }}
@@ -95,6 +94,12 @@
       name:
       - glow
 
+  # - name: Install Azure CLI
+    # shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo -E sh -
+
+  - name: Install kubectl and kubelogin
+    shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo -E sh -
+
   - name: Remove useless packages from the cache
     apt:
       autoclean: yes
@@ -108,3 +113,4 @@
     vars:
     # - golang_version: {{ golang_version }}
     - golang_install_dir: /usr/local/go
+  - role: brentwg.azure-cli

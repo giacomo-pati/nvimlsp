@@ -9,11 +9,11 @@
 
   - name: Caskaydia exists
     shell: "ls {{ lookup('env', 'HOME') }}/.fonts/Caskaydia*Nerd*Font*Complete*"
-    register: hack_exists
+    register: Caskaydia_exists
     ignore_errors: yes
 
-  - name: Download Hack
-    when: hack_exists is failed
+  - name: Download Caskaydia
+    when: Caskaydia_exists is failed
     ansible.builtin.unarchive:
       src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
       dest: "{{ lookup('env', 'HOME') }}/.fonts/"

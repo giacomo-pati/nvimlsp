@@ -3,6 +3,7 @@
   gather_facts: yes
   vars:
     install_azcli: true
+    install_pwsh: true
     install_go: true
     golang_version: 1.18
 
@@ -94,8 +95,17 @@
   - name: Install glow
     community.general.snap:
       name: "{{ item }}"
+      state: latest
     with_items:
       - glow
+
+  - name: Install powershell
+    community.general.snap:
+      name: "{{ item }}"
+      extra_args: --classic
+      state: latest
+    when: install_pwsh
+    with_items:
       - powershell
 
   - name: Install Azure CLI

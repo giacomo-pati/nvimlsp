@@ -6,7 +6,7 @@
     install_go: true
     golang_version: 1.18
 
-  tasks:
+  pre_tasks:
   # - name: Install roles
   #   command: ansible-galaxy role install {{ item }}
   #   with_items:
@@ -93,7 +93,8 @@
 
   - name: Install glow
     community.general.snap:
-      name:
+      name: "{{ item }}"
+    with_items:
       - glow
       - powershell
 
@@ -118,3 +119,5 @@
     vars:
     # - golang_version: {{ golang_version }}
     - golang_install_dir: /usr/local/go
+
+  post_tasks:

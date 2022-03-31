@@ -28,9 +28,9 @@
     ansible.builtin.apt_repository:
       repo: ppa:neovim-ppa/stable
 
-  - name: install node
-    shell: |
-      curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
+  # - name: install node
+  #   shell: |
+  #     curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
 
   - name: Install packages
     apt: name={{item}}
@@ -54,7 +54,7 @@
     - lynx
     - make
     - neovim
-    - nodejs
+    # - nodejs
     - npm
     - python3-dev
     - python3-pip
@@ -66,19 +66,19 @@
     - tmux
     - zsh
 
-  # - name: add nodejs apt key
-  #   apt_key:
-  #     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-  #     state: present
-  # - name: add nodejs repository
-  #   apt_repository:
-  #     repo: deb https://deb.nodesource.com/node_12.x {{ ansible_lsb.codename }} main
-  #     state: present
-  #     update_cache: yes
-  # - name: install nodejs
-  #   apt:
-  #     name: nodejs
-  #     state: present
+  - name: add nodejs apt key
+    apt_key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      state: present
+  - name: add nodejs repository
+    apt_repository:
+      repo: deb https://deb.nodesource.com/node_current.x {{ ansible_lsb.codename }} main
+      state: present
+      update_cache: yes
+  - name: install nodejs
+    apt:
+      name: nodejs
+      state: present
 
   - name: Install python package pynvim
     pip:

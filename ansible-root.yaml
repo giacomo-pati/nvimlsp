@@ -55,7 +55,7 @@
     - make
     - neovim
     # - nodejs
-    - npm
+    # - npm
     - python3-dev
     - python3-pip
     - ripgrep
@@ -72,12 +72,16 @@
       state: present
   - name: add nodejs repository
     apt_repository:
-      repo: deb https://deb.nodesource.com/node_18.x {{ ansible_lsb.codename }} main
+      repo: deb https://deb.nodesource.com/node_17.x {{ ansible_lsb.codename }} main
       state: present
       update_cache: yes
   - name: install nodejs
     apt:
       name: nodejs
+      state: present
+  - name: install nodejs
+    apt:
+      name: npm
       state: present
 
   - name: Install python package pynvim

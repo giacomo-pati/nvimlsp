@@ -9,7 +9,6 @@
   #   command: ansible-galaxy role install {{ item.item }}
   #   with_items:
   #   - gantsign.golang
-  #   - nodesource.node
 
   - name: Install update-manager-core
     apt: name=update-manager-core
@@ -29,6 +28,10 @@
     ansible.builtin.apt_repository:
       repo: ppa:neovim-ppa/stable
 
+  - name: install node
+    shell: |
+      curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
+
   - name: Install packages
     apt: name={{item}}
     with_items:
@@ -44,11 +47,14 @@
     - flake8
     - fontconfig
     - fzf
+    - gcc
+    - g++
     - locate
     - luarocks
     - lynx
+    - make
     - neovim
-    # - nodejs
+    - nodejs
     - npm
     - python3-dev
     - python3-pip
@@ -59,6 +65,20 @@
     - sqlite3
     - tmux
     - zsh
+
+  # - name: add nodejs apt key
+  #   apt_key:
+  #     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+  #     state: present
+  # - name: add nodejs repository
+  #   apt_repository:
+  #     repo: deb https://deb.nodesource.com/node_12.x {{ ansible_lsb.codename }} main
+  #     state: present
+  #     update_cache: yes
+  # - name: install nodejs
+  #   apt:
+  #     name: nodejs
+  #     state: present
 
   - name: Install python package pynvim
     pip:
@@ -122,4 +142,3 @@
     vars:
     # - golang_version: {{ golang_version }}
     - golang_install_dir: /usr/local/go
-  - role: nodesource.node

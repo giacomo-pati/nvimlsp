@@ -2,6 +2,8 @@
   become: true
   gather_facts: yes
   vars:
+    install_azcli: true
+    install_go: true
     golang_version: 1.18
 
   tasks:
@@ -93,12 +95,14 @@
     community.general.snap:
       name:
       - glow
+      - powershell
 
-  # - name: Install Azure CLI
-    # shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo -E sh -
+  - name: Install Azure CLI
+    shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
   - name: Install kubectl and kubelogin
     shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo -E sh -
+    when: install_azcli
 
   - name: Remove useless packages from the cache
     apt:
@@ -110,7 +114,7 @@
 
   roles:
   - role: gantsign.golang
+    when: install_go
     vars:
     # - golang_version: {{ golang_version }}
     - golang_install_dir: /usr/local/go
-  - role: brentwg.azure-cli

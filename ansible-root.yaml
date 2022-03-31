@@ -62,12 +62,9 @@
 
   - name: Install python package pynvim
     pip:
-      name: {{ item.item }}
+      name: pynvim
       extra_args: --upgrade
       executable: pip3
-      with_items:
-      - pynvim
-      - msgpack
 
   - name: Install python package msgpack
     pip:

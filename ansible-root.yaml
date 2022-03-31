@@ -65,47 +65,25 @@
     - tmux
     - zsh
 
-  - name: Install python package pynvim
+  - name: Install python packages
     pip:
-      name: {{ item }}
+      name: "{{ item }}"
       extra_args: --upgrade
       executable: pip3
     with_items:
     - pynvim
     - msgpack
 
-  # - name: Install python package msgpack
-  #   pip:
-  #     name: msgpack
-  #     extra_args: --upgrade
-  #     executable: pip3
-
-  - name: Install NPM package npm
+  - name: Install NPM packages
     community.general.npm:
-      name: npm
+      name: "{{ item }}"
       version: latest
       global: yes
-
-  - name: Install NPM package neovim
-    community.general.npm:
-      name: neovim
-      version: latest
-      state: latest
-      global: yes
-
-  - name: Install NPM package prettierd
-    community.general.npm:
-      name: '@fsouza/prettierd'
-      version: latest
-      state: latest
-      global: yes
-
-  - name: Install NPM package eslint_d
-    community.general.npm:
-      name: eslint_d
-      version: latest
-      state: latest
-      global: yes
+    with_items:
+    - npm
+    - neovim
+    - '@fsouza/prettierd'
+    - eslint_d
 
   - name: Install latest neovim gem
     community.general.gem:

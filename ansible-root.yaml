@@ -98,7 +98,7 @@
     when: "{{ item.install }}"
     with_items:
     - { name: glow, classic: no, install: yes }
-    - { name: powershell, classic: yes, install: {{ install_pwsh }} }
+    - { name: powershell, classic: yes, install: "{{ install_pwsh }}" }
 
   - name: Install Azure CLI
     shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash

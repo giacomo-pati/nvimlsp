@@ -25,7 +25,6 @@
     with_items:
     - ppa:neovim-ppa/stable
     - ppa:cwchien/gradle
-    - ppa:lazygit-team/release
 
   - name: Install node ppa
     shell: curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
@@ -54,7 +53,6 @@
     - locate
     - luarocks
     - lynx
-    - lazygit
     - make
     - neovim
     - nodejs

@@ -17,7 +17,7 @@
   #   with_items:
   #   - gantsign.golang
   #   - lean_delivery.java
-  #   - avinash6784.ansible-maven
+  #   - avinash6784.maven
 
   - name: Install update-manager-core
     apt: name=update-manager-core

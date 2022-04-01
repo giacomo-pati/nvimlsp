@@ -13,7 +13,7 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+	. $HOME/.bashrc
     fi
 fi
 
@@ -27,11 +27,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:/usr/local/go/bin
+. $HOME/.extra.path.sh
 export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:/opt/maven/bin
-export PATH=$PATH:$HOME/.pulumi/bin
 
 export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true

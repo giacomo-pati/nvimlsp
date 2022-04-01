@@ -183,9 +183,22 @@
     become: false
     shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
 
-  - name: Install tmux config and plugins
+  - name: Check tmux-plugins is installed
     become: false
-    shell: "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm && cp ./shell/.tmux.conf ${HOME}/"
+    stat:
+      path: ${HOME}/.tmux/plugins/tpm
+    register: register_name
+  - name: Install tmux plugins
+    become: false
+    shell: "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm"
+    when: not register_name.stat.exists
+  - name: Update tmux plugins
+    become: false
+    shell: "cd ${HOME}/.tmux/plugins/tpm && git pull"
+    when: register_name.stat.exists
+  - name: Update tmux config and plugins
+    become: false
+    shell: "cp ./shell/.tmux.conf ${HOME}/"
 
   - name: Install Pulumi
     become: false

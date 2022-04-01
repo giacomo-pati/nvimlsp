@@ -1,24 +1,10 @@
 - hosts: localhost
   become: true
   gather_facts: yes
-  vars:
-    install_azcli: true
-    install_go: true
-    install_java: true
-    java_major_version: 11
-    install_maven: true
-    maven_version: 3.8.1
-    golang_version: 1.18
-    install_pwsh: true
+  vars_files:
+    - ./ansible-vars.yaml
 
   pre_tasks:
-  # - name: Install roles
-  #   command: ansible-galaxy role install {{ item }}
-  #   with_items:
-  #   - gantsign.golang
-  #   - lean_delivery.java
-  #   - tecris.maven
-
   - name: Install update-manager-core
     apt: name=update-manager-core
 
@@ -63,11 +49,11 @@
     - gcc
     - gradle
     - g++
+    - jq
     - locate
     - luarocks
     - lynx
     - make
-    - maven
     - neovim
     - nodejs
     - python3-dev
@@ -109,13 +95,22 @@
     community.general.snap:
       name: "{{ item.name }}"
       classic: "{{ item.classic }}"
+    when: {{ item.install }}
     with_items:
-    - { name: glow, classic: no }
-    - { name: powershell, classic: yes }
+    - { name: glow, classic: no, install: yes }
+    - { name: powershell, classic: yes, install: {{ install_pwsh }} }
 
   - name: Install Azure CLI
     shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     when: install_azcli
+
+  - name: Get dive latest version
+    shell: "curl -s 'https://api.github.com/repos/wagoodman/dive/releases/latest' | jq -r '.tag_name' | grep -Po 'v\\K[0-9.]+'"
+    register: DIVE_VERSION
+  - name: Download dive deb file
+    shell: "curl -Lo dive.deb 'https://github.com/wagoodman/dive/releases/latest/download/dive_{{DIVE_VERSION}}_linux_amd64.deb'"
+  - name: Install dive (docker image inspection)
+    shell: "apt install -y ./dive.deb && rm -rf dive.deb"
 
   roles:
   - role: gantsign.golang

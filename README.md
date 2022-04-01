@@ -191,17 +191,6 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
     sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z zsh-autosuggestions history-substring-search zsh-syntax-highlighting)/' ~/.zshrc
 ```
 
-Put the following on top of your ~/.zshrc file:
-
-```sh
-# Download Znap, if it's not there yet.
-[[ -f ~/projects/zsh-snap/znap.zsh ]] ||
-    git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/projects/zsh-snap
-
-# `znap source` automatically downloads and starts your plugins.
-znap source marlonrichert/zsh-autocomplete
-```
-
 ## Installation and configuration via Ansible playbook
 
 ```sh

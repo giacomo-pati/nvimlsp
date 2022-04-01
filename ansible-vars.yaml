@@ -1,0 +1,9 @@
+install_azcli: true
+install_go: true
+golang_version: 1.18
+install_java: true
+java_major_version: 11
+install_maven: true
+maven_version: 3.8.5
+install_pwsh: true
+install_pulumi: true

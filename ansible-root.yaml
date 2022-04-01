@@ -3,14 +3,13 @@
   gather_facts: yes
   vars:
     install_azcli: true
-    install_pwsh: true
     install_go: true
     install_java: true
     java_major_version: 11
-    install_gradle: true
-    gradle_version: 7.4.2
     install_maven: true
+    maven_version: 3.3.9
     golang_version: 1.18
+    install_pwsh: true
 
   pre_tasks:
   # - name: Install roles
@@ -18,6 +17,7 @@
   #   with_items:
   #   - gantsign.golang
   #   - lean_delivery.java
+  #   - avinash6784.ansible-maven
 
   - name: Install update-manager-core
     apt: name=update-manager-core
@@ -118,16 +118,17 @@
   - role: gantsign.golang
     when: install_go
     vars:
-    # - golang_version: {{ golang_version }}
-    - golang_install_dir: /opt/go
+    - golang_version: "{{ golang_version }}"
+    # - golang_install_dir: /opt/go
   - role: lean_delivery.java
-    # transport: repositories
-    # java_major_version: {{ java_major_version }}
-    when: install_java or install_gradle or install_maven
-  # - role: shelleg.gradle
-  #   vars:
-  #   - gradle_version: "{{ gradle_version }}"
-  #   when: install_gradle
+    vars:
+      # transport: repositories
+      java_major_version: "{{ java_major_version }}"
+    when: install_java or install_maven
+  - role: avinash6784.ansible-maven
+    vars:
+      maven_version: "{{ maven_version }}"
+    when: install_maven
 
   post_tasks:
   - name: Install kubectl and kubelogin

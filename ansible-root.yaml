@@ -105,12 +105,11 @@
     when: install_azcli
 
   - name: Get dive latest version
-    shell: "curl -s 'https://api.github.com/repos/wagoodman/dive/releases/latest' | jq -r '.tag_name' | grep -Po 'v\\K[0-9.]+'"
-    register: DIVE_VERSION
-  - name: Download dive deb file
-    shell: "curl -Lo dive.deb 'https://github.com/wagoodman/dive/releases/latest/download/dive_{{DIVE_VERSION}}_linux_amd64.deb'"
-  - name: Install dive (docker image inspection)
-    shell: "apt install -y ./dive.deb && rm -rf dive.deb"
+    shell: |
+      DIVE_VERSION=$(curl -s "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
+      curl -Lo dive.deb "https://github.com/wagoodman/dive/releases/latest/download/dive_${DIVE_VERSION}_linux_amd64.deb"
+      sudo apt install -y ./dive.deb
+      rm -rf dive.deb
 
   roles:
   - role: gantsign.golang

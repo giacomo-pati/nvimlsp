@@ -36,9 +36,6 @@
     with_items:
     - neovim-remote
 
-  - name: Install lazygit
-    shell: "/opt/go/{{ golang_version }}/bin/go install github.com/jesseduffield/lazygit@latest"
-
   - name: Install NVIM config
     shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
 

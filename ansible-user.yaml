@@ -40,10 +40,7 @@
     shell: "go install github.com/jesseduffield/lazygit@latest"
 
   - name: Install NVIM config
-    shell: |
-      mkdir -p ${HOME}/.config
-      rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/
-      cp -a ./nvim ${HOME}/.config/"
+    shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
 
   - name: Install tmux consif and plusing
     shell: "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm && cp ./shell/.tmux.conf ${HOME}/"

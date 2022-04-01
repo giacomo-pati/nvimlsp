@@ -95,7 +95,7 @@
     community.general.snap:
       name: "{{ item.name }}"
       classic: "{{ item.classic }}"
-    when: {{ item.install }}
+    when: "{{ item.install }}"
     with_items:
     - { name: glow, classic: no, install: yes }
     - { name: powershell, classic: yes, install: {{ install_pwsh }} }

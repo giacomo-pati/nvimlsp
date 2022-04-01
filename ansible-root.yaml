@@ -7,7 +7,7 @@
     install_java: true
     java_major_version: 11
     install_maven: true
-    maven_version: 3.3.9
+    maven_version: 3.8.1
     golang_version: 1.18
     install_pwsh: true
 
@@ -17,7 +17,7 @@
   #   with_items:
   #   - gantsign.golang
   #   - lean_delivery.java
-  #   - avinash6784.maven
+  #   - tecris.maven
 
   - name: Install update-manager-core
     apt: name=update-manager-core
@@ -44,7 +44,9 @@
     shell: curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
 
   - name: Install packages
-    apt: name={{ item }}
+    apt:
+      name: "{{ item }}"
+      state: latest
     with_items:
     - apt-transport-https
     - black
@@ -65,6 +67,7 @@
     - luarocks
     - lynx
     - make
+    - maven
     - neovim
     - nodejs
     - python3-dev
@@ -117,17 +120,15 @@
   roles:
   - role: gantsign.golang
     when: install_go
-    vars:
-    - golang_version: "{{ golang_version }}"
+    # vars:
+    # - golang_version: {{ golang_version }}
     # - golang_install_dir: /opt/go
   - role: lean_delivery.java
-    vars:
+    # vars:
       # transport: repositories
-      java_major_version: "{{ java_major_version }}"
+      # java_major_version: "{{ java_major_version }}"
     when: install_java or install_maven
-  - role: avinash6784.ansible-maven
-    vars:
-      maven_version: "{{ maven_version }}"
+  - role: tecris.maven
     when: install_maven
 
   post_tasks:

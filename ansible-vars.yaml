@@ -1,7 +1,7 @@
 install_azcli: true
 install_go: true
 go_version: 1.18
-go_install_dir: "/opt/go{{ go_version }}"
+go_install_dir: "/opt/go/{{ go_version }}"
 install_java: true
 java_major_version: 11
 install_maven: true

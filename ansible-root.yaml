@@ -113,10 +113,10 @@
 
   roles:
   - role: gantsign.golang
+    vars:
+    - golang_version: {{ golang_version }}
+    - golang_install_dir: {{ golang_install_dir }}
     when: install_go
-    # vars:
-    # - golang_version: {{ golang_version }}
-    # - golang_install_dir: /opt/go
   - role: lean_delivery.java
     # vars:
       # transport: repositories

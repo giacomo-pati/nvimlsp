@@ -29,7 +29,7 @@
       name: stylua
 
   - name: Install lazygit
-  shell: "go install github.com/jesseduffield/lazygit@latest"
+    shell: "go install github.com/jesseduffield/lazygit@latest"
 
   - name: Install python packages
     pip:

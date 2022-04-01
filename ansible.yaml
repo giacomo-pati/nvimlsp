@@ -159,7 +159,11 @@
 
   - name: cache fonts
     become: false
-    shell: "fc-cache -fv"
+    shell: fc-cache -fv
+
+  - name: Install zoxide
+    become: false
+    shell: curl -sS https://webinstall.dev/zoxide | sh
 
   - name: Install stylua Rust package
     become: false
@@ -196,7 +200,7 @@
     become: false
     shell: "cd ${HOME}/.tmux/plugins/tpm && git pull"
     when: register_name.stat.exists
-  - name: Update tmux config and plugins
+  - name: Update tmux config
     become: false
     shell: "cp ./shell/.tmux.conf ${HOME}/"
 

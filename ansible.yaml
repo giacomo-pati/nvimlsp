@@ -216,21 +216,21 @@
       git clone https://github.com/zsh-users/zsh-history-substring-search ${HOME}/.oh-my-zsh/custom/plugins/zsh-history-substring-search
       git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
       sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z zsh-autosuggestions history-substring-search zsh-syntax-highlighting)/' ${HOME}/.zshrc
-      echo export PATH=\$PATH:\${HOME}/.cargo/bin >${HOME}/.extra-path.sh
+      echo export PATH=\$PATH:\${HOME}/.cargo/bin >>${HOME}/.profile
 
   - name: Add PATH for golang
     become: false
-    shell: echo export PATH=\$PATH:{{ go_install_dir }}/bin >>${HOME}/.extra-path.sh
+    shell: echo export PATH=\$PATH:{{ go_install_dir }}/bin >>${HOME}/.profile
     when: install_go
 
   - name: Add PATH for Maven
     become: false
-    shell: echo export PATH=\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.extra-path.sh
+    shell: echo export PATH=\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.profile
     when: install_maven
 
   - name: Install Pulumi
     become: false
     shell: |
       curl -fsSL https://get.pulumi.com | sh -s""
-      echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.extra-path.sh
+      echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
     when: install_pulumi

@@ -7,7 +7,6 @@
 [alias]
 	st = status
 	sync = fetch -p --all
-	trash = "!mkdir -p .trash ; git ls-files --others --exclude-standard | xargs mv -f -t .trash"
 	undo = checkout HEAD --
 	conflicted = !nvim +Conflicted
 [push]

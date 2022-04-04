@@ -189,6 +189,10 @@
     become: false
     shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
     when: not update
+  - name: Update NVIM config
+    become: false
+    shell: "cp -a ./nvim ${HOME}/.config/"
+    when: update
 
   - name: Check tmux-plugins is installed
     become: false
@@ -228,12 +232,14 @@
 
   - name: Add PATH for Maven
     become: false
-    shell: echo export PATH=\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.profile
+    shell: |
+      echo export PATH=\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.profile
+      echo export M2_HOME=/opt/apache-maven-{{ maven_version }}
     when: install_maven
 
   - name: Install Pulumi
     become: false
     shell: |
-      curl -fsSL https://get.pulumi.com | sh -s""
+      curl -fsSL https://get.pulumi.com | sh
       echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
     when: install_pulumi

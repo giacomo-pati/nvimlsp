@@ -350,6 +350,7 @@ local dap_nvim_dap_mappings = {
 		o = { "<Cmd>lua require('dap').step_out()<CR>", "Step out" },
 		u = { "<Cmd>lua require('dapui').toggle()<CR>", "Toggle UI" },
 		p = { "<Cmd>lua require('dap').repl.open()<CR>", "REPL" },
+		l = { "<Cmd>lua require('config.dap').nvim_dap_load_launchjs()<CR>", "Reload .vscode/launch.json" },
 		e = { '<Cmd>lua require"telescope".extensions.dap.commands{}<CR>', "Commands" },
 		f = { '<Cmd>lua require"telescope".extensions.dap.configurations{}<CR>', "Configurations" },
 		r = { '<Cmd>lua require"telescope".extensions.dap.list_breakpoints{}<CR>', "List breakpoints" },
@@ -401,6 +402,7 @@ local dap_vimspector_mappings = {
 }
 
 local fmappings = {
+	["<F5>"] = { ":lua require('config.dap').nvim_dap_load_launchjs()<CR>", "Reload .vscode/launch.json" },
 	["<F8>"] = { ":lua require('dap').step_over()<CR>", "Step over" },
 	["<S-F8>"] = { ":lua require('dap').step_out()<CR>", "Step out" },
 	["<F7>"] = { ":lua require('dap').step_into()<CR>", "Step into" },

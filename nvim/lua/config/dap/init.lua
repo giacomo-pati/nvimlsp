@@ -16,13 +16,6 @@ function M.nvim_dap_setup()
 	-- nvim-dap-ui
 	require("dapui").setup({})
 
-	-- languages
-	-- require("config.dap.python").setup()
-	-- require("config.dap.rust").setup()
-	require("config.dap.go").setup()
-	-- require("config.dap.node").setup()
-	-- require("config.dap.lua").setup()
-
 	-- nvim-dap
 	vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
 	vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
@@ -66,9 +59,38 @@ function M.vimspector_setup()
 	-- nnoremap <leader>vgo :call GotoWindow(g:vimspector_session_windows.output)<CR>
 end
 
+function M.nvim_dap_load_launchjs(path)
+	-- languages
+	require("config.dap.python").setup()
+	-- require("config.dap.rust").setup()
+	require("config.dap.go").setup()
+	require("config.dap.node").setup()
+	require("config.dap.lua").setup()
+	local resolved_path = path or (vim.fn.getcwd() .. "/.vscode/launch.json")
+	local file = io.open(resolved_path)
+	if not file then
+		return
+	end
+	local contents = file:read("*all")
+	file:close()
+	local data = vim.fn.json_decode(contents)
+	assert(data.configurations, "launch.json must have a 'configurations' key")
+	local dap = require("dap")
+	for _, config in ipairs(data.configurations) do
+		assert(config.type, "Configuration in launch.json must have a 'type' key")
+		local configurations = dap.configurations[config.type]
+		if not configurations then
+			configurations = {}
+			dap.configurations[config.type] = configurations
+		end
+		table.insert(configurations, config)
+	end
+end
+
 function M.setup()
 	M.nvim_dap_setup()
 	M.vimspector_setup()
+	M.nvim_dap_load_launchjs()
 
 	-- key mappings
 	local wk = require("config.whichkey")

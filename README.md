@@ -2,9 +2,16 @@
 
 Neovim configuration system
 
-## Installation of Prereqs on WSL/Ubuntu (system level)
+## Installation via Ansible
 
-- WSL: Install "Ubuntu 20.04 LTS"
+A prerequirement is that `sudo` command works without a password!
+
+Simply run `install.sh` for initial or re-installation.
+
+Use `update.sh` to update all toolings and configs
+
+## Manual installation (system level)
+
 - open shell and execute the following commands:
 
 ```sh
@@ -189,16 +196,4 @@ see [https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubunt
     git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z zsh-autosuggestions history-substring-search zsh-syntax-highlighting)/' ~/.zshrc
-```
-
-## Installation and configuration via Ansible playbook
-
-```sh
-sudo apt install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt update
-sudo apt install ansible
-sudo ansible-galaxy role install gantsign.golang brentwg.azure-cli
-sudo ansible-pull -U https://github.com/giacomo-pati/nvimlsp.git ansible-root.yaml
-ansible-pull -U https://github.com/giacomo-pati/nvimlsp.git ansible-user.yaml
 ```

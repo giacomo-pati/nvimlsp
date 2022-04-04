@@ -27,7 +27,9 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-. $HOME/.extra.path.sh
+if [ -f "$HOME/.extra.path.sh" ] ; then
+  . $HOME/.extra.path.sh
+ffii
 export PATH=$PATH:$HOME/go/bin
 
 export ARM_DISABLE_PULUMI_PARTNER_ID=true

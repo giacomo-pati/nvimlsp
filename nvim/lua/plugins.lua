@@ -485,6 +485,7 @@ function M.setup()
 		use({
 			"yriveiro/dap-go.nvim",
 			requires = { "nvim-lua/plenary.nvim" },
+			after = { "lspconfig" },
 			config = function()
 				require("dap-go").setup({
 					external_config = {

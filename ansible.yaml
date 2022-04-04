@@ -7,6 +7,7 @@
   pre_tasks:
   - name: Install update-manager-core
     apt: name=update-manager-core
+    when: not update
 
   - name: Update apt repo and cache
     apt:
@@ -65,6 +66,7 @@
     - sqlite3
     - tmux
     - zsh
+    when: not update
 
   - name: Install python packages
     pip:

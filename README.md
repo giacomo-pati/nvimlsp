@@ -95,13 +95,13 @@ Use `update.sh` to update all toolings and configs
     mkdir -p ~/.config
     rm -rf ~/.local/share/nvim/ ~/.config/nvim/ ~/.cache/nvim/
     cp -a [PATH-TO-THIS-REPO-CHECKOUT]/nvim ~/.config/
-    nvim # this will install all plugins
 ```
 
-- Quit Neovim with `:qa` key sequence
-- Now start up Neovim again with:
+- Now start up Neovim twice to install (1) plugins and (2) Treesitter binaries with:
 
 ```sh
+    nvim # this will install all plugins
+    # Quit Neovim with `:qa` key sequence
     nvim # will install the Treesitter binaries
 ```
 

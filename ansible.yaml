@@ -186,6 +186,7 @@
   - name: Install NVIM config
     become: false
     shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
+    when: not update
 
   - name: Check tmux-plugins is installed
     become: false

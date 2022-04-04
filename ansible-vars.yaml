@@ -8,3 +8,4 @@ install_maven: true
 maven_version: 3.8.5
 install_pwsh: true
 install_pulumi: true
+update: false

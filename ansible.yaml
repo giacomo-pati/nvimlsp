@@ -225,12 +225,12 @@
 
   - name: Add PATH for Maven
     become: false
-    shell: echo export PATH=\\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.extra_path.sh
+    shell: echo export PATH=\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.extra_path.sh
     when: install_maven
 
   - name: Install Pulumi
     become: false
     shell: |
       curl -fsSL https://get.pulumi.com | sh -s""
-      echo export PATH=\\$PATH:.pulumi/bin >>${HOME}/.extra_path.sh
+      echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.extra_path.sh
     when: install_pulumi

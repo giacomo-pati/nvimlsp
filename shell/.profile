@@ -27,11 +27,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ -f "$HOME/.extra-path.sh" ] ; then
-  . $HOME/.extra-path.sh
-ffii
-export PATH=$PATH:$HOME/go/bin
-
 export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true
 export AZURE_STORAGE_ACCOUNT=aahdsapulumi
@@ -92,3 +87,4 @@ alias ks="gk s"
 	eval pulumi $command $@ $argsx $argsy
     }
 # fi
+export PATH=$PATH:$HOME/go/bin

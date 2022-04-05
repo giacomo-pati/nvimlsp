@@ -60,13 +60,13 @@ function M.setup()
 			},
 		},
 		filters = {
-			dotfiles = false,
+			dotfiles = true,
 			custom = {},
 			exclude = {},
 		},
 		git = {
 			enable = true,
-			ignore = true,
+			ignore = false,
 			timeout = 400,
 		},
 		actions = {

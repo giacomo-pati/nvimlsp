@@ -4,7 +4,7 @@
 local M = {}
 
 function M.setup()
-	vim.api.nvim_set_keymap("n", "<F2>", ":NvimTreeToggle<cr>", { noremap = true })
+	vim.api.nvim_set_keymap("n", "<F2>", ":FileTreeToggle<cr>", { noremap = true })
 
 	-- each of these are documented in `:help nvim-tree.OPTION_NAME`
 	require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS

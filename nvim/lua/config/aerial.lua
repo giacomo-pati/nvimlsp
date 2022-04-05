@@ -4,7 +4,7 @@
 local M = {}
 
 function M.setup()
-	vim.api.nvim_set_keymap("n", "<F3>", ":AerialToggle!<cr>", { noremap = true })
+	vim.api.nvim_set_keymap("n", "<F3>", ":FileTreeToggle!<cr>", { noremap = true })
 	require("aerial").setup({
 		-- Priority list of preferred backends for aerial.
 		-- This can be a filetype map (see :help aerial-filetype-map)

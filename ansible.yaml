@@ -93,7 +93,7 @@
       name: neovim
       state: latest
 
-  - name: Install glow
+  - name: Install snap items
     community.general.snap:
       name: "{{ item.name }}"
       classic: "{{ item.classic }}"

@@ -60,7 +60,7 @@ function M.setup()
 			},
 		},
 		filters = {
-			dotfiles = true,
+			dotfiles = false,
 			custom = {},
 			exclude = {},
 		},

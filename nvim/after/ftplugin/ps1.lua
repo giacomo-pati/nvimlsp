@@ -1,7 +1,8 @@
-vim.bo.shiftwidth = 4
-vim.bo.tabstop = 4
-vim.bo.softtabstop = 4
-vim.bo.expandtab = false
-vim.bo.textwidth = 0
-vim.bo.autoindent = false
-vim.bo.smartindent = false
+local bo = vim.bo
+bo.shiftwidth = 4
+bo.tabstop = 4
+bo.softtabstop = 4
+bo.expandtab = false
+bo.textwidth = 0
+bo.autoindent = false
+bo.smartindent = false

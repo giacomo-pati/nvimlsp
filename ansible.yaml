@@ -59,6 +59,7 @@
     - nodejs
     - python3-dev
     - python3-pip
+    - python3-venv
     - ripgrep
     - ruby-full
     - shellcheck
@@ -66,7 +67,6 @@
     - sqlite3
     - tmux
     - zsh
-    when: not update
 
   - name: Install python packages
     pip:
@@ -184,6 +184,14 @@
       executable: pip3
     with_items:
     - neovim-remote
+  
+  - name: iInstall virtualenv for debugpy
+    become: false
+    shell: |
+      mkdir -p ${HOME}/.virtualenvs
+      cd ${HOME}/.virtualenvs
+      python3 -m venv debugpy
+      debugpy/bin/python -m pip install debugpy
 
   - name: Install NVIM config
     become: false

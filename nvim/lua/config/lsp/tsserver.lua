@@ -52,7 +52,7 @@ function M.lsp_attach(client, bufnr)
 
   -- required to fix code action ranges and filter diagnostics
   ts_utils.setup_client(client)
-  require("aerial").on_attach(client, bufnr)
+  -- require("aerial").on_attach(client, bufnr)
 end
 
 function M.config(installed_server)

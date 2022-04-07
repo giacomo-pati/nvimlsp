@@ -303,6 +303,7 @@ local lsp_mappings = {
 		x = { "<Cmd>lua vim.diagnostic.disable()<CR>", "Disable diagnostics" },
 		n = { "<Cmd>update<CR>:Neoformat<CR>", "Neoformat" },
 		t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
+		l = { "<Cmd>SymbolsOutline<CR>", "Outlines" },
 	},
 
 	-- WIP - refactoring

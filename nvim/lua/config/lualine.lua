@@ -212,7 +212,7 @@ function M.setup()
 	})
 
 	-- Add components to right sections
-	ins_right({ "aerial" })
+	-- ins_right({ "aerial" })
 
 	ins_right({
 		"o:encoding", -- option component same as &encoding in viml

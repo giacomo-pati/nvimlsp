@@ -211,12 +211,12 @@ function M.setup()
 				},
 			},
 		})
-		use({
-			"stevearc/aerial.nvim",
-			config = function()
-				require("config.aerial").setup()
-			end,
-		})
+		-- use({
+		-- 	"stevearc/aerial.nvim",
+		-- 	config = function()
+		-- 		require("config.aerial").setup()
+		-- 	end,
+		-- })
 
 		-- Dashboard
 		-- use {
@@ -423,15 +423,6 @@ function M.setup()
 				--     vim.g.completion_matching_smart_case = 1
 			end,
 		})
-		-- Lua development
-		-- use { "tjdevries/nlua.nvim" }
-		-- use { "folke/lua-dev.nvim", event = "VimEnter" }
-		-- use { "simrat39/symbols-outline.nvim",
-		--   event = "VimEnter",
-		--   config = function()
-		--     require("config.symbols-outline").setup()
-		--   end,
-		-- }
 
 		-- LSP and completion
 		use({ "williamboman/nvim-lsp-installer" })
@@ -447,19 +438,29 @@ function M.setup()
 			},
 			config = function()
 				require("config.lsp").setup()
-				require("config.dap").setup()
+			end,
+		})
+		use({
+			"ray-x/navigator.lua",
+			requires = {
+				"ray-x/guihua.lua",
+				run = "cd lua/fzy && make",
+			},
+			config = function()
+				require("config.navigator").setup()
 			end,
 		})
 
 		-- Lua development
 		use({ "tjdevries/nlua.nvim" })
 		use({ "folke/lua-dev.nvim", event = "VimEnter" })
-		-- use { "simrat39/symbols-outline.nvim",
-		--   event = "VimEnter",
-		--   config = function()
-		--     require("config.symbols-outline").setup()
-		--   end,
-		-- }
+		use({
+			"simrat39/symbols-outline.nvim",
+			-- event = "VimEnter",
+			config = function()
+				require("config.symbols-outline").setup()
+			end,
+		})
 
 		-- debugging/DAP
 		use({ "puremourning/vimspector", event = "BufWinEnter" })
@@ -474,7 +475,13 @@ function M.setup()
 			end,
 		})
 		use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
-		use({ "Pocco81/DAPInstall.nvim", after = "nvim-dap" })
+		use({
+			"Pocco81/DAPInstall.nvim",
+			after = "nvim-dap",
+			config = function()
+				require("config.dap").setup()
+			end,
+		})
 		use({ "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" })
 		-- use({
 		-- 	"leoluz/nvim-dap-go",
@@ -482,20 +489,20 @@ function M.setup()
 		-- 		require("dap-go").setup()
 		-- 	end,
 		-- })
-		use({
-			"yriveiro/dap-go.nvim",
-			requires = { "nvim-lua/plenary.nvim" },
-			after = { "nvim-lspconfig" },
-			config = function()
-				require("dap-go").setup({
-					external_config = {
-						enable = true,
-						path = require("lspconfig.util").find_git_ancestor(vim.loop.fs_realpath("."))
-							.. "/.vscode/dap-go.json",
-					},
-				})
-			end,
-		})
+		-- use({
+		-- 	"yriveiro/dap-go.nvim",
+		-- 	requires = { "nvim-lua/plenary.nvim" },
+		-- 	after = { "nvim-lspconfig" },
+		-- 	config = function()
+		-- 		require("dap-go").setup({
+		-- 			external_config = {
+		-- 				enable = true,
+		-- 				path = require("lspconfig.util").find_git_ancestor(vim.loop.fs_realpath("."))
+		-- 					.. "/.vscode/launch.json",
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- })
 
 		if packer_bootstrap then
 			print("Setting up Neovim. Restart required after installation!")

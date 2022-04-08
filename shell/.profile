@@ -33,6 +33,7 @@ export AZURE_STORAGE_ACCOUNT=aahdsapulumi
 export AZURE_STORAGE_RESOURCE_GROUP=pulumi
 if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then
   az storage account keys list --resource-group $AZURE_STORAGE_RESOURCE_GROUP --account-name $AZURE_STORAGE_ACCOUNT --query '[0].value' -o tsv > $HOME/.cache/AZURE_STORAGE_KEY
+  chmod 0600 $HOME/.cache/AZURE_STORAGE_KEY
 fi
 export AZURE_STORAGE_KEY=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
 

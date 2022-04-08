@@ -235,15 +235,14 @@
 
   - name: Add PATH for golang
     become: false
-    shell: |
-      echo export PATH=\$PATH:{{ go_install_dir }}/bin:${HOME}/go/bin >>${HOME}/.profile
+    shell: echo export PATH=\$PATH:{{ go_install_dir }}/bin:${HOME}/go/bin >>${HOME}/.profile
     when: install_go
 
   - name: Add PATH for Maven
     become: false
     shell: |
       echo export PATH=\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.profile
-      echo export M2_HOME=/opt/apache-maven-{{ maven_version }}
+      echo export M2_HOME=/opt/apache-maven-{{ maven_version }} >>${HOME}/.profile
     when: install_maven
 
   - name: Install Pulumi

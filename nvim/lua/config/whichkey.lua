@@ -403,6 +403,8 @@ local dap_vimspector_mappings = {
 }
 
 local fmappings = {
+	["<S-F1>"] = { ":WhichKey<CR>", "Current WhichKeys" },
+	["<M-F1>"] = { ":LspKeymaps<CR>", "LSP Navigator keys" },
 	["<F5>"] = { ":lua require('config.dap').nvim_dap_load_launchjs()<CR>", "Reload .vscode/launch.json" },
 	["<F8>"] = { ":lua require('dap').step_over()<CR>", "Step over" },
 	["<S-F8>"] = { ":lua require('dap').step_out()<CR>", "Step out" },

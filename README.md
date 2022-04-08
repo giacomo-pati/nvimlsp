@@ -2,13 +2,14 @@
 
 Neovim configuration system
 
-## Installation via Ansible
+## Installation (via Ansible)
 
 A prerequirement is that `sudo` command works without a password!
 
-Simply run `install.sh` for initial or re-installation.
+Checkout this repo and simply run `install.sh` for initial or re-installation.
 
-Use `update.sh` to update all toolings and configs
+Use `update.sh` after a `git pull` of this repo or to update all toolings and 
+configs
 
 ## Manual installation (system level)
 

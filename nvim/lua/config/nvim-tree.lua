@@ -8,7 +8,6 @@ function M.setup()
 
 	-- each of these are documented in `:help nvim-tree.OPTION_NAME`
 	require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
-		auto_close = false,
 		auto_reload_on_write = true,
 		disable_netrw = false,
 		hide_root_folder = false,
@@ -75,7 +74,7 @@ function M.setup()
 				global = false,
 			},
 			open_file = {
-				quit_on_open = false,
+				quit_on_open = true,
 				resize_window = false,
 				window_picker = {
 					enable = true,

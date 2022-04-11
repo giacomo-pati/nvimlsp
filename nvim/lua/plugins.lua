@@ -425,7 +425,12 @@ function M.setup()
 		})
 
 		-- LSP and completion
-		use({ "williamboman/nvim-lsp-installer" })
+		use({
+			"williamboman/nvim-lsp-installer",
+			config = function()
+				require("config.lsp-installer").setup()
+			end,
+		})
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "hrsh7th/cmp-nvim-lsp" })
 		use({
@@ -440,16 +445,16 @@ function M.setup()
 				require("config.lsp").setup()
 			end,
 		})
-		use({
-			"ray-x/navigator.lua",
-			requires = {
-				"ray-x/guihua.lua",
-				run = "cd lua/fzy && make",
-			},
-			config = function()
-				require("config.navigator").setup()
-			end,
-		})
+		-- use({
+		-- 	"ray-x/navigator.lua",
+		-- 	requires = {
+		-- 		"ray-x/guihua.lua",
+		-- 		run = "cd lua/fzy && make",
+		-- 	},
+		-- 	config = function()
+		-- 		require("config.navigator").setup()
+		-- 	end,
+		-- })
 
 		-- Lua development
 		use({ "tjdevries/nlua.nvim" })

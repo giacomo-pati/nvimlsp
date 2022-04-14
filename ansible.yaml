@@ -37,6 +37,7 @@
     with_items:
     - apt-transport-https
     - black
+    - blobfuse
     - cargo
     - cpanminus
     - daemonize
@@ -165,18 +166,18 @@
 
   - name: Install zoxide
     become: false
-    shell: curl -sS https://webinstall.dev/zoxide | bash
+    shell: curl -ss https://webinstall.dev/zoxide | bash
 
-  - name: Install stylua Rust package
+  - name: install stylua rust package
     become: false
     community.general.cargo:
       name: stylua
 
-  - name: Install lazygit
+  - name: install lazygit
     become: false
     shell: "{{ go_install_dir }}/bin/go install github.com/jesseduffield/lazygit@latest"
 
-  - name: Install python packages
+  - name: install python packages
     become: false
     pip:
       name: "{{ item }}"
@@ -185,33 +186,33 @@
     with_items:
     - neovim-remote
 
-  - name: Install virtualenv for debugpy
+  - name: install virtualenv for debugpy
     become: false
     shell: |
-      mkdir -p ${HOME}/.virtualenvs
-      cd ${HOME}/.virtualenvs
+      mkdir -p ${home}/.virtualenvs
+      cd ${home}/.virtualenvs
       python3 -m venv debugpy
       debugpy/bin/python -m pip install debugpy
 
-  - name: Install NVIM config
+  - name: install nvim config
     become: false
-    shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
+    shell: "mkdir -p ${home}/.config && rm -rf ${home}/.local/share/nvim/ ${home}/.config/nvim/ ${home}/.cache/nvim/ && cp -a ./nvim ${home}/.config/"
     when: not update
-  - name: Update NVIM config
+  - name: update nvim config
     become: false
-    shell: "cp -a ./nvim ${HOME}/.config/"
+    shell: "cp -a ./nvim ${home}/.config/"
     when: update
 
-  - name: Check tmux-plugins is installed
+  - name: check tmux-plugins is installed
     become: false
     stat:
-      path: ${HOME}/.tmux/plugins/tpm
+      path: ${home}/.tmux/plugins/tpm
     register: register_name
-  - name: Install tmux plugins
+  - name: install tmux plugins
     become: false
-    shell: "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm"
+    shell: "git clone https://github.com/tmux-plugins/tpm ${home}/.tmux/plugins/tpm"
     when: not register_name.stat.exists
-  - name: Update tmux plugins
+  - name: update tmux plugins
     become: false
     shell: "cd ${HOME}/.tmux/plugins/tpm && git pull"
     when: register_name.stat.exists

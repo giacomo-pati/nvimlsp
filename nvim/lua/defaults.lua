@@ -80,7 +80,7 @@ function M.setup()
 
 	-- g.virtualedit = "all"
 	g.vim_markdown_fenced_languages = { "html", "javascript", "typescript", "css", "python", "lua", "vim" }
-	g.treesitter_parsers = { "python", "go", "lua", "javascript", "c" }
+	g.treesitter_parsers = { "python", "go", "lua", "javascript", "c","java" }
 	-- g.treesitter_parsers = "maintained"
 	-- on WSL 'choco install win32yank' and activate the following
 	-- g.clipboard = {
@@ -96,7 +96,6 @@ function M.setup()
 	-- 	cache_enabled = 0,
 	-- }
 	-- make it extensible to individual users
-	g.NERDTreeWinSize = 50
 	pcall(require, "user.defaults")
 end
 

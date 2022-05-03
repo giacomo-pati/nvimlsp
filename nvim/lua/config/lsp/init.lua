@@ -1,7 +1,6 @@
 local M = {}
 
 local function setup_servers()
-  -- require("config.lsp.null-ls").setup()
   local lspconfig = require("lspconfig")
   local lsputils = require("config.lsp.utils")
   local gopls_opts = require("config.lsp.gopls").setup()

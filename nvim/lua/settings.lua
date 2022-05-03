@@ -62,6 +62,10 @@ function M.setup()
       map <C-k> <C-W>k
       map <C-h> <C-W>h
       map <C-l> <C-W>l
+      nnoremap <M-Left> <cmd>wincmd h<cr>
+      nnoremap <M-Up> <cmd>wincmd k<cr>
+      nnoremap <M-Right> <cmd>wincmd l<cr>
+      nnoremap <M-Down> <cmd>wincmd j<cr>
     ]],
 		false
 	)
@@ -70,8 +74,8 @@ function M.setup()
 	-- but skip the quickfix when navigating
 	vim.api.nvim_exec(
 		[[
-      nnoremap <S-Left> :bprevious<cr>
-      nnoremap <S-Right> :bnext<cr>
+      nnoremap <S-Left> <cmd>bprevious<cr>
+      nnoremap <S-Right> <cmd>bnext<cr>
       augroup qf
         autocmd!
         autocmd FileType qf set nobuflisted
@@ -229,13 +233,13 @@ function M.setup()
 	--   false
 	-- )
 	-- Ctrl-Space for completions. Heck Yeah!
-	vim.api.nvim_exec(
-		[[
-            inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ? "\<lt>C-n>" : "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" . "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" . "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-            imap <C-@> <C-Space>
-	  ]],
-		false
-	)
+	-- vim.api.nvim_exec(
+	-- 	[[
+            -- inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ? "\<C-n>" : "\<C-x>\<C-o><c-r>=pumvisible() ?" . "\"\\<c-n>\\<c-p>\\<c-n>\" :" . "\" \\<bs>\\<C-n>\"\<CR>"
+            -- imap <C-@> <C-Space>
+	--   ]],
+	-- 	false
+	-- )
 
 	-- make it extensible to individual users
 	pcall(require, "user.settings")

@@ -6,6 +6,7 @@ function M.nvim_dap_setup()
 	dap_install.setup({
 		installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
 	})
+	-- require("dap-go").setup()
 
 	-- telescope-dap
 	require("telescope").load_extension("dap")

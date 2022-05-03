@@ -36,6 +36,15 @@ local xopts = {
 	nowait = true,
 }
 
+local bopts = {
+	mode = "n",
+	prefix = "<leader>",
+	buffer = nil,
+	silent = true,
+	noremap = true,
+	nowait = true,
+}
+
 local mappings = {
 	["w"] = { "<Cmd>w<Cr>", "Save" },
 	["q"] = { "<Cmd>q<Cr>", "Quit!" },
@@ -297,11 +306,12 @@ local lsp_mappings = {
 		u = { "<Cmd>Telescope lsp_references<CR>", "References" },
 		i = { "<Cmd>Telescope lsp_implementations<CR>", "Implementations" },
 		o = { "<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols" },
+		c = { "<Cmd>lua vim.lsp.buf.declaration<CR>", "Declaration" },
 		d = { "<Cmd>Telescope lsp_definitions<CR>", "Definition" },
 		a = { "<Cmd>Telescope lsp_code_actions<CR>", "Code actions" },
 		e = { "<Cmd>lua vim.diagnostic.enable()<CR>", "Enable diagnostics" },
 		x = { "<Cmd>lua vim.diagnostic.disable()<CR>", "Disable diagnostics" },
-		n = { "<Cmd>update<CR>:Neoformat<CR>", "Neoformat" },
+		f = { "<Cmd>update<CR>:lua vim.lsp.buf.format()<CR>", "Format" },
 		t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
 		l = { "<Cmd>SymbolsOutline<CR>", "Outlines" },
 	},
@@ -413,14 +423,15 @@ local fmappings = {
 	["<S-F9>"] = { ":lua require('dap-go').debug_test()<CR>", "Continue Test" },
 }
 
-function M.register_lsp(client)
+function M.register_lsp(client,bufno)
 	local wk = require("which-key")
-	wk.register(lsp_mappings, opts)
+	bopts.buffer=bufno
+	wk.register(lsp_mappings, bopts)
 
 	for _, m in pairs(lsp_mappings_opts) do
 		local capability, key = unpack(m)
-		if client.resolved_capabilities[capability] then
-			wk.register(key, opts)
+		if client.server_capabilities[capability] then
+			wk.register(key, bopts)
 		end
 	end
 end

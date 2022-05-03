@@ -189,28 +189,28 @@
   - name: install virtualenv for debugpy
     become: false
     shell: |
-      mkdir -p ${home}/.virtualenvs
-      cd ${home}/.virtualenvs
+      mkdir -p ${HOME}/.virtualenvs
+      cd ${HOME}/.virtualenvs
       python3 -m venv debugpy
       debugpy/bin/python -m pip install debugpy
 
   - name: install nvim config
     become: false
-    shell: "mkdir -p ${home}/.config && rm -rf ${home}/.local/share/nvim/ ${home}/.config/nvim/ ${home}/.cache/nvim/ && cp -a ./nvim ${home}/.config/"
+    shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
     when: not update
   - name: update nvim config
     become: false
-    shell: "cp -a ./nvim ${home}/.config/"
+    shell: "cp -a ./nvim ${HOME}/.config/"
     when: update
 
   - name: check tmux-plugins is installed
     become: false
     stat:
-      path: ${home}/.tmux/plugins/tpm
+      path: ${HOME}/.tmux/plugins/tpm
     register: register_name
   - name: install tmux plugins
     become: false
-    shell: "git clone https://github.com/tmux-plugins/tpm ${home}/.tmux/plugins/tpm"
+    shell: "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm"
     when: not register_name.stat.exists
   - name: update tmux plugins
     become: false
@@ -252,3 +252,7 @@
       curl -fsSL https://get.pulumi.com | sh
       echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
     when: install_pulumi
+
+  - name: Install gopls
+    become: false
+    shell: {{ go_install_dir }}/bin/go install golang.org/x/tools/gopls@latest

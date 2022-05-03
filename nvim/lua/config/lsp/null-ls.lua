@@ -1,10 +1,7 @@
 local M = {}
 
-local lsputils = require("config.lsp.utils")
-
-CONFIG = {}
-
 function M.setup()
+  local lsputils = require("config.lsp.utils")
 	local nls = require("null-ls")
 	local sources = {
 		nls.builtins.formatting.prettierd.with({

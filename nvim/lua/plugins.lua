@@ -427,24 +427,27 @@ function M.setup()
 		-- LSP and completion
 		use({
 			"williamboman/nvim-lsp-installer",
-			config = function()
-				require("config.lsp-installer").setup()
-			end,
+			{
+				"neovim/nvim-lspconfig",
+				as = "nvim-lspconfig",
+				after = { "nvim-treesitter", "cmp" },
+				-- opt = true,
+				requires = {
+					"ray-x/lsp_signature.nvim",
+				},
+				config = function()
+					-- require("nvim-lsp-installer").setup({})
+					require("config.lsp").setup()
+					-- local lsp_config = require("lspconfig")
+					-- lsp_config.gopls.setup({})
+					-- lsp_config.sumneko_lua.setup({})
+				end,
+				-- config = function()
+				-- end,
+			},
 		})
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "hrsh7th/cmp-nvim-lsp" })
-		use({
-			"neovim/nvim-lspconfig",
-			as = "nvim-lspconfig",
-			after = { "nvim-treesitter", "nvim-lsp-installer", "cmp" },
-			opt = true,
-			requires = {
-				"ray-x/lsp_signature.nvim",
-			},
-			config = function()
-				require("config.lsp").setup()
-			end,
-		})
 		-- use({
 		-- 	"ray-x/navigator.lua",
 		-- 	requires = {
@@ -482,16 +485,28 @@ function M.setup()
 		use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
 		use({
 			"Pocco81/DAPInstall.nvim",
+			commit = "24923c3",
+			-- as = "dap-install",
 			after = "nvim-dap",
 			config = function()
 				require("config.dap").setup()
 			end,
 		})
+		-- use({
+		-- 	"Pocco81/dap-buddy.nvim",
+		-- 	as = "dap-install",
+		-- 	after = "nvim-dap",
+		-- 		config = function()
+		-- 			require("config.dap").setup()
+		-- 		end,
+		-- })
 		use({ "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" })
 		-- use({
 		-- 	"leoluz/nvim-dap-go",
+		-- 	after = { "nvim-dap", "nvim-dap-ui" },
 		-- 	config = function()
-		-- 		require("dap-go").setup()
+		-- 		require("config.dap").setup()
+		-- 		-- require("dap-go").setup()
 		-- 	end,
 		-- })
 		-- use({

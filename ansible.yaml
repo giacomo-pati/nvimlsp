@@ -252,7 +252,3 @@
       curl -fsSL https://get.pulumi.com | sh
       echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
     when: install_pulumi
-
-  - name: Install gopls
-    become: false
-    shell: {{ go_install_dir }}/bin/go install golang.org/x/tools/gopls@latest

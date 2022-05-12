@@ -199,7 +199,7 @@ function M.setup()
 				{
 					"romgrk/nvim-treesitter-context",
 					config = function()
-						require("treesitter-context.config").setup({ enable = true })
+						require("treesitter-context").setup({ enable = true })
 					end,
 				},
 				{
@@ -436,14 +436,8 @@ function M.setup()
 					"ray-x/lsp_signature.nvim",
 				},
 				config = function()
-					-- require("nvim-lsp-installer").setup({})
 					require("config.lsp").setup()
-					-- local lsp_config = require("lspconfig")
-					-- lsp_config.gopls.setup({})
-					-- lsp_config.sumneko_lua.setup({})
 				end,
-				-- config = function()
-				-- end,
 			},
 		})
 		use({ "jose-elias-alvarez/null-ls.nvim" })

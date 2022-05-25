@@ -24,7 +24,7 @@
     ansible.builtin.apt_repository:
       repo: "{{ item }}"
     with_items:
-    - ppa:neovim-ppa/stable
+    - ppa:neovim-ppa/unstable
     - ppa:cwchien/gradle
 
   - name: Install node ppa

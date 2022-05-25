@@ -30,6 +30,9 @@
   - name: Install node ppa
     shell: curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
 
+  - name: Install blobfuse ppa
+    shell: wget https://packages.microsoft.com/config/ubuntu/22.04//packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb
+
   - name: Install packages
     apt:
       name: "{{ item }}"

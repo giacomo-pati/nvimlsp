@@ -129,6 +129,12 @@
     when: install_maven
 
   post_tasks:
+  - name: Link to current golang installation
+    shell: rm -f "$(dirname {{ go_install_dir }})/current" && ln -s "{{ go_install_dir }}" "$(dirname {{ go_install_dir }})/current"
+
+  - name: Link to current Maven installation
+    shell: rm -f "/opt/maven" && ln -sf "/opt/apache-maven-{{ maven_version }}" "/opt/maven"
+
   - name: Install kubectl and kubelogin
     shell: az aks install-cli --install-location /usr/local/bin/kubectl --kubelogin-install-location /usr/local/bin/kubelogin
 
@@ -236,14 +242,14 @@
 
   - name: Add PATH for golang
     become: false
-    shell: echo export PATH=\$PATH:{{ go_install_dir }}/bin:${HOME}/go/bin >>${HOME}/.profile
+    shell: echo export PATH=\$PATH:$(dirname "{{ go_install_dir }}")/current/bin:\${HOME}/go/bin >>${HOME}/.profile
     when: install_go
 
   - name: Add PATH for Maven
     become: false
     shell: |
-      echo export PATH=\$PATH:/opt/apache-maven-{{ maven_version }}/bin >>${HOME}/.profile
-      echo export M2_HOME=/opt/apache-maven-{{ maven_version }} >>${HOME}/.profile
+      echo export PATH=\$PATH:/opt/maven/bin >>${HOME}/.profile
+      echo export M2_HOME=/opt/maven >>${HOME}/.profile
     when: install_maven
 
   - name: Install Pulumi

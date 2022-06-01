@@ -247,14 +247,15 @@
 
   - name: Add PATH for Maven
     become: false
-    shell: |
-      echo export PATH=\$PATH:/opt/maven/bin >>${HOME}/.profile
-      echo export M2_HOME=/opt/maven >>${HOME}/.profile
+    shell: echo export PATH=\$PATH:/opt/maven/bin >>${HOME}/.profile && echo export M2_HOME=/opt/maven >>${HOME}/.profile
     when: install_maven
 
   - name: Install Pulumi
     become: false
-    shell: |
-      curl -fsSL https://get.pulumi.com | sh
-      echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
+    shell: curl -fsSL https://get.pulumi.com | sh && echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
     when: install_pulumi
+
+  - name: Install GoKube
+    become: false
+    shell: cd ./gokube && {{ go_install_dir }}/bin/go install ./cmd/gk
+    when: install_go

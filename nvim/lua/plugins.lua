@@ -159,12 +159,12 @@ function M.setup()
 		})
 
 		-- Testing
-		use({
-			"rcarriga/vim-ultest",
-			config = "require('config.test').setup()",
-			run = ":UpdateRemotePlugins",
-			requires = { "vim-test/vim-test" },
-		})
+		-- use({
+		-- 	"rcarriga/vim-ultest",
+		-- 	config = "require('config.test').setup()",
+		-- 	run = ":UpdateRemotePlugins",
+		-- 	requires = { "vim-test/vim-test" },
+		-- })
 		use({ "stevearc/stickybuf.nvim" })
 
 		-- Better syntax
@@ -469,6 +469,13 @@ function M.setup()
 		-- DAP
 		use({ "mfussenegger/nvim-dap", event = "BufWinEnter", as = "nvim-dap" })
 		use({ "mfussenegger/nvim-dap-python", after = "nvim-dap" })
+		use({
+			"leoluz/nvim-dap-go",
+			after = "nvim-dap",
+			-- config = function()
+			-- 	require("config.dap").setup()
+			-- end,
+		})
 		use({
 			"theHamsta/nvim-dap-virtual-text",
 			after = "nvim-dap",

@@ -255,7 +255,7 @@
 
   - name: Install Pulumi
     become: false
-    shell: curl -fsSL https://get.pulumi.com | sh && echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
+    shell: curl -fsSL https://get.pulumi.com | sh -s -- --version {{ pulumi_version }} && echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile
     when: install_pulumi
 
   - name: Install GoKube

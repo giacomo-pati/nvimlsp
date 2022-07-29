@@ -30,6 +30,13 @@
   - name: Install node ppa
     shell: curl -sL https://deb.nodesource.com/setup_current.x | sudo -E sh -
 
+  - name: Install Microsoft repository
+    shell: |
+      rel=$(lsb_release -r -s)
+      curl -sSL https://packages.microsoft.com/config/ubuntu/${rel}/prod.list | tee /etc/apt/sources.list.d/microsoft-prod.list
+      curl -sSL https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
+      apt-get update
+
   - name: Install packages
     apt:
       name: "{{ item }}"
@@ -37,7 +44,8 @@
     with_items:
     - apt-transport-https
     - black
-    # - blobfuse
+    - blobfuse
+    # - libfuse2
     - cargo
     - cpanminus
     - daemonize
@@ -91,6 +99,13 @@
     - neovim
     - '@fsouza/prettierd'
     - eslint_d
+    - vscode-json-languageserver
+    - yaml-language-server
+    - bash-language-server
+    - dockerfile-language-server-nodejs
+
+  - name: Install alternative name for vscode-json-languageserver
+    shell: ls -s /usr/bin/vscode-json-languageserver /usr/bin/vscode-json-language-server
 
   - name: Install latest neovim gem
     community.general.gem:
@@ -183,6 +198,10 @@
       name: stylua
 
   - name: install lazygit
+    become: false
+    shell: "{{ go_install_dir }}/bin/go install github.com/jesseduffield/lazygit@latest"
+
+  - name: install json-language-server
     become: false
     shell: "{{ go_install_dir }}/bin/go install github.com/jesseduffield/lazygit@latest"
 

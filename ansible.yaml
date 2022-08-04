@@ -201,10 +201,6 @@
     become: false
     shell: "{{ go_install_dir }}/bin/go install github.com/jesseduffield/lazygit@latest"
 
-  - name: install json-language-server
-    become: false
-    shell: "{{ go_install_dir }}/bin/go install github.com/jesseduffield/lazygit@latest"
-
   - name: install python packages
     become: false
     pip:

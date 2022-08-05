@@ -18,6 +18,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	graph "github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2021-03-01/resourcegraph"
 	"github.com/Azure/go-autorest/autorest/azure/auth"
+	"github.com/davecgh/go-spew/spew"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 )
@@ -89,7 +90,6 @@ func (info *stratumInfo) askForStratumEnv() *aksEnvironmentType {
 	log.Fatalf("Env '%s' not found, this should not happen", answers.Environment)
 	return nil
 }
-
 func (info *stratumInfo) fetchStratumClusters() {
 	// Create and authorize a ResourceGraph client
 	graphClient := graph.New()
@@ -129,12 +129,11 @@ resources
 	if r1, ok := results.Data.([]interface{}); ok {
 		for _, v := range r1 {
 			if r2, ok := v.(map[string]interface{}); ok {
-				instName := r2["stratumClusterName"].(string)
 				res = append(res, aksEnvironmentType{
 					AksName:            r2["aksName"].(string),
 					SubscriptionID:     r2["subscriptionId"].(string),
 					ResourceGroup:      r2["resourceGroup"].(string),
-					StratumClusterName: instName,
+					StratumClusterName: r2["stratumClusterName"].(string),
 				})
 			}
 		}
@@ -142,9 +141,23 @@ resources
 	sort.Slice(res, func(i, j int) bool {
 		return res[i].StratumClusterName < res[j].StratumClusterName
 	})
+	spew.Dump("After Sort", res)
+	lastName := ""
+	i := 0
+	for j, v := range res {
+		fmt.Printf("i=%d,lastName=%s,cluster=%s\n", i, lastName, v.StratumClusterName)
+		if strings.EqualFold(v.StratumClusterName, lastName) {
+			i++
+			res[j].StratumClusterName = fmt.Sprintf("%s@%d", v.StratumClusterName, i)
+			fmt.Printf("New name %s\n", v.StratumClusterName)
+		} else {
+			lastName = v.StratumClusterName
+			i = 0
+		}
+	}
+	spew.Dump("After Name tweak", res)
 	info.aksEnvironments = res
 }
-
 func (info *stratumInfo) connect(env *aksEnvironmentType) error {
 	log.Printf("Connecting to environment %s", env.StratumClusterName)
 	azargs := []string{"aks", "get-credentials", "--name", env.AksName, "--subscription", env.SubscriptionID,

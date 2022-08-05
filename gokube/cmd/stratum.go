@@ -156,13 +156,16 @@ func (info *stratumInfo) connect(env *aksEnvironmentType) error {
 		}
 		azargs = append(azargs, v)
 	}
+	kc := os.Getenv("KUBECONFIG")
+	if kc != "" {
+		azargs = append(azargs, "-f", kc)
+	}
 	err := execLogged("az", azargs...)
 	if err != nil {
 		log.Fatalf("failed to connect to environment %s: %v", env.StratumClusterName, err)
 	}
 
 	if !isAdmin {
-		kc := os.Getenv("KUBECONFIG")
 		if kc == "" {
 			kc = filepath.Join(userHomeDir(), ".kube", "config")
 		}

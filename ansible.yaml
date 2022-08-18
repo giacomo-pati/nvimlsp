@@ -104,8 +104,14 @@
     - bash-language-server
     - dockerfile-language-server-nodejs
 
+  - name: vscode-json-language-server exists
+    become: false
+    shell: "ls /usr/bin/vscode-json-language-server"
+    register: vscode-json-language-server_exists
+    ignore_errors: yes
   - name: Install alternative name for vscode-json-languageserver
     shell: ls -s /usr/bin/vscode-json-languageserver /usr/bin/vscode-json-language-server
+    when: vscode-json-language-server_exists
 
   - name: Install latest neovim gem
     community.general.gem:

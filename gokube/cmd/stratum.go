@@ -18,7 +18,6 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	graph "github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2021-03-01/resourcegraph"
 	"github.com/Azure/go-autorest/autorest/azure/auth"
-	"github.com/davecgh/go-spew/spew"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 )
@@ -141,7 +140,6 @@ resources
 	sort.Slice(res, func(i, j int) bool {
 		return res[i].StratumClusterName < res[j].StratumClusterName
 	})
-	spew.Dump("After Sort", res)
 	lastName := ""
 	i := 0
 	for j, v := range res {
@@ -149,13 +147,11 @@ resources
 		if strings.EqualFold(v.StratumClusterName, lastName) {
 			i++
 			res[j].StratumClusterName = fmt.Sprintf("%s@%d", v.StratumClusterName, i)
-			fmt.Printf("New name %s\n", v.StratumClusterName)
 		} else {
 			lastName = v.StratumClusterName
 			i = 0
 		}
 	}
-	spew.Dump("After Name tweak", res)
 	info.aksEnvironments = res
 }
 func (info *stratumInfo) connect(env *aksEnvironmentType) error {

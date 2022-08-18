@@ -111,7 +111,7 @@
     ignore_errors: yes
   - name: Install alternative name for vscode-json-languageserver
     shell: ln -s /usr/bin/vscode-json-languageserver /usr/bin/vscode-json-language-server
-    when: vscode_json_language_server_exists
+    when: vscode_json_language_server_exists is failed
 
   - name: Install latest neovim gem
     community.general.gem:

@@ -44,8 +44,8 @@
     with_items:
     - apt-transport-https
     - black
-    - blobfuse
-    # - libfuse2
+    # - blobfuse
+    - libfuse2
     - cargo
     - cpanminus
     - daemonize
@@ -110,7 +110,7 @@
     register: vscode-json-language-server_exists
     ignore_errors: yes
   - name: Install alternative name for vscode-json-languageserver
-    shell: ls -s /usr/bin/vscode-json-languageserver /usr/bin/vscode-json-language-server
+    shell: ln -s /usr/bin/vscode-json-languageserver /usr/bin/vscode-json-language-server
     when: vscode-json-language-server_exists
 
   - name: Install latest neovim gem

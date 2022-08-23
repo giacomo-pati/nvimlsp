@@ -143,7 +143,7 @@ resources
 	lastName := ""
 	i := 0
 	for j, v := range res {
-		fmt.Printf("i=%d,lastName=%s,cluster=%s\n", i, lastName, v.StratumClusterName)
+		// fmt.Printf("i=%d,lastName=%s,cluster=%s\n", i, lastName, v.StratumClusterName)
 		if strings.EqualFold(v.StratumClusterName, lastName) {
 			i++
 			res[j].StratumClusterName = fmt.Sprintf("%s@%d", v.StratumClusterName, i)

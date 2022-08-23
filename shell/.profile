@@ -40,6 +40,9 @@ export AZURE_STORAGE_KEY=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
 export PULUMI_ACCESS_TOKEN="..."
 export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-d-kv-pulumi.vault.azure.net/keys/azapphost
 
+if [ -f ${HOME}/.profile_paths ] ; then
+  . ${HOME}/.profile_paths
+fi
 if [ -n "$BASH_VERSION" ]; then
     eval "$(stratum completion bash)"
     eval "$(pulumi gen-completion bash)"
@@ -88,4 +91,3 @@ alias ks="gk s"
 	eval pulumi $command $@ $argsx $argsy
     }
 # fi
-export PATH=$PATH:$HOME/go/bin

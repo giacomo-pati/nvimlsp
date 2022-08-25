@@ -211,6 +211,10 @@
     become: false
     shell: "{{ go_install_dir }}/bin/go install github.com/jesseduffield/lazygit@latest"
 
+  - name: install flarectl
+    become: false
+    shell: "{{ go_install_dir }}/bin/go install github.com/cloudflare/cloudflare-go/cmd/flarectl@latest"
+
   - name: install python packages
     become: false
     pip:

@@ -37,6 +37,11 @@ if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then
 fi
 export AZURE_STORAGE_KEY=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
 
+if [ ! -f "$HOME/.cache/CF_API_TOKEN" ] ; then
+  az keyvault secret show --id https://aah-d-kv-secrets.vault.azure.net/secrets/cf-token --query value -o tsv > $HOME/.cache/CF_API_TOKEN
+fi
+export CF_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
+
 export PULUMI_ACCESS_TOKEN="..."
 export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-d-kv-pulumi.vault.azure.net/keys/azapphost
 

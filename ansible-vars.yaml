@@ -3,10 +3,10 @@ install_go: true
 go_version: 1.19
 go_install_dir: "/opt/go/{{ go_version }}"
 install_java: true
-java_major_version: 11
+java_major_version: 18
 install_maven: true
 maven_version: 3.8.6
 install_pwsh: true
 install_pulumi: true
-pulumi_version: 3.38.0
+pulumi_version: 3.39.0
 update: false

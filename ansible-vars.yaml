@@ -1,12 +1,14 @@
-install_azcli: true
-install_go: true
 go_version: 1.19
 go_install_dir: "/opt/go/{{ go_version }}"
+nerd_font: "Hack"
+nerd_font_version: "v2.2.2"
+install_azcli: true
+install_go: true
 install_java: true
-java_major_version: 18
 install_maven: true
-maven_version: 3.8.6
-install_pwsh: true
 install_pulumi: true
-pulumi_version: 3.39.0
+install_pwsh: true
+java_major_version: 18
+maven_version: 3.8.6
+pulumi_version: 3.39.3
 update: false

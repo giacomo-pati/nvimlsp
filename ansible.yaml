@@ -180,17 +180,17 @@
       path: "{{ lookup('env', 'HOME') }}/.fonts"
       state: directory
 
-  - name: Caskaydia exists
+  - name: Nerd fonts exists
     become: false
-    shell: "ls {{ lookup('env', 'HOME') }}/.fonts/Caskaydia*Nerd*Font*Complete*"
-    register: Caskaydia_exists
+    shell: "ls {{ lookup('env', 'HOME') }}/.fonts/{{ nerd_font }}*Nerd*Font*Complete*"
+    register: NerdFont_exists
     ignore_errors: yes
 
-  - name: Download Caskaydia
+  - name: Download Nerd Font
     become: false
-    when: Caskaydia_exists is failed
+    when: NerdFont_exists is failed
     ansible.builtin.unarchive:
-      src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
+      src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_version }}/{{ nerd_font }}.zip
       dest: "{{ lookup('env', 'HOME') }}/.fonts/"
       remote_src: yes
 

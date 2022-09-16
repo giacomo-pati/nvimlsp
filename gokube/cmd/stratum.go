@@ -252,7 +252,6 @@ func getAPIConfig(kubeConfigPath string) (*api.Config, error) {
 // exec credential plugin format in order to use the kubelogin plugin for
 // azure authentication. See: https://github.com/Azure/kubelogin
 func convertAPIConfig(kubeConfigPath string) error {
-
 	config, err := getAPIConfig(kubeConfigPath)
 	if err != nil {
 		return err
@@ -260,28 +259,38 @@ func convertAPIConfig(kubeConfigPath string) error {
 
 	for _, authInfo := range config.AuthInfos {
 		if authInfo != nil {
-			if authInfo.AuthProvider == nil || authInfo.AuthProvider.Name != "azure" {
-				continue
+			if authInfo.AuthProvider != nil && authInfo.AuthProvider.Name == "azure" && authInfo.AuthProvider.Config["apiserver-id"] != "" {
+				authInfo.Exec = createExecArgs()
+				authInfo.Exec.Args = append(authInfo.Exec.Args, authInfo.AuthProvider.Config["apiserver-id"])
+				authInfo.AuthProvider = nil
+			} else if authInfo.Exec != nil {
+				for i, e := range authInfo.Exec.Args {
+					if e == "--server-id" && (i+1) < len(authInfo.Exec.Args) {
+						sid := authInfo.Exec.Args[i+1]
+						authInfo.Exec = createExecArgs()
+						authInfo.Exec.Args = append(authInfo.Exec.Args, sid)
+						authInfo.AuthProvider = nil
+						break
+					}
+				}
 			}
-			exec := &api.ExecConfig{
-				Command: "kubelogin",
-				Args: []string{
-					"get-token",
-				},
-				APIVersion: "client.authentication.k8s.io/v1beta1",
-			}
-			if authInfo.AuthProvider.Config["apiserver-id"] != "" {
-				exec.Args = append(exec.Args, "--server-id")
-				exec.Args = append(exec.Args, authInfo.AuthProvider.Config["apiserver-id"])
-			}
-			exec.Args = append(exec.Args, "--login")
-			exec.Args = append(exec.Args, "azurecli")
-			authInfo.Exec = exec
-			authInfo.AuthProvider = nil
 		}
 	}
 
 	return clientcmd.ModifyConfig(clientcmd.NewDefaultPathOptions(), *config, true)
+}
+
+func createExecArgs() *api.ExecConfig {
+	return &api.ExecConfig{
+		Command: "kubelogin",
+		Args: []string{
+			"get-token",
+			"--login",
+			"azurecli",
+			"--server-id",
+		},
+		APIVersion: "client.authentication.k8s.io/v1beta1",
+	}
 }
 
 func userHomeDir() string {

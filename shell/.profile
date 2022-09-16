@@ -65,6 +65,9 @@ alias krsv="gk s"
 alias kns="gk ns"
 alias kc="gk c"
 alias ks="gk s"
+function plss {
+    pulumi stack ls | grep -v "LAST UPDATE" | awk '{split($1,a,"-"); print a[length(a)] " " $0}' | sort -k 1 | awk '/BEGIN/ {a=""} {if(a!=$1){print ""};a=$1; print substr($0,length($1)+2)}'
+}
 
 # add Pulumi shortcut
 # if [ -n "$BASH_VERSION" ]; then

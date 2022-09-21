@@ -60,6 +60,7 @@
     - fzf
     - gcc
     - gradle
+    - graphviz
     - g++
     - jq
     - locate

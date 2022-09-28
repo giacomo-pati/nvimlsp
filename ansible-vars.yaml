@@ -10,5 +10,5 @@ install_pulumi: true
 install_pwsh: true
 java_major_version: 18
 maven_version: 3.8.6
-pulumi_version: 3.40.1
+pulumi_version: 3.40.2
 update: false

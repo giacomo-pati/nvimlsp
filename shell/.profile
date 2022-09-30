@@ -55,6 +55,7 @@ if [ -n "$BASH_VERSION" ]; then
     eval "$(kubectl completion bash)"
     complete -o default -F __start_stratum s
     complete -o default -F __start_kubectl k
+    complete -o default -F __start_pulumi pu
 fi
 
 alias s="stratum"
@@ -65,6 +66,8 @@ alias krsv="gk s"
 alias kns="gk ns"
 alias kc="gk c"
 alias ks="gk s"
+alias pu=pulumi
+alias s=stratum
 function plss {
     pulumi stack ls | grep -v "LAST UPDATE" | awk '{split($1,a,"-"); print a[length(a)] " " $0}' | tr -d '*' | sort -k 1 | awk '/BEGIN/ {a=""} {if(a!=$1){print ""};a=$1; print substr($0,length($1)+2)}'
 }

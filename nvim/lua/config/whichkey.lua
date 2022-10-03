@@ -89,6 +89,7 @@ local mappings = {
 		n = { "<Cmd>bn<Cr>", "Next buffer" },
 		p = { "<Cmd>bp<Cr>", "Previous buffer" },
 		f = { "<Cmd>bd!<Cr>", "Force delete current buffer" },
+		s = { "<Cmd>silent! wa!<Cr>", "Save all buffers" },
 	},
 
 	-- Quick fix
@@ -423,9 +424,9 @@ local fmappings = {
 	["<S-F9>"] = { ":lua require('dap-go').debug_test()<CR>", "Continue Test" },
 }
 
-function M.register_lsp(client,bufno)
+function M.register_lsp(client, bufno)
 	local wk = require("which-key")
-	bopts.buffer=bufno
+	bopts.buffer = bufno
 	wk.register(lsp_mappings, bopts)
 
 	for _, m in pairs(lsp_mappings_opts) do

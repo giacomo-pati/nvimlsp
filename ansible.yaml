@@ -33,8 +33,8 @@
       rel=$(lsb_release -r -s)
       curl -sSL https://packages.microsoft.com/config/ubuntu/${rel}/prod.list | tee /etc/apt/sources.list.d/microsoft-prod.list
       curl -sSL https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc
-      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg --batch --yes
-      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg --batch --yes
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
       apt-get update
       apt-cache policy docker-ce
 
@@ -47,8 +47,10 @@
     - black
     # - blobfuse
     - libfuse2
+    - ca-certificates
     - cargo
     - cpanminus
+    - curl
     - daemonize
     - dbus-user-session
     - default-jdk
@@ -59,10 +61,12 @@
     - fontconfig
     - fzf
     - gcc
+    - gnupg
     - gradle
     - graphviz
     - g++
     - jq
+    - lsb-release
     - locate
     - luarocks
     - lynx
@@ -76,6 +80,7 @@
     - ruby-full
     - shellcheck
     - silversearcher-ag
+    - speedometer
     - sqlite3
     - tmux
     - zsh
@@ -128,15 +133,21 @@
     when: item.install
     with_items:
     - { name: glow, classic: no, install: yes }
-    - { name: powershell, classic: yes, install: "{{ install_pwsh }}" }
+    - { name: powershell, classic: yes, install: "{{ pwsh_install }}" }
   - name: Link SNAP items to /bin
     shell: |
       ln -sf /snap/bin/pwsh /bin/pwsh
       ln -sf /snap/bin/glow /bin/glow
 
   - name: Install Azure CLI
-    shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-    when: install_azcli
+    shell: |
+      curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+      AZ_REPO=$(lsb_release -cs)
+      echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | tee /etc/apt/sources.list.d/azure-cli.list
+      apt-get update
+      apt-cache policy azure-cli
+      apt-get install azure-cli="{{ azcli_version }}-1~$AZ_REPO" -y --allow-downgrades
+    when: azcli_install
 
   - name: Get dive latest version
     shell: |
@@ -150,14 +161,14 @@
     vars:
     - golang_version: "{{ go_version }}"
     - golang_install_dir: "{{ go_install_dir }}"
-    when: install_go
+    when: go_install
   - role: lean_delivery.java
     # vars:
       # transport: repositories
       # java_major_version: "{{ java_major_version }}"
-    when: install_java or install_maven
+    when: java_install or maven_install
   - role: tecris.maven
-    when: install_maven
+    when: maven_install
 
   post_tasks:
   - name: Link to current golang installation
@@ -278,19 +289,19 @@
   - name: Add PATH for golang
     become: false
     shell: echo export PATH=\$PATH:$(dirname "{{ go_install_dir }}")/current/bin:\${HOME}/go/bin >>${HOME}/.profile_paths
-    when: install_go
+    when: go_install
 
   - name: Add PATH for Maven
     become: false
     shell: echo export PATH=\$PATH:/opt/maven/bin >>${HOME}/.profile_paths && echo export M2_HOME=/opt/maven >>${HOME}/.profile_paths
-    when: install_maven
+    when: maven_install
 
   - name: Install Pulumi
     become: false
     shell: curl -fsSL https://get.pulumi.com | sh -s -- --version {{ pulumi_version }} && echo export PATH=\$PATH:\${HOME}/.pulumi/bin >>${HOME}/.profile_paths
-    when: install_pulumi
+    when: pulumi_install
 
   - name: Install GoKube
     become: false
     shell: cd ./gokube && {{ go_install_dir }}/bin/go install ./cmd/gk
-    when: install_go
+    when: go_install

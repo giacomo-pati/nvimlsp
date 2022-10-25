@@ -68,11 +68,11 @@ function M.nvim_dap_load_launchjs(path)
 	require("config.dap.node").setup()
 	require("config.dap.lua").setup()
 	-- local resolved_path = path or "./.vscode/launch.json"
-	local resolved_path = path
-		or (require("lspconfig.util").find_git_ancestor(vim.loop.fs_realpath(".")) .. "/.vscode/launch.json")
-	if not resolved_path then
+	local path = require("lspconfig.util").find_git_ancestor(vim.loop.fs_realpath("."))
+	if not path then
 		return
 	end
+	local resolved_path = path .. "/.vscode/launch.json"
 	local file = io.open(resolved_path)
 	if not file then
 		return

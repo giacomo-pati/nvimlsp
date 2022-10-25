@@ -104,13 +104,13 @@ function M.lsp_config(client, bufnr)
 
 	-- LSP and DAP menu
 	local whichkey = require("config.whichkey")
-	whichkey.register_lsp(client,bufnr)
+	whichkey.register_lsp(client, bufnr)
 
 	if client.name == "tsserver" or client.name == "jsonls" then
 		client.server_capabilities.document_formatting = false
 		client.server_capabilities.document_range_formatting = false
 	end
-        -- print(vim.inspect(client))
+	-- print(vim.inspect(client))
 	if client.server_capabilities.documentFormattingProvider then
 		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format()")
 	end
@@ -135,7 +135,7 @@ function M.get_capabilities()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 	-- for nvim-cmp
-	capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 	-- Code actions
 	capabilities.textDocument.codeAction = {

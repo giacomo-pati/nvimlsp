@@ -50,10 +50,11 @@ if [ -f ${HOME}/.profile_paths ] ; then
   . ${HOME}/.profile_paths
 fi
 if [ -n "$BASH_VERSION" ]; then
-    eval "$(stratum completion bash)"
-    eval "$(pulumi gen-completion bash)"
-    eval "$(zoxide init bash)"
-    eval "$(kubectl completion bash)"
+    eval "$(stratum completion zsh)"
+    eval "$(pulumi gen-completion zsh)"
+    eval "$(zoxide init zsh)"
+    eval "$(kubectl completion zsh)"
+    eval "$(stern --completion zsh)"
     complete -o default -F __start_stratum s
     complete -o default -F __start_kubectl k
     complete -o default -F __start_pulumi pu

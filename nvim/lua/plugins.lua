@@ -108,6 +108,7 @@ function M.setup()
 				require("gitsigns").setup()
 			end,
 		})
+		use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 		use({ "Pocco81/AutoSave.nvim" })
 		--  use { "TimUntersberger/neogit",
 		--    cmd = "Neogit",

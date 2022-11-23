@@ -17,7 +17,8 @@ function M.setup()
 		open_on_setup = true,
 		open_on_tab = false,
 		sort_by = "name",
-		update_cwd = false,
+		respect_buf_cwd = true,
+		update_cwd = true,
 		view = {
 			width = 40,
 			hide_root_folder = false,
@@ -29,6 +30,10 @@ function M.setup()
 			mappings = {
 				custom_only = false,
 				list = {
+					-- remove a default mapping for cd
+					{ key = "<2-RightMouse>", action = "" },
+					-- add multiple normal mode mappings for edit
+					{ key = "C", action = "cd", mode = "n" },
 					-- user mappings go here
 				},
 			},
@@ -39,7 +44,7 @@ function M.setup()
 		},
 		update_focused_file = {
 			enable = true,
-			update_cwd = false,
+			update_cwd = true,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},

@@ -29,7 +29,7 @@ fi
 
 export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true
-export AZURE_STORAGE_ACCOUNT=aahdsapulumi
+export AZURE_STORAGE_ACCOUNT=aah2sapulumi
 export AZURE_STORAGE_RESOURCE_GROUP=pulumi
 if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then
   az storage account keys list --resource-group $AZURE_STORAGE_RESOURCE_GROUP --account-name $AZURE_STORAGE_ACCOUNT --query '[0].value' -o tsv > $HOME/.cache/AZURE_STORAGE_KEY
@@ -44,7 +44,7 @@ export CF_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
 export CLOUDFLARE_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
 
 export PULUMI_ACCESS_TOKEN="..."
-export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-d-kv-pulumi.vault.azure.net/keys/azapphost
+export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-2-kv-pulumi.vault.azure.net/keys/azapphost
 
 if [ -f ${HOME}/.profile_paths ] ; then
   . ${HOME}/.profile_paths

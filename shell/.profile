@@ -12,9 +12,7 @@
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. $HOME/.bashrc
-    fi
+    test -f "$HOME/.bashrc" && . "$HOME/.bashrc"
 fi
 
 # set PATH so it includes user's private bin if it exists
@@ -27,27 +25,40 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+export AZURE_ACCOUNT="AZAPPHOST DEV 2"
+echo "setting Azure Account to '${AZURE_ACCOUNT}'"
+az account set -s "AZAPPHOST DEV 2"
 export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true
 export AZURE_STORAGE_ACCOUNT=aah2sapulumi
 export AZURE_STORAGE_RESOURCE_GROUP=pulumi
+export AAH_SECRETS_KEYVAULT=secrets-kv683f5e89
 if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then
-  az storage account keys list --resource-group $AZURE_STORAGE_RESOURCE_GROUP --account-name $AZURE_STORAGE_ACCOUNT --query '[0].value' -o tsv > $HOME/.cache/AZURE_STORAGE_KEY
-  chmod 0600 $HOME/.cache/AZURE_STORAGE_KEY
+  echo "refreshing storage access key for SA '${AZURE_STORAGE_RESOURCE_GROUP}/${AZURE_STORAGE_ACCOUNT} to '$HOME/.cache/AZURE_STORAGE_KEY'"
+  az storage account keys list --resource-group $AZURE_STORAGE_RESOURCE_GROUP --account-name $AZURE_STORAGE_ACCOUNT --query '[0].value' -o tsv > "$HOME/.cache/AZURE_STORAGE_KEY"
+  chmod 0600 "$HOME/.cache/AZURE_STORAGE_KEY"
+else
+  echo "reusing storage access key for SA '${AZURE_STORAGE_RESOURCE_GROUP}/${AZURE_STORAGE_ACCOUNT} from '$HOME/.cache/AZURE_STORAGE_KEY'"
 fi
-export AZURE_STORAGE_KEY=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
+AZURE_STORAGE_KEY=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
+export AZURE_STORAGE_KEY
 
 if [ ! -f "$HOME/.cache/CF_API_TOKEN" ] ; then
-  az keyvault secret show --id https://aah-d-kv-secrets.vault.azure.net/secrets/cf-token --query value -o tsv > $HOME/.cache/CF_API_TOKEN
+  echo "refreshing CloudFlare API token from KeyVault '${AAH_SECRETS_KEYVAULT}/cf-token' to '$HOME/.cache/CF_API_TOKEN'"
+  az keyvault secret show --id https://${AAH_SECRETS_KEYVAULT}.vault.azure.net/secrets/cf-token --query value -o tsv > "$HOME/.cache/CF_API_TOKEN"
+else
+  echo "reusing CloudFlare API token of KeyVault '${AAH_SECRETS_KEYVAULT}/cf-token' from '$HOME/.cache/CF_API_TOKEN'"
 fi
-export CF_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
-export CLOUDFLARE_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
+CF_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
+export CF_API_TOKEN
+CLOUDFLARE_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
+export CLOUDFLARE_API_TOKEN
 
 export PULUMI_ACCESS_TOKEN="..."
-export PULUMI_SECRET_PROVIDER=azurekeyvault://aah-2-kv-pulumi.vault.azure.net/keys/azapphost
+export PULUMI_SECRET_PROVIDER=azurekeyvault://${AAH_SECRETS_KEYVAULT}.vault.azure.net/keys/azapphost
 
-if [ -f ${HOME}/.profile_paths ] ; then
-  . ${HOME}/.profile_paths
+if [ -f "$HOME/.profile_paths" ] ; then
+  . "$HOME/.profile_paths"
 fi
 if [ -n "$BASH_VERSION" ]; then
     eval "$(stratum completion zsh)"
@@ -100,6 +111,6 @@ function plss {
 		    ;;
 	esac
 	echo "Executing pulumi $command $@ $argsx $argsy"
-	eval pulumi $command $@ $argsx $argsy
+	eval pulumi "$command" $@ $argsx $argsy
     }
 # fi

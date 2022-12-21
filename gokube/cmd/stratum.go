@@ -14,7 +14,6 @@ import (
 	"sort"
 	"strings"
 
-	// "github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2"
 	graph "github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2021-03-01/resourcegraph"
 	"github.com/Azure/go-autorest/autorest/azure/auth"
@@ -49,20 +48,18 @@ func executeStratumConnectCmd() {
 
 func (info *stratumInfo) askForStratumEnv() *aksEnvironmentType {
 	targets := []string{}
-	deflt := ""
 	for _, v := range info.aksEnvironments {
-		targets = append(targets, v.StratumClusterName)
+		if len(v.StratumClusterName) > 13 {
+			targets = append(targets, fmt.Sprintf("%s\t%s\t%s", v.StratumClusterName, v.AksName, v.ResourceGroup))
+		} else {
+			targets = append(targets, fmt.Sprintf("%s\t\t%s\t%s", v.StratumClusterName, v.AksName, v.ResourceGroup))
+		}
 	}
 	sort.Strings(targets)
 
 	s := survey.Select{
 		Message: "Choose a target STRATUM environment or press ctrl-c to cancel selection:",
 		Options: targets,
-	}
-	if deflt == "" {
-		s.Default = nil
-	} else {
-		s.Default = deflt
 	}
 	simpleQs := []*survey.Question{{
 		Name:   "environment",
@@ -81,8 +78,9 @@ func (info *stratumInfo) askForStratumEnv() *aksEnvironmentType {
 	}
 	log.Printf("Environment selected: '%v'", answers.Environment)
 
+	selection := strings.Split(answers.Environment, "\t")[0]
 	for _, v := range info.aksEnvironments {
-		if strings.EqualFold(answers.Environment, v.StratumClusterName) {
+		if strings.EqualFold(selection, v.StratumClusterName) {
 			return &v
 		}
 	}
@@ -143,7 +141,6 @@ resources
 	lastName := ""
 	i := 0
 	for j, v := range res {
-		// fmt.Printf("i=%d,lastName=%s,cluster=%s\n", i, lastName, v.StratumClusterName)
 		if strings.EqualFold(v.StratumClusterName, lastName) {
 			i++
 			res[j].StratumClusterName = fmt.Sprintf("%s@%d", v.StratumClusterName, i)
@@ -152,6 +149,7 @@ resources
 			i = 0
 		}
 	}
+
 	info.aksEnvironments = res
 }
 func (info *stratumInfo) connect(env *aksEnvironmentType) error {

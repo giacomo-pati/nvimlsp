@@ -1,4 +1,3 @@
-# azcli_version: 2.40.0
 azcli_version: 2.42.0
 azcli_install: true
 go_version: 1.19.5
@@ -10,7 +9,7 @@ java_major_version: 18
 java_install: true
 maven_version: 3.8.6
 maven_install: true
-pulumi_version: 3.51.1
+pulumi_version: 3.52.1
 pulumi_install: true
 pwsh_install: true
 update: false

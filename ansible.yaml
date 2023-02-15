@@ -141,7 +141,7 @@
 
   - name: Install Azure CLI
     shell: |
-      curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+      curl -sLS https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/keyrings/microsoft.gpg > /dev/null
       AZ_REPO=$(lsb_release -cs)
       echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | tee /etc/apt/sources.list.d/azure-cli.list
       apt-get update
@@ -161,6 +161,7 @@
     vars:
     - golang_version: "{{ go_version }}"
     - golang_install_dir: "{{ go_install_dir }}"
+    - golang_redis_sha256sum: '000a5b1fca4f75895f78befeb2eecf10bfff3c428597f3f1e69133b63b911b02'
     when: go_install
   - role: lean_delivery.java
     # vars:

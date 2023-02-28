@@ -282,7 +282,7 @@ function M.setup()
 			use({ "Xuyuanp/nerdtree-git-plugin" })
 		else
 			use({
-				"kyazdani42/nvim-tree.lua",
+				"nvim-tree/nvim-tree.lua",
 				requires = "kyazdani42/nvim-web-devicons",
 				config = function()
 					require("config.nvim-tree").setup()

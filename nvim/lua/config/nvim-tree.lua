@@ -29,7 +29,7 @@ function M.setup()
 			centralize_selection = false,
 			cursorline = true,
 			debounce_delay = 15,
-			width = 30,
+			width = 50, -- MODIFIED
 			hide_root_folder = false,
 			side = "left",
 			preserve_window_proportions = false,
@@ -58,7 +58,7 @@ function M.setup()
 		renderer = {
 			add_trailing = false,
 			group_empty = false,
-			highlight_git = false,
+			highlight_git = true, -- MODIFIED
 			full_name = false,
 			highlight_opened_files = "none",
 			highlight_modified = "none",
@@ -161,7 +161,7 @@ function M.setup()
 		},
 		git = {
 			enable = true,
-			ignore = true,
+			ignore = false, -- MODIFIED
 			show_on_dirs = true,
 			show_on_open_dirs = true,
 			timeout = 400,

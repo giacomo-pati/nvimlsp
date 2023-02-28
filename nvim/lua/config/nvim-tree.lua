@@ -5,7 +5,7 @@ local M = {}
 
 function M.setup()
 	vim.api.nvim_set_keymap("n", "<F2>", ":NvimTreeToggle<cr>", { noremap = true })
-
+	local api = require("nvim-tree.api")
 	local on_attach = function(bufnr)
 		local opts = function(desc)
 			return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -78,8 +78,8 @@ function M.setup()
 		-- You might tidy things by removing these along with their default mapping.
 		-- vim.keymap.set("n", "O", "", { buffer = bufnr })
 		-- vim.keymap.del("n", "O", { buffer = bufnr })
-		-- vim.keymap.set("n", "<2-RightMouse>", "", { buffer = bufnr })
-		-- vim.keymap.del("n", "<2-RightMouse>", { buffer = bufnr })
+		vim.keymap.set("n", "<2-RightMouse>", "", { buffer = bufnr })
+		vim.keymap.del("n", "<2-RightMouse>", { buffer = bufnr })
 		-- vim.keymap.set("n", "D", "", { buffer = bufnr })
 		-- vim.keymap.del("n", "D", { buffer = bufnr })
 		-- vim.keymap.set("n", "E", "", { buffer = bufnr })

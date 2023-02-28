@@ -58,7 +58,7 @@ function M.setup()
 		renderer = {
 			add_trailing = false,
 			group_empty = false,
-			highlight_git = true, -- MODIFIED
+			highlight_git = false,
 			full_name = false,
 			highlight_opened_files = "none",
 			highlight_modified = "none",

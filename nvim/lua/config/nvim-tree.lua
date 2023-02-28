@@ -114,7 +114,7 @@ function M.setup()
 		sync_root_with_cwd = false,
 		reload_on_bufenter = false,
 		respect_buf_cwd = false,
-		on_attach = on_attach,
+		on_attach = on_attach, -- MODIFIED
 		remove_keymaps = false,
 		select_prompts = false,
 		view = {
@@ -140,8 +140,8 @@ function M.setup()
 				open_win_config = {
 					relative = "editor",
 					border = "rounded",
-					width = 30,
-					height = 30,
+					width = 50, -- MODIFIED
+					height = 86, -- MODIFIED
 					row = 1,
 					col = 1,
 				},
@@ -214,7 +214,7 @@ function M.setup()
 			auto_open = true,
 		},
 		update_focused_file = {
-			enable = false,
+			enable = true, -- MODIFIED
 			update_root = false,
 			ignore_list = {},
 		},
@@ -284,7 +284,7 @@ function M.setup()
 				},
 			},
 			open_file = {
-				quit_on_open = false,
+				quit_on_open = true, -- MODIFIED
 				resize_window = true,
 				window_picker = {
 					enable = true,
@@ -310,7 +310,7 @@ function M.setup()
 		tab = {
 			sync = {
 				open = true, -- MODIFIED
-				close = false,
+				close = true,
 				ignore = {},
 			},
 		},

@@ -166,7 +166,12 @@ function M.setup()
 		-- 	run = ":UpdateRemotePlugins",
 		-- 	requires = { "vim-test/vim-test" },
 		-- })
-		use({ "stevearc/stickybuf.nvim" })
+		use({
+			"stevearc/stickybuf.nvim",
+			config = function()
+				require("stickybuf").setup()
+			end,
+		})
 
 		-- Better syntax
 		use({

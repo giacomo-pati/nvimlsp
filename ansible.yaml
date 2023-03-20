@@ -230,6 +230,10 @@
     become: false
     shell: "{{ go_install_dir }}/bin/go install github.com/cloudflare/cloudflare-go/cmd/flarectl@latest"
 
+  - name: install yq
+    become: false
+    shell: "{{ go_install_dir }}/bin/go install github.com/mikefarah/yq/v4@latest"
+
   - name: install python packages
     become: false
     pip:

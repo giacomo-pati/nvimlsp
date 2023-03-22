@@ -14,7 +14,7 @@ SRC_FILES := @(Get-ChildItem -Recurse -Filter '*.go' | Where-Object { -not ($$_ 
 
 .PHONY: help tidy lint build install upgrade-all unit-test clean
 
-help: 
+help:
 	@(Select-String '^([a-zA-Z0-9_-]+):.*?## (.*$$)' $(MAKEFILE_LIST)).Matches | ForEach-Object { "`e[36m{0,-15}`e[0m {1}" -f $$_.Groups[1].Value, $$_.Groups[2].Value } | Sort-Object
 
 tidy: ## Clean up Go modules by adding missing and removing unused modules
@@ -26,8 +26,11 @@ lint: ## Run linter on all Go code
 run: ## Run the CLI
 	go run ./cmd/gk
 
-build: ## Compile the CLI into temp folder _temp
+build: ## Compile the CLI into current folder
 	go build -o . ./cmd/gk
+
+build-windows: ## Compile the CLI into temp folder _temp as windows binary
+	$$Env:GOOS="windows"; $$Env:GOARCH="amd64"; go build -o . ./cmd/gk
 
 install: ## Compile and install the CLI to $GOPATH/bin
 	go install ./cmd/gk

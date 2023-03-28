@@ -10,7 +10,7 @@ java_major_version: 18
 java_install: true
 maven_version: 3.9.0
 maven_install: true
-pulumi_version: 3.57.1
+pulumi_version: 3.60.0
 pulumi_install: true
 pwsh_install: true
 update: false

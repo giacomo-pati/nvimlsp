@@ -308,5 +308,5 @@
 
   - name: Install GoKube
     become: false
-    shell: cd ./gokube && {{ go_install_dir }}/bin/go install ./cmd/gk
+    shell: cd ./gokube && {{ go_install_dir }}/bin/go install ./cmd/gk && GOOS=windows GOARCH=amd64 {{ go_install_dir }}/bin/go build -o . ./cmd/gk
     when: go_install

@@ -32,7 +32,17 @@ export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true
 export AZURE_STORAGE_ACCOUNT=aah2sapulumi
 export AZURE_STORAGE_RESOURCE_GROUP=pulumi
-export AAH_SECRETS_KEYVAULT=secrets-kv683f5e89
+
+if [ ! -f "$HOME/.cache/AAH_SECRETS_KEYVAULT" ] ; then
+  echo "refreshing secrets keyvault name to '$HOME/.cache/AAH_SECRETS_KEYVAULT'"
+  az resource list -g security-zone --resource-type Microsoft.KeyVault/vaults --query '[0].name' -o tsv > "$HOME/.cache/AZURE_SECRETS_KEYVAULT"
+  chmod 0600 "$HOME/.cache/AZURE_STORAGE_KEY"
+else
+  echo "reusing secrets keyvault name from '$HOME/.cache/AZURE_SECRETS_KEYVAULT'"
+fi
+AZURE_SECRETS_KEYVAULT=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
+export AZURE_SECRETS_KEYVAULT
+
 if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then
   echo "refreshing storage access key for SA '${AZURE_STORAGE_RESOURCE_GROUP}/${AZURE_STORAGE_ACCOUNT} to '$HOME/.cache/AZURE_STORAGE_KEY'"
   az storage account keys list --resource-group $AZURE_STORAGE_RESOURCE_GROUP --account-name $AZURE_STORAGE_ACCOUNT --query '[0].value' -o tsv > "$HOME/.cache/AZURE_STORAGE_KEY"

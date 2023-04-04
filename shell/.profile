@@ -35,12 +35,11 @@ export AZURE_STORAGE_RESOURCE_GROUP=pulumi
 
 if [ ! -f "$HOME/.cache/AAH_SECRETS_KEYVAULT" ] ; then
   echo "refreshing secrets keyvault name to '$HOME/.cache/AAH_SECRETS_KEYVAULT'"
-  az resource list -g security-zone --resource-type Microsoft.KeyVault/vaults --query '[0].name' -o tsv > "$HOME/.cache/AZURE_SECRETS_KEYVAULT"
-  chmod 0600 "$HOME/.cache/AZURE_STORAGE_KEY"
+  az resource list -g security-zone --resource-type Microsoft.KeyVault/vaults --query '[0].name' -o tsv > "$HOME/.cache/AAH_SECRETS_KEYVAULT"
 else
-  echo "reusing secrets keyvault name from '$HOME/.cache/AZURE_SECRETS_KEYVAULT'"
+  echo "reusing secrets keyvault name from '$HOME/.cache/AAH_SECRETS_KEYVAULT'"
 fi
-AZURE_SECRETS_KEYVAULT=$(cat "$HOME/.cache/AZURE_STORAGE_KEY")
+AZURE_SECRETS_KEYVAULT=$(cat "$HOME/.cache/AAH_SECRETS_KEYVAULT")
 export AZURE_SECRETS_KEYVAULT
 
 if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then

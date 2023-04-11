@@ -51,7 +51,7 @@ main() {
     echo
 
     additional_commit_message="Rebase via merge. '$current_branch' rebased on '$base_branch'."
-    additional_commit_hash=$(git commit-tree $hidden_result_hash^{tree} -p HEAD -m "$additional_commit_message")
+    additional_commit_hash=$(git commit-tree "$hidden_result_hash^{tree}" -p HEAD -m "$additional_commit_message")
 
     git merge --ff "$additional_commit_hash"
     echo

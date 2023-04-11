@@ -6,6 +6,6 @@ diff -rub \
 	--exclude .idea \
 	--exclude .git \
 	--exclude \*.iml \
-	--exclude \go.sum \
+	--exclude go.sum \
 	--exclude target \
-	$1 $2
+	"$1" "$2"

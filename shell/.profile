@@ -119,7 +119,8 @@ function plss {
 		    local argsy=""
 		    ;;
 	esac
-	echo "Executing pulumi $command $@ $argsx $argsy"
-	eval pulumi "$command" $@ $argsx $argsy
+	echo "Executing pulumi $command $* $argsx $argsy"
+	cmd="pulumi $command $* $argsx $argsy"
+	eval "$cmd"
     }
 # fi

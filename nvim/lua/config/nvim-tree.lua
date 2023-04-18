@@ -105,9 +105,6 @@ function M.setup()
 		hijack_cursor = false,
 		hijack_netrw = true,
 		hijack_unnamed_buffer_when_opening = false,
-		ignore_buffer_on_setup = false,
-		open_on_setup = false,
-		open_on_setup_file = false,
 		sort_by = "name",
 		root_dirs = {},
 		prefer_startup_root = false,
@@ -121,7 +118,7 @@ function M.setup()
 			centralize_selection = false,
 			cursorline = true,
 			debounce_delay = 15,
-			width = 50, -- MODIFIED
+			width = 30,
 			hide_root_folder = false,
 			side = "left",
 			preserve_window_proportions = false,
@@ -214,11 +211,10 @@ function M.setup()
 			auto_open = true,
 		},
 		update_focused_file = {
-			enable = true, -- MODIFIED
+			enable = false,
 			update_root = false,
 			ignore_list = {},
 		},
-		ignore_ft_on_setup = {},
 		system_open = {
 			cmd = "",
 			args = {},
@@ -310,7 +306,7 @@ function M.setup()
 		tab = {
 			sync = {
 				open = true, -- MODIFIED
-				close = true,
+				close = false,
 				ignore = {},
 			},
 		},
@@ -321,6 +317,11 @@ function M.setup()
 			confirm = {
 				remove = true,
 				trash = true,
+			},
+		},
+		experimental = {
+			git = {
+				async = false,
 			},
 		},
 		log = {

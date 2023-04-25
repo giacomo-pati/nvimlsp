@@ -4,4 +4,5 @@ git remote prune origin
 for i in $(git branch -vv | grep gone | awk '{print $1}'); do
   git branch -D "$i"
 done
+git gc
 GIT_PAGER="cat" git branch -a

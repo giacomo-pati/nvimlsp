@@ -2,6 +2,8 @@
 -- Plugin: pkyazdani42/nvim-tree
 ------------------------------------------------
 local M = {}
+local HEIGHT_RATIO = 0.8 -- You can change this
+local WIDTH_RATIO = 0.5 -- You can change this too
 
 function M.setup()
 	vim.api.nvim_set_keymap("n", "<F2>", ":NvimTreeToggle<cr>", { noremap = true })
@@ -118,7 +120,7 @@ function M.setup()
 			centralize_selection = false,
 			cursorline = true,
 			debounce_delay = 15,
-			width = 30,
+			width = 50, -- MODIFIED
 			hide_root_folder = false,
 			side = "left",
 			preserve_window_proportions = false,
@@ -132,16 +134,26 @@ function M.setup()
 				},
 			},
 			float = {
-				enable = false,
+				enable = true, -- MODIFIED
 				quit_on_focus_loss = true,
-				open_win_config = {
-					relative = "editor",
-					border = "rounded",
-					width = 50, -- MODIFIED
-					height = 86, -- MODIFIED
-					row = 1,
-					col = 1,
-				},
+				open_win_config = function() -- MODIFIED STRAT
+					local screen_w = vim.opt.columns:get()
+					local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+					local window_w = screen_w * WIDTH_RATIO
+					local window_h = screen_h * HEIGHT_RATIO
+					local window_w_int = math.floor(window_w)
+					local window_h_int = math.floor(window_h)
+					local center_x = (screen_w - window_w) / 2
+					local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
+					return {
+						border = "rounded",
+						relative = "editor",
+						row = center_y,
+						col = center_x,
+						width = window_w_int,
+						height = window_h_int,
+					}
+				end, -- MODIFIED END
 			},
 		},
 		renderer = {
@@ -211,7 +223,7 @@ function M.setup()
 			auto_open = true,
 		},
 		update_focused_file = {
-			enable = false,
+			enable = true, -- MODIFIED
 			update_root = false,
 			ignore_list = {},
 		},

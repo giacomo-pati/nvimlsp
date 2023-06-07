@@ -49,13 +49,19 @@ func executeEventsCmd() {
 	}
 	if len(m.Items) > 0 {
 		sort.Slice(m.Items, func(i, j int) bool {
-			return m.Items[i].Metadata.CreationTimestamp < m.Items[j].Metadata.CreationTimestamp
+			if m.Items[i].InvolvedObject.Kind == m.Items[j].InvolvedObject.Kind {
+				if m.Items[i].InvolvedObject.Name == m.Items[j].InvolvedObject.Name {
+					return m.Items[i].Metadata.CreationTimestamp < m.Items[j].Metadata.CreationTimestamp
+				}
+				return m.Items[i].InvolvedObject.Name < m.Items[j].InvolvedObject.Name
+			}
+			return m.Items[i].InvolvedObject.Kind < m.Items[j].InvolvedObject.Kind
 		})
 		w := new(tabwriter.Writer)
 		w.Init(os.Stdout, 5, 0, 2, ' ', 0)
-		fmt.Fprintln(w, "TIME\tTYPE\tREASON\tOBJECT\tMESSAGE")
+		fmt.Fprintln(w, "OBJECT\tTIME\tTYPE\tREASON\tMESSAGE")
 		for _, v := range m.Items {
-			fmt.Fprintf(w, "%s\t%s\t%s\t%s/%s\t%s\n", v.Metadata.CreationTimestamp, v.Type, v.Reason, v.InvolvedObject.Kind, v.InvolvedObject.Name, v.Message)
+			fmt.Fprintf(w, "%s/%s\t%s\t%s\t%s\t%s\n", v.InvolvedObject.Kind, v.InvolvedObject.Name, v.Metadata.CreationTimestamp, v.Type, v.Reason, v.Message)
 		}
 		fmt.Fprintln(w)
 		w.Flush()

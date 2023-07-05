@@ -134,7 +134,7 @@ function M.setup()
 				},
 			},
 			float = {
-				enable = true, -- MODIFIED
+				enable = false, -- MODIFIED
 				quit_on_focus_loss = true,
 				open_win_config = function() -- MODIFIED STRAT
 					local screen_w = vim.opt.columns:get()

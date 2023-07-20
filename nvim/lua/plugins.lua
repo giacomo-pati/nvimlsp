@@ -470,17 +470,16 @@ function M.setup()
 			end,
 		})
 
-		-- debugging/DAP
 		use({ "puremourning/vimspector", event = "BufWinEnter" })
 		-- DAP
 		use({ "mfussenegger/nvim-dap", event = "BufWinEnter", as = "nvim-dap" })
-		use({ "mfussenegger/nvim-dap-python", after = "nvim-dap" })
+		-- use({ "mfussenegger/nvim-dap-python", after = "nvim-dap" })
 		use({
 			"leoluz/nvim-dap-go",
 			after = "nvim-dap",
-			-- config = function()
-			-- 	require("config.dap").setup()
-			-- end,
+			config = function()
+				require("dap-go").setup()
+			end,
 		})
 		use({
 			"theHamsta/nvim-dap-virtual-text",

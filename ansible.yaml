@@ -196,15 +196,15 @@
       path: "{{ lookup('env', 'HOME') }}/.fonts"
       state: directory
 
-  - name: Nerd fonts exists
-    become: false
-    shell: "ls {{ lookup('env', 'HOME') }}/.fonts/{{ nerd_font }}*Nerd*Font*Complete*"
-    register: NerdFont_exists
-    ignore_errors: yes
+  # - name: Nerd fonts exists
+  #   become: false
+  #   shell: "ls {{ lookup('env', 'HOME') }}/.fonts/{{ nerd_font }}*Nerd*Font*Complete*"
+  #   register: NerdFont_exists
+  #   ignore_errors: yes
 
   - name: Download Nerd Font
     become: false
-    when: NerdFont_exists is failed
+    # when: NerdFont_exists is failed
     ansible.builtin.unarchive:
       src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_version }}/{{ nerd_font }}.zip
       dest: "{{ lookup('env', 'HOME') }}/.fonts/"

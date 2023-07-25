@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"sort"
 	"strings"
 )
 
@@ -23,8 +24,8 @@ func executeAllCmd() {
 			filtered = append(filtered, v)
 		}
 	}
+	sort.Strings(filtered)
 	join := strings.Join(filtered, ",")
-
 	a = append([]string{"get", "--show-kind", "--ignore-not-found"}, os.Args[2:]...)
 	a = append(a, join)
 	kcmd = exec.Command("kubectl", a...)

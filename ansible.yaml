@@ -161,9 +161,9 @@
   roles:
   - role: gantsign.golang
     vars:
-    - golang_version: "{{ go_version }}"
-    - golang_install_dir: "{{ go_install_dir }}"
-    - golang_redis_sha256sum: '000a5b1fca4f75895f78befeb2eecf10bfff3c428597f3f1e69133b63b911b02'
+      golang_version: "{{ go_version }}"
+      golang_install_dir: "{{ go_install_dir }}"
+      golang_redis_sha256sum: '000a5b1fca4f75895f78befeb2eecf10bfff3c428597f3f1e69133b63b911b02'
     when: go_install
   - role: lean_delivery.java
     # vars:

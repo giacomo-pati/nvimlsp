@@ -1,7 +1,7 @@
 azcli_version: 2.50.0
 azcli_install: true
 gathering_facts: false
-go_version: 1.20.6
+go_version: 1.20.7
 go_install_dir: "/opt/go/{{ go_version }}"
 go_install: true
 nerd_font: "Hack"

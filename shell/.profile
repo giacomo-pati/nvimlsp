@@ -87,6 +87,7 @@ alias kall="gk all"
 alias kev="gk ev"
 alias kns="gk ns"
 alias kc="gk c"
+alias kcd="gk cd"
 alias ks="gk s"
 alias pu=pulumi
 function plss {

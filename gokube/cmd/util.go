@@ -33,3 +33,11 @@ func getKubeConfigs(kubeConfigPath string) (*api.Config, error) {
 	}
 	return &config, nil
 }
+
+func setKubeConfigs(api *api.Config, kubeConfigPath string) error {
+	err := clientcmd.WriteToFile(*api, kubeConfigPath)
+	if err != nil {
+		return fmt.Errorf("error writing kubeconfig: %v", err)
+	}
+	return nil
+}

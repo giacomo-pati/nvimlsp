@@ -22,6 +22,7 @@ func Execute() {
 	cmds["context"] = executeContextCmd
 	cmds["ctx"] = executeContextCmd
 	cmds["c"] = executeContextCmd
+	cmds["cd"] = executeContextDeleteCmd
 	cmds["events"] = executeEventsCmd
 	cmds["event"] = executeEventsCmd
 	cmds["ev"] = executeEventsCmd

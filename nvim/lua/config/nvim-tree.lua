@@ -102,37 +102,33 @@ function M.setup()
 	end
 	-- each of these are documented in `:help nvim-tree.OPTION_NAME`
 	require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
+		on_attach = on_attach, -- MODIFIED
+		hijack_cursor = false,
 		auto_reload_on_write = true,
 		disable_netrw = false,
-		hijack_cursor = false,
 		hijack_netrw = true,
 		hijack_unnamed_buffer_when_opening = false,
-		sort_by = "name",
 		root_dirs = {},
 		prefer_startup_root = false,
 		sync_root_with_cwd = false,
 		reload_on_bufenter = false,
 		respect_buf_cwd = false,
-		on_attach = on_attach, -- MODIFIED
-		remove_keymaps = false,
 		select_prompts = false,
+		sort = {
+			sorter = "name",
+			folders_first = true,
+			files_first = false,
+		},
 		view = {
 			centralize_selection = false,
 			cursorline = true,
 			debounce_delay = 15,
-			width = 50, -- MODIFIED
-			hide_root_folder = false,
 			side = "left",
 			preserve_window_proportions = false,
 			number = false,
 			relativenumber = false,
 			signcolumn = "yes",
-			mappings = {
-				custom_only = false,
-				list = {
-					-- user mappings go here
-				},
-			},
+			width = 50, -- MODIFIED
 			float = {
 				enable = false, -- MODIFIED
 				quit_on_focus_loss = true,
@@ -159,12 +155,17 @@ function M.setup()
 		renderer = {
 			add_trailing = false,
 			group_empty = false,
-			highlight_git = false,
 			full_name = false,
-			highlight_opened_files = "none",
-			highlight_modified = "none",
 			root_folder_label = ":~:s?$?/..?",
 			indent_width = 2,
+			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+			symlink_destination = true,
+			highlight_git = false,
+			highlight_diagnostics = false,
+			highlight_opened_files = "none",
+			highlight_modified = "none",
+			highlight_bookmarks = "none",
+			highlight_clipboard = "name",
 			indent_markers = {
 				enable = false,
 				inline_arrows = true,
@@ -177,9 +178,20 @@ function M.setup()
 				},
 			},
 			icons = {
-				webdev_colors = true,
+				web_devicons = {
+					file = {
+						enable = true,
+						color = true,
+					},
+					folder = {
+						enable = false,
+						color = true,
+					},
+				},
 				git_placement = "before",
 				modified_placement = "after",
+				diagnostics_placement = "signcolumn",
+				bookmarks_placement = "signcolumn",
 				padding = " ",
 				symlink_arrow = " ➛ ",
 				show = {
@@ -188,11 +200,13 @@ function M.setup()
 					folder_arrow = true,
 					git = true,
 					modified = true,
+					diagnostics = true,
+					bookmarks = true,
 				},
 				glyphs = {
 					default = "",
 					symlink = "",
-					bookmark = "",
+					bookmark = "󰆤",
 					modified = "●",
 					folder = {
 						arrow_closed = "",
@@ -215,21 +229,26 @@ function M.setup()
 					},
 				},
 			},
-			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
-			symlink_destination = true,
 		},
 		hijack_directories = {
 			enable = true,
 			auto_open = true,
 		},
 		update_focused_file = {
-			enable = true, -- MODIFIED
+			enable = false,
 			update_root = false,
 			ignore_list = {},
 		},
 		system_open = {
 			cmd = "",
 			args = {},
+		},
+		git = {
+			enable = true,
+			show_on_dirs = true,
+			show_on_open_dirs = true,
+			disable_for_dirs = {},
+			timeout = 400,
 		},
 		diagnostics = {
 			enable = false,
@@ -247,29 +266,27 @@ function M.setup()
 				error = "",
 			},
 		},
+		modified = {
+			enable = false,
+			show_on_dirs = true,
+			show_on_open_dirs = true,
+		},
 		filters = {
+			git_ignored = true,
 			dotfiles = false,
 			git_clean = false,
 			no_buffer = false,
 			custom = {},
 			exclude = {},
 		},
+		live_filter = {
+			prefix = "[FILTER]: ",
+			always_show_folders = true,
+		},
 		filesystem_watchers = {
 			enable = true,
 			debounce_delay = 50,
 			ignore_dirs = {},
-		},
-		git = {
-			enable = true,
-			ignore = false, -- MODIFIED
-			show_on_dirs = true,
-			show_on_open_dirs = true,
-			timeout = 400,
-		},
-		modified = {
-			enable = false,
-			show_on_dirs = true,
-			show_on_open_dirs = true,
 		},
 		actions = {
 			use_system_clipboard = true,
@@ -293,6 +310,7 @@ function M.setup()
 			},
 			open_file = {
 				quit_on_open = true, -- MODIFIED
+				eject = true,
 				resize_window = true,
 				window_picker = {
 					enable = true,
@@ -311,19 +329,16 @@ function M.setup()
 		trash = {
 			cmd = "gio trash",
 		},
-		live_filter = {
-			prefix = "[FILTER]: ",
-			always_show_folders = true,
-		},
 		tab = {
 			sync = {
-				open = true, -- MODIFIED
+				open = false,
 				close = false,
 				ignore = {},
 			},
 		},
 		notify = {
 			threshold = vim.log.levels.INFO,
+			absolute_path = true,
 		},
 		ui = {
 			confirm = {
@@ -331,11 +346,7 @@ function M.setup()
 				trash = true,
 			},
 		},
-		experimental = {
-			git = {
-				async = false,
-			},
-		},
+		experimental = {},
 		log = {
 			enable = false,
 			truncate = false,
@@ -351,5 +362,27 @@ function M.setup()
 			},
 		},
 	}) -- END_DEFAULT_OPTS
+	-- auto close MODIFIED
+	local function is_modified_buffer_open(buffers)
+		for _, v in pairs(buffers) do
+			if v.name:match("NvimTree_") == nil then
+				return true
+			end
+		end
+		return false
+	end
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		nested = true,
+		callback = function()
+			if
+				#vim.api.nvim_list_wins() == 1
+				and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil
+				and is_modified_buffer_open(vim.fn.getbufinfo({ bufmodified = 1 })) == false
+			then
+				vim.cmd("quit")
+			end
+		end,
+	})
 end
 return M

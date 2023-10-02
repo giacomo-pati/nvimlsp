@@ -235,7 +235,7 @@ function M.setup()
 			auto_open = true,
 		},
 		update_focused_file = {
-			enable = false,
+			enable = true, -- MODIFIED
 			update_root = false,
 			ignore_list = {},
 		},
@@ -331,7 +331,7 @@ function M.setup()
 		},
 		tab = {
 			sync = {
-				open = false,
+				open = true, -- MODIFIED
 				close = false,
 				ignore = {},
 			},

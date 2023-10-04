@@ -173,6 +173,7 @@ local mappings = {
 		U = "Reset buffer index",
 	},
 
+	--
 	-- Magma
 	-- m = {
 	--   name = "Magma",
@@ -210,7 +211,7 @@ local mappings = {
 	},
 
 	-- Easymotion
-	["<Space>"] = { name = "Easymotion" },
+	-- ["<Space>"] = { name = "Easymotion" },
 
 	-- Search
 	["s"] = {
@@ -300,10 +301,9 @@ local xmappings = {
 }
 
 local lsp_mappings = {
-
 	l = {
 		name = "LSP",
-		r = { "<Cmd>Lspsaga rename<CR>", "Rename" },
+		-- r = { "<Cmd>Lspsaga rename<CR>", "Rename" },
 		u = { "<Cmd>Telescope lsp_references<CR>", "References" },
 		i = { "<Cmd>Telescope lsp_implementations<CR>", "Implementations" },
 		o = { "<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols" },
@@ -315,6 +315,8 @@ local lsp_mappings = {
 		f = { "<Cmd>update<CR>:lua vim.lsp.buf.format()<CR>", "Format" },
 		t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
 		l = { "<Cmd>SymbolsOutline<CR>", "Outlines" },
+		k = { "<Cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature" },
+		K = { "<Cmd>lua vim.lsp.buf.hover()<CR>", "Signature" },
 	},
 
 	-- WIP - refactoring
@@ -475,6 +477,8 @@ function M.setup()
 	wk.register(vmappings, vopts)
 	wk.register(xmappings, xopts)
 	wk.register(fmappings, fopts)
+	wk.register(lsp_mappings, bopts)
+	wk.register(lsp_mappings_opts, bopts)
 end
 
 return M

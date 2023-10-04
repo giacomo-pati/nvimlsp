@@ -11,8 +11,8 @@ local lsp_keymappings = {
 		["<C-k>"] = "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
 		["[d"] = "<Cmd>lua vim.diagnostic.goto_prev()<CR>",
 		["]d"] = "<Cmd>lua vim.diagnostic.goto_next()<CR>",
-		["[e"] = "<Cmd>Lspsaga diagnostic_jump_next<CR>",
-		["]e"] = "<Cmd>Lspsaga diagnostic_jump_prev<CR>",
+		-- ["[e"] = "<Cmd>Lspsaga diagnostic_jump_next<CR>",
+		-- ["]e"] = "<Cmd>Lspsaga diagnostic_jump_prev<CR>",
 	},
 	-- insert_mode = {
 	-- 	["<leader>,"] = "<C-x><C-o>",

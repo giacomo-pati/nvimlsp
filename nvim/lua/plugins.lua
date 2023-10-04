@@ -187,8 +187,9 @@ function M.setup()
 				{ "jose-elias-alvarez/nvim-lsp-ts-utils" },
 				{ "JoosepAlviste/nvim-ts-context-commentstring" },
 				{ "p00f/nvim-ts-rainbow" },
-				{ "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+				{ "nvim-treesitter/playground",                 cmd = "TSHighlightCapturesUnderCursor" },
 				{ "nvim-treesitter/nvim-treesitter-textobjects" },
+				{ "nvim-treesitter/nvim-treesitter-refactor" },
 				{ "RRethy/nvim-treesitter-textsubjects" },
 				-- { "windwp/nvim-autopairs",
 				--   run = "make",
@@ -371,12 +372,12 @@ function M.setup()
 				require("config.cmp").setup()
 			end,
 		})
-		use({
-			"tami5/lspsaga.nvim",
-			config = function()
-				require("config.lspsaga").setup()
-			end,
-		})
+		-- use({
+		-- 	"tami5/lspsaga.nvim",
+		-- 	config = function()
+		-- 		require("config.$latestVersionsHash[$i].Valuelspsaga").setup()
+		-- 	end,
+		-- })
 		use({
 			"onsails/lspkind-nvim",
 			config = function()
@@ -431,33 +432,49 @@ function M.setup()
 		})
 
 		-- LSP and completion
+		use("williamboman/mason.nvim")
 		use({
-			"williamboman/nvim-lsp-installer",
-			{
-				"neovim/nvim-lspconfig",
-				as = "nvim-lspconfig",
-				after = { "nvim-treesitter", "cmp" },
-				-- opt = true,
-				requires = {
-					"ray-x/lsp_signature.nvim",
-				},
-				config = function()
-					require("config.lsp").setup()
-				end,
-			},
+			"williamboman/mason-lspconfig.nvim",
+			config = function()
+				require("mason").setup()
+				require("mason-lspconfig").setup({})
+			end,
 		})
+
+		use({
+			"ray-x/navigator.lua",
+			requires = {
+				{ "ray-x/guihua.lua",               run = "cd lua/fzy && make" },
+				{ "neovim/nvim-lspconfig" },
+				{ "nvim-treesitter/nvim-treesitter" },
+			},
+			config = function()
+				local lsputils = require("config.lsp.utils")
+				require'navigator'.setup({
+					mason = true,
+					on_attach = lsputils.lsp_attach,
+				})
+				vim.api.nvim_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
+				vim.api.nvim_set_keymap("n", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
+			end,
+		})
+		-- use({
+		-- 	"williamboman/nvim-lsp-installer",
+		-- 	{
+		-- 		"neovim/nvim-lspconfig",
+		-- 		as = "nvim-lspconfig",
+		-- 		after = { "nvim-treesitter", "cmp" },
+		-- 		-- opt = true,
+		-- 		requires = {
+		-- 			"ray-x/lsp_signature.nvim",
+		-- 		},
+		-- 		-- config = function()
+		-- 		-- 	require("config.lsp").setup()
+		-- 		-- end,
+		-- 	},
+		-- })
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "hrsh7th/cmp-nvim-lsp" })
-		-- use({
-		-- 	"ray-x/navigator.lua",
-		-- 	requires = {
-		-- 		"ray-x/guihua.lua",
-		-- 		run = "cd lua/fzy && make",
-		-- 	},
-		-- 	config = function()
-		-- 		require("config.navigator").setup()
-		-- 	end,
-		-- })
 
 		-- Lua development
 		use({ "tjdevries/nlua.nvim" })

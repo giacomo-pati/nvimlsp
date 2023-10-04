@@ -123,8 +123,8 @@
     when: go_install
   - role: lean_delivery.java
     when: java_install or maven_install
-  - role: tecris.maven
-    when: maven_install
+  # - role: tecris.maven
+  #   when: maven_install
 
   post_tasks:
   - name: Link to current golang installation

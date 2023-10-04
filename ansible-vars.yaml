@@ -15,46 +15,45 @@ pulumi_install: true
 pwsh_install: true
 update: false
 apt_pkgs:
-- apt-transport-https
-- bat
-- black
-# - blobfuse
-- libfuse2
-- ca-certificates
-- cargo
-- cpanminus
-- curl
-- daemonize
-- dbus-user-session
-- default-jdk
-- docker-ce
-- dos2unix
-- fd-find
-- flake8
-- fontconfig
-- fzf
-- gcc
-- gnupg
-- gradle
-- graphviz
-- g++
-- jq
-- lsb-release
-- locate
-- luarocks
-- lynx
-- make
-- neovim
-- nodejs
-- python3-dev
-- python3-pip
-- python3-venv
-- ripgrep
-- ruby-full
-- shellcheck
-- silversearcher-ag
-- speedometer
-- sqlite3
-- tmux
-- zsh
-
+  - apt-transport-https
+  - bat
+  - black
+  # - blobfuse
+  - ca-certificates
+  - cargo
+  - cpanminus
+  - curl
+  - daemonize
+  - dbus-user-session
+  - default-jdk
+  - docker-ce
+  - dos2unix
+  - fd-find
+  - flake8
+  - fontconfig
+  - fzf
+  - gcc
+  - gnupg
+  - gradle
+  - graphviz
+  - g++
+  - jq
+  - libfuse2
+  - lsb-release
+  - locate
+  - luarocks
+  - lynx
+  - make
+  - neovim
+  - nodejs
+  - python3-dev
+  - python3-pip
+  - python3-venv
+  - ripgrep
+  - ruby-full
+  - shellcheck
+  - silversearcher-ag
+  - speedometer
+  - sqlite3
+  - tmux
+  - zsh

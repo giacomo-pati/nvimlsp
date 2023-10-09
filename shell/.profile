@@ -79,6 +79,7 @@ if [ -n "$BASH_VERSION" ]; then
     complete -o default -F __start_stratum s
     complete -o default -F __start_kubectl k
     complete -o default -F __start_pulumi pu
+    complete -o default -F __start_pulumi pl
 fi
 
 alias s="stratum"

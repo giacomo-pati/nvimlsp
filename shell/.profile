@@ -77,7 +77,7 @@ CLOUDFLARE_API_TOKEN=$CF_API_TOKEN
 export CLOUDFLARE_API_TOKEN
 
 export PULUMI_ACCESS_TOKEN="..."
-export PULUMI_SECRET_PROVIDER=azurekeyvault://${AAH_SECRETS_KEYVAULT}.vault.azure.net/keys/azapphost
+export PULUMI_SECRET_PROVIDER=azurekeyvault://${PULUMI_KEYVAULT}.vault.azure.net/keys/azapphost
 
 if [ -f "$HOME/.profile_paths" ] ; then
   . "$HOME/.profile_paths"

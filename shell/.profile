@@ -28,6 +28,8 @@ fi
 export AZURE_ACCOUNT="AZAPPHOST DEV 2"
 echo "setting Azure Account to '${AZURE_ACCOUNT}'"
 az account set -s "AZAPPHOST DEV 2"
+AZURE_SUBSCRIPTION_ID=$(az account show|jq -r ".id")
+export AZURE_SUBSCRIPTION_ID
 export ARM_DISABLE_PULUMI_PARTNER_ID=true
 export ARM_USE_MSI=true
 export AZURE_STORAGE_ACCOUNT=aah2sapulumi
@@ -35,13 +37,23 @@ export AZURE_STORAGE_RESOURCE_GROUP=pulumi
 
 if [ ! -f "$HOME/.cache/AAH_SECRETS_KEYVAULT" ] ; then
   echo "refreshing secrets keyvault name to '$HOME/.cache/AAH_SECRETS_KEYVAULT'"
-  az resource list -g security-zone --resource-type Microsoft.KeyVault/vaults --query '[0].name' -o tsv > "$HOME/.cache/AAH_SECRETS_KEYVAULT"
+  az resource list -g security-zone --resource-type Microsoft.KeyVault/vaults --query '[0].name' -o tsv --subscription "$AZURE_ACCOUNT" > "$HOME/.cache/AAH_SECRETS_KEYVAULT"
 else
   echo "reusing secrets keyvault name from '$HOME/.cache/AAH_SECRETS_KEYVAULT'"
 fi
 AZURE_SECRETS_KEYVAULT=$(cat "$HOME/.cache/AAH_SECRETS_KEYVAULT")
 export AZURE_SECRETS_KEYVAULT
-export AAH_SECRETS_KEYVAULT=$AZURE_SECRETS_KEYVAULT
+AAH_SECRETS_KEYVAULT=$AZURE_SECRETS_KEYVAULT
+export AAH_SECRETS_KEYVAULT
+
+if [ ! -f "$HOME/.cache/PULUMI_KEYVAULT" ] ; then
+  echo "refreshing pulumi keyvault name to '$HOME/.cache/PULUMI_KEYVAULT'"
+  az resource list -g pulumi --resource-type Microsoft.KeyVault/vaults --query '[0].name' -o tsv --subscription "$AZURE_ACCOUNT" > "$HOME/.cache/PULUMI_KEYVAULT"
+else
+  echo "reusing pulumi keyvault name from '$HOME/.cache/PULUMI_KEYVAULT'"
+fi
+PULUMI_KEYVAULT=$(cat "$HOME/.cache/PULUMI_KEYVAULT")
+export PULUMI_KEYVAULT
 
 if [ ! -f "$HOME/.cache/AZURE_STORAGE_KEY" ] ; then
   echo "refreshing storage access key for SA '${AZURE_STORAGE_RESOURCE_GROUP}/${AZURE_STORAGE_ACCOUNT} to '$HOME/.cache/AZURE_STORAGE_KEY'"
@@ -61,7 +73,7 @@ else
 fi
 CF_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
 export CF_API_TOKEN
-CLOUDFLARE_API_TOKEN=$(cat "$HOME/.cache/CF_API_TOKEN")
+CLOUDFLARE_API_TOKEN=$CF_API_TOKEN
 export CLOUDFLARE_API_TOKEN
 
 export PULUMI_ACCESS_TOKEN="..."

@@ -202,11 +202,15 @@
   - name: install nvim config
     become: false
     shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
-    when: not update
+    when: (not update) and (not nvim_chad)
   - name: update nvim config
     become: false
     shell: "cp -a ./nvim ${HOME}/.config/"
-    when: update
+    when: update and (not nvim_chad)
+  - name: install nvim NvChad config
+    become: false
+    shell: "mkdir -p ${OME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && ln -s ${HOME}/projects/nvimlsp/custom ${HOME}/.config/nvim/lua/custom"
+    when: (not update) and nvim_chad
 
   - name: check tmux-plugins is installed
     become: false

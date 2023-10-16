@@ -10,6 +10,7 @@ java_major_version: 18
 java_install: true
 maven_version: 3.9.3
 maven_install: true
+nvim_chad: true
 pulumi_version: 3.88.0
 pulumi_install: true
 pwsh_install: true
@@ -42,6 +43,7 @@ apt_pkgs:
   - lsb-release
   - locate
   - luarocks
+  - lua5.4
   - lynx
   - make
   - neovim

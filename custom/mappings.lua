@@ -63,7 +63,7 @@ local M = {
         "Disable diagnostics",
       },
       ["<leader>lt"] = {
-		    "<Cmd>lua require('toggle').mode()<CR>",
+		    "<Cmd>lua require('toggle').toggle()<CR>",
         "Trouble",
       },
       ["<leader>ll"] = {

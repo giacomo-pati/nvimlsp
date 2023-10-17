@@ -97,14 +97,22 @@ local plugins = {
     "kdheepak/lazygit.nvim",
     lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
-    -- config = function()
-    --   local x = require "lazygit"
-    -- end,
   },
   {
     "nvim-pack/nvim-spectre",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+  {
+    "folke/trouble.nvim",
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      auto_open = true,
+    },
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+	},
   {
   "folke/which-key.nvim",
   disable = false,
@@ -116,9 +124,10 @@ local plugins = {
     end
     wk.register(
       {
-        -- add group
+        -- add groups
         ["<leader>"] = {
           b = { name = "+Buffer" },
+          l = { name = "+LSP" },
         }
       }
     )

@@ -15,7 +15,7 @@ local function setup_servers()
           },
       },
   }
-	
+
 	local lspconfig = require("lspconfig")
 	local lsputils = require("config.lsp.utils")
 	

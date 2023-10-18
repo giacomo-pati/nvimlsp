@@ -6,7 +6,6 @@ go_install_dir: "/opt/go/{{ go_version }}"
 go_install: true
 nerd_font: "Hack"
 nerd_font_version: "v3.0.2"
-nvchad: true
 java_major_version: 18
 java_install: true
 maven_version: 3.9.3

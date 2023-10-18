@@ -47,7 +47,7 @@ local plugins = {
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "nvimtree")
-      require("nvim-tree").setup(opts())
+      require("nvim-tree").setup(opts)
     end,
   },
   {
@@ -104,7 +104,7 @@ local plugins = {
   },
   {
     "folke/trouble.nvim",
-    -- lazy = false,
+    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       auto_open = true,
@@ -112,6 +112,10 @@ local plugins = {
   },
   {
     "simrat39/symbols-outline.nvim",
+    lazy = false,
+    config = function(_, opts)
+      require("symbols-outline").setup(opts)
+    end,
 	},
   {
   "folke/which-key.nvim",

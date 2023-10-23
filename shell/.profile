@@ -25,9 +25,9 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export AZURE_ACCOUNT="AZAPPHOST DEV 2"
+export AZURE_ACCOUNT="AZAPPHOST DEV CONNECTED 2"
 echo "setting Azure Account to '${AZURE_ACCOUNT}'"
-az account set -s "AZAPPHOST DEV 2"
+az account set -s "AZAPPHOST DEV CONNECTED 2"
 AZURE_SUBSCRIPTION_ID=$(az account show|jq -r ".id")
 export AZURE_SUBSCRIPTION_ID
 export ARM_DISABLE_PULUMI_PARTNER_ID=true

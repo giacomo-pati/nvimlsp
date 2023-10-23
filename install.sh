@@ -8,7 +8,7 @@ sudo apt update
 sudo apt install ansible -y
 
 echo "Install Ansible roles"
-ansible-galaxy role install gantsign.golang lean_delivery.java # tecris.maven
+ansible-galaxy role install lean_delivery.java # tecris.maven
 
 echo "Execute Ansible playboot"
 ansible-playbook ansible.yaml

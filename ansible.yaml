@@ -114,15 +114,30 @@
       sudo apt install -y ./dive.deb
       rm -rf dive.deb
 
-  roles:
-  - role: gantsign.golang
-    vars:
-      golang_version: "{{ go_version }}"
-      golang_install_dir: "{{ go_install_dir }}"
-      golang_redis_sha256sum: '000a5b1fca4f75895f78befeb2eecf10bfff3c428597f3f1e69133b63b911b02'
+  - name: golang version exists
+    shell: ls {{ go_install_dir}}/{{ go_version }}
+    register: golang_version_exists
+    ignore_errors: yes
     when: go_install
-  - role: lean_delivery.java
-    when: java_install or maven_install
+  - name: Download go tar file
+    shell: |
+      wget https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz
+      tar -C {{ go_install_dir}}/ -xzf go{{ go_version }}.linux-amd64.tar.gz
+      mv {{ go_install_dir }}/go {{ go_install_dir }}/{{ go_version }}
+      rm -rf go{{ go_version }}.linux-amd64.tar.gz*
+      rm {{ go_install_dir }}/current
+      ln -fs {{ go_install_dir }}/{{ go_version }} {{ go_install_dir }}/current
+    when: (golang_version_exists is failed) and go_install
+
+  # roles:
+  # - role: gantsign.golang
+  #   # vars:
+  #   #   golang_version: "{{ go_version }}"
+  #   #   golang_install_dir: "{{ go_install_dir }}"
+  #   #   golang_redis_sha256sum: '000a5b1fca4f75895f78befeb2eecf10bfff3c428597f3f1e69133b63b911b02'
+  #   when: go_install
+  # - role: lean_delivery.java
+  #   when: java_install or maven_install
   # - role: tecris.maven
   #   when: maven_install
 

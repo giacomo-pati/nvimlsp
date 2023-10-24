@@ -2,9 +2,7 @@ local g = vim.g
 local cmd = vim.cmd
 local o = vim.o
 local wo = vim.wo
-local bo = vim.bo
 local opt = vim.opt
-local indent = 4
 
 cmd([[filetype plugin indent on]])
 cmd([[syntax enable]])
@@ -77,8 +75,6 @@ wo.wrap = false
 
 -- g.virtualedit = "all"
 g.vim_markdown_fenced_languages = { "html", "javascript", "typescript", "css", "python", "lua", "vim" }
-g.treesitter_parsers = { "python", "go", "lua", "javascript", "c","java" }
--- g.treesitter_parsers = "maintained"
 -- on WSL 'choco install win32yank' and activate the following
 -- g.clipboard = {
 -- 	name = "win32yank-wsl",

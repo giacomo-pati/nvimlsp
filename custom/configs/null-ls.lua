@@ -1,14 +1,19 @@
-
 local nullls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local opts = {
+local b = nullls.builtins
+nullls.setup {
   sources = {
     -- go install mvdan.cc/gofumpt@latest
-    nullls.builtins.formatting.gofumpt,
+    b.formatting.gofumpt,
     -- go install github.com/incu6us/goimports-reviser/v3@latest
-    nullls.builtins.formatting.goimports_reviser,
+    b.formatting.goimports_reviser,
     -- go install github.com/segmentio/golines@latest
-    nullls.builtins.formatting.golines,
+    b.formatting.golines,
+    -- webdev stuff
+    b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
+    b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+    -- Lua
+    b.formatting.stylua,
   },
   on_attach = function (client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -24,8 +29,7 @@ local opts = {
         end,
       })
       -- Remove trailing white spaces on save
-      -- vim.cmd([[autocmd BufWritePre * :%s/\s\+$//e]])
+      vim.cmd([[autocmd BufWritePre * :%s/\s\+$//e]])
     end
   end,
 }
-return opts

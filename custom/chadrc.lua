@@ -14,6 +14,14 @@ M.ui = {
       { "  Mappings", "<leader> c h", "NvCheatsheet" },
     },
   },
+  hl_override = {
+    Comment = {
+      italic = true,
+    },
+  },
+  hl_add = {
+    NvimTreeOpenedFolderName = { fg = "green", bold = true },
+  },
 }
 M.plugins = "custom.plugins"
 M.mappings = require "custom.mappings"

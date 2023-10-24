@@ -1,55 +1,47 @@
+local overrides = require("custom.configs.overrides")
 local plugins = {
-  { 
+  {
     "Pocco81/AutoSave.nvim",
     lazy = false,
   },
+
+  -- Override plugin definition options
+
   {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "gopls",
-        "bash-language-server",
-        "dockerfile-language-server",
-        "lua-language-server",
-        "powershell-editor-services",
-        "json-lsp", 
-        "yaml-language-server", 
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      -- format & linting
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        ft = "go",
+        config = function()
+          require "custom.configs.null-ls"
+        end,
       },
     },
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
+    end, -- Override to setup mason-lspconfig
+  },
+
+  -- overwrite plugin configs
+
+  {
+    "williamboman/mason.nvim",
+    -- lazy = false,
+    opts = overrides.mason,
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function ()
-      local opts = require "plugins.configs.treesitter"
-      opts["ensure_installed"] = {
-        "lua",
-        "python",
-        "go",
-        "gomod",
-        "gosum",
-        "gowork",
-        "javascript",
-        "c",
-        "java",
-      }
-      return opts
-    end,
+    opts = overrides.treesitter,
   },
   {
     "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    init = function()
-      require("core.utils").load_mappings("nvimtree")
-    end,
-    opts = function()
-      -- return require "plugins.configs.nvimtree"
-      return require "custom.configs.nvimtree"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "nvimtree")
-      require("nvim-tree").setup(opts)
-    end,
+    opts = overrides.nvimtree,
   },
+  
+  -- Install a plugins
   {
     -- go install github.com/go-delve/delve/cmd/dlv@latest
     "mfussenegger/nvim-dap",
@@ -65,20 +57,6 @@ local plugins = {
     config = function (_, opts)
       require("dap-go").setup(opts)
       require("core.utils").load_mappings("dap-go")
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    config = function ()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
-    end,
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = "go",
-    opts = function ()
-      return require "custom.configs.null-ls"
     end,
   },
   {

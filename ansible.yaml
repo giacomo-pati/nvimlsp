@@ -124,27 +124,12 @@
       wget https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz
       tar -C {{ go_install_dir}}/ -xzf go{{ go_version }}.linux-amd64.tar.gz
       mv {{ go_install_dir }}/go {{ go_install_dir }}/{{ go_version }}
-      rm -rf go{{ go_version }}.linux-amd64.tar.gz*
+      rm go{{ go_version }}.linux-amd64.tar.gz*
       rm {{ go_install_dir }}/current
-      ln -fs {{ go_install_dir }}/{{ go_version }} {{ go_install_dir }}/current
+      ln -s {{ go_install_dir }}/{{ go_version }} {{ go_install_dir }}/current
     when: (golang_version_exists is failed) and go_install
 
-  # roles:
-  # - role: gantsign.golang
-  #   # vars:
-  #   #   golang_version: "{{ go_version }}"
-  #   #   golang_install_dir: "{{ go_install_dir }}"
-  #   #   golang_redis_sha256sum: '000a5b1fca4f75895f78befeb2eecf10bfff3c428597f3f1e69133b63b911b02'
-  #   when: go_install
-  # - role: lean_delivery.java
-  #   when: java_install or maven_install
-  # - role: tecris.maven
-  #   when: maven_install
-
   post_tasks:
-  - name: Link to current golang installation
-    shell: rm -f "$(dirname {{ go_install_dir }})/current" && ln -s "{{ go_install_dir }}" "$(dirname {{ go_install_dir }})/current"
-
   - name: Link to current Maven installation
     shell: rm -f "/opt/maven" && ln -sf "/opt/apache-maven-{{ maven_version }}" "/opt/maven"
 
@@ -187,15 +172,15 @@
 
   - name: install lazygit
     become: false
-    shell: "{{ go_install_dir }}/bin/go install github.com/jesseduffield/lazygit@latest"
+    shell: "{{ go_install_dir }}/current/bin/go install github.com/jesseduffield/lazygit@latest"
 
   - name: install flarectl
     become: false
-    shell: "{{ go_install_dir }}/bin/go install github.com/cloudflare/cloudflare-go/cmd/flarectl@latest"
+    shell: "{{ go_install_dir }}/current/bin/go install github.com/cloudflare/cloudflare-go/cmd/flarectl@latest"
 
   - name: install yq
     become: false
-    shell: "{{ go_install_dir }}/bin/go install github.com/mikefarah/yq/v4@latest"
+    shell: "{{ go_install_dir }}/current/bin/go install github.com/mikefarah/yq/v4@latest"
 
   - name: install python packages
     become: false
@@ -275,5 +260,5 @@
 
   - name: Install GoKube
     become: false
-    shell: cd ./gokube && {{ go_install_dir }}/bin/go install ./cmd/gk && GOOS=windows GOARCH=amd64 {{ go_install_dir }}/bin/go build -o . ./cmd/gk
+    shell: cd ./gokube && {{ go_install_dir }}/current/bin/go install ./cmd/gk && GOOS=windows GOARCH=amd64 {{ go_install_dir }}/current/bin/go build -o . ./cmd/gk
     when: go_install

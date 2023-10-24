@@ -1,10 +1,9 @@
 #!/bin/bash
-
 namepat="$1"
-tmp_file=$(mktemp)
+shift 1
 
-echo flarectl d l --zone apps-dev.swissre.com
-flarectl d l --zone apps-dev.swissre.com >"$tmp_file"
-head -n2 <"$tmp_file"
-grep "$namepat" <"$tmp_file"
-rm -rf "$tmp_file"
+echo flarectl dns $@ --zone apps-dev.swissre.com 
+flarectl --json dns "$@" --zone apps-dev.swissre.com \
+| jq -r ".[] | select(.Name | startswith(\"$namepat\")) | \"\(.ID),\(.Name),\(.Type),\(.Content),\(.TTL),\(.Proxied)\"" \
+| column -t -s , -o "  " -N "ID,Name,Type,Content,TTL,Proxied"
+

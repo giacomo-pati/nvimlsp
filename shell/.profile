@@ -15,14 +15,21 @@ if [ -n "$BASH_VERSION" ]; then
     test -f "$HOME/.bashrc" && . "$HOME/.bashrc"
 fi
 
+mkdir -p $HOME/.profile_paths
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+  echo "$HOME/bin" >$HOME/.profile_paths/home_bin.path
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+  echo "$HOME/local/bin" >$HOME/.profile_paths/home_local_bin.path
+fi
+
+# set M2 home if exists
+if [ -d "/opt/maven" ] ; then
+  export M2_HOME=/opt/maven
 fi
 
 export AZURE_ACCOUNT="AZAPPHOST DEV CONNECTED 2"
@@ -106,9 +113,7 @@ function plss {
     pulumi stack ls | grep -v "LAST UPDATE" | awk '{split($1,a,"-"); print a[length(a)] " " $0}' | tr -d '*' | sort -k 1 | awk '/BEGIN/ {a=""} {if(a!=$1){print ""};a=$1; print substr($0,length($1)+2)}'
 }
 
-# add Pulumi shortcut
-# if [ -n "$BASH_VERSION" ]; then
-    function pl {
+function pl {
 	local argsx="--color never --non-interactive --logtostderr"
 	local command=$1
 	shift
@@ -135,5 +140,6 @@ function plss {
 	echo "Executing pulumi $command $* $argsx $argsy"
 	cmd="pulumi $command $* $argsx $argsy"
 	eval "$cmd"
-    }
-# fi
+}
+
+export PATH=$PATH:$(find ~/.profile_paths -name \*.path -print0 | xargs -0 cat | tr '\n' ':')

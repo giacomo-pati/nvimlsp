@@ -1,6 +1,7 @@
 [user]
 	name = Giacomo Pati
 	email = giacomo_pati@swissre.com
+	; email = giacomo@pati.ch
 [credential]
 	helper = store
 	; credentialStore = plaintext

@@ -1,0 +1,139 @@
+- hosts: localhost
+  become: false
+  gather_facts: yes
+  vars_files:
+    - ./macansible-vars.yaml
+
+  pre_tasks:
+
+  tasks:
+  - name: Updating Homebrew
+    homebrew:
+      update_homebrew: true
+
+  - name: Upgrading Homebrew Packages
+    homebrew:
+      upgrade_all: "{{ upgrade_homebrew_packages }}"
+    register: result
+    until: result is successful
+
+  - name: Installing Homebrew Cask Packages
+    homebrew_cask:
+      name: "{{ brew_cask_pkgs }}"
+      state: latest
+    register: result
+    until: result is successful
+
+  - name: Installing Homebrew Packages
+    homebrew:
+      name: "{{ brew_pkgs }}"
+      state: latest
+    register: result
+    until: result is successful
+
+  - name: Installing Python Modules
+    pip:
+      name: "{{ item }}"
+      extra_args: --upgrade
+      executable: pip3
+      state: latest
+    with_items: "{{ python_pkgs }}"
+
+  - name: Install NPM packages
+    become: true
+    community.general.npm:
+      name: "{{ item }}"
+      version: latest
+      global: yes
+    with_items: "{{ npm_pkgs }}"
+
+  - name: prepare home directory
+    shell: mkdir -p ${HOME}/.profile_paths
+
+  - name: vscode-json-language-server exists
+    shell: "ls /opt/homebrew/bin/vscode-json-language-server"
+    register: vscode_json_language_server_exists
+    ignore_errors: yes
+  - name: Install alternative name for vscode-json-languageserver
+    become: true
+    shell: ln -s /opt/homegrew/bin/vscode-json-languageserver /opt/homebrew/bin/vscode-json-language-server
+    when: vscode_json_language_server_exists is failed
+
+  - name: Install latest neovim gem
+    become: true
+    community.general.gem:
+      name: neovim
+      state: latest
+
+  - name: Get dive latest version
+    shell: |
+      DIVE_VERSION=$(curl -s "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
+      curl -Lo dive.deb "https://github.com/wagoodman/dive/releases/latest/download/dive_${DIVE_VERSION}_linux_amd64.deb"
+      sudo apt install -y ./dive.deb
+      rm -rf dive.deb
+
+  post_tasks:
+  - name: ensure fonts directory
+    file:
+      path: "{{ lookup('env', 'HOME') }}/.fonts"
+      state: directory
+
+  - name: Download Nerd Font
+    ansible.builtin.unarchive:
+      src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_version }}/{{ nerd_font }}.zip"
+      dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+      remote_src: yes
+
+  - name: cache fonts
+    shell: fc-cache -fv
+
+  - name: install stylua rust package
+    community.general.cargo:
+      name: stylua
+
+  - name: install virtualenv for debugpy
+    shell: |
+      mkdir -p ${HOME}/.virtualenvs
+      cd ${HOME}/.virtualenvs
+      python3 -m venv debugpy
+      debugpy/bin/python -m pip install debugpy
+
+  - name: install nvim config
+    shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
+    when: (not update) and (not nvim_chad)
+  - name: update nvim config
+    shell: "cp -a ./nvim ${HOME}/.config/"
+    when: update and (not nvim_chad)
+  - name: install nvim NvChad config
+    shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && git clone https://github.com/NvChad/NvChad ${HOME}/.config/nvim --depth 1 && ln -s ${HOME}/projects/nvimlsp/custom ${HOME}/.config/nvim/lua/custom"
+    when: (not update) and nvim_chad
+
+  - name: check tmux-plugins is installed
+    stat:
+      path: ${HOME}/.tmux/plugins/tpm
+    register: register_name
+  - name: install tmux plugins
+    shell: "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm"
+    when: not register_name.stat.exists
+  - name: update tmux plugins
+    shell: "cd ${HOME}/.tmux/plugins/tpm && git pull"
+    when: register_name.stat.exists
+  - name: Update tmux config
+    shell: "cp ./shell/.tmux.conf ${HOME}/"
+
+  - name: Customize Zshell
+    shell: |
+      rm -rf $HOME/.oh-my-zsh
+      sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+      cp -a ./shell/zshcustom/* ${HOME}/.oh-my-zsh/custom/
+      cp -a ./shell/bin ./shell/.*profile* ./shell/.gitconfig ${HOME}/
+      sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="agnoster"/' ${HOME}/.zshrc
+      git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+      git clone https://github.com/zsh-users/zsh-history-substring-search ${HOME}/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+      git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+      sed -i 's/^plugins=.*$/plugins=(ag docker kubectl z zsh-autosuggestions history-substring-search zsh-syntax-highlighting)/' ${HOME}/.zshrc
+      echo ${HOME}/.cargo/bin >${HOME}/.profile_paths/cargo.path
+
+  - name: Install GoKube
+    shell: cd ./gokube && go install ./cmd/gk && GOOS=windows GOARCH=amd64 go build -o . ./cmd/gk
+    when: go_install

@@ -1,8 +1,14 @@
 #!/bin/sh
 echo "$0"
 
-echo "Update Ansible roles"
-ansible-galaxy role install lean_delivery.java --force # tecris.maven --force
+if [ "$(uname)" != "Darwin" ]; then
+  echo "Update Ansible roles"
+  ansible-galaxy role install lean_delivery.java --force # tecris.maven --force
+fi
 
 echo "Execute Ansible playboot"
-ansible-playbook ansible.yaml -e "update=true"
+if [ "$(uname)" = "Darwin" ]; then
+  ansible-playbook macansible.yaml -e "update=true"
+else
+  ansible-playbook ansible.yaml -e "update=true"
+fi

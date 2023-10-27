@@ -45,6 +45,7 @@ function M.setup()
 	opt.updatetime = 300 -- redraw the status bar often
 	opt.visualbell = false -- I said, no bells!
 
+	g.python3_host_prog = "/opt/homebrew/bin/python3"
 	g.python3_host_prog = "/usr/bin/python3"
 	g.loaded_python_provider = 0
 	g.loaded_perl_provider = 0
@@ -80,7 +81,7 @@ function M.setup()
 
 	-- g.virtualedit = "all"
 	g.vim_markdown_fenced_languages = { "html", "javascript", "typescript", "css", "python", "lua", "vim" }
-	g.treesitter_parsers = { "python", "go", "lua", "javascript", "c","java" }
+	g.treesitter_parsers = { "python", "go", "lua", "javascript", "c", "java" }
 	-- g.treesitter_parsers = "maintained"
 	-- on WSL 'choco install win32yank' and activate the following
 	-- g.clipboard = {

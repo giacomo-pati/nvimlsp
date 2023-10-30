@@ -20,7 +20,7 @@ test -d "$HOME/bin" && echo "$HOME/bin" >$HOME/.profile_paths/home_bin.path
 # set PATH so it includes user's private bin if it exists
 test -d "$HOME/.local/bin" && echo "$HOME/local/bin" >$HOME/.profile_paths/home_local_bin.path
 
-if [ "$(uname)" == "Darwin" ] : then
+if [ "$(uname)" = "Darwin" ]; then
   echo On Mac
 else
   # set M2 home if exists

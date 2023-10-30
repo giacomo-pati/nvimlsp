@@ -20,12 +20,12 @@
       upgrade: dist
       force_apt_get: yes
 
-  - name: Add PPA repositories
-    ansible.builtin.apt_repository:
-      repo: "{{ item }}"
-    with_items:
-    - ppa:neovim-ppa/unstable
-    - ppa:cwchien/gradle
+#   - name: Add PPA repositories
+#     ansible.builtin.apt_repository:
+#       repo: "{{ item }}"
+#     with_items:
+#       - ppa:neovim-ppa/unstable
+#       - ppa:cwchien/gradle
 
   - name: Install various repositories
     shell: |
@@ -87,18 +87,19 @@
       name: neovim
       state: latest
 
-  - name: Install snap items
-    community.general.snap:
-      name: "{{ item.name }}"
-      classic: "{{ item.classic }}"
-    when: item.install
-    with_items:
-    - { name: glow, classic: no, install: yes }
-    - { name: powershell, classic: yes, install: "{{ pwsh_install }}" }
-  - name: Link SNAP items to /bin
+#   - name: Install snap items
+#     community.general.snap:
+#       name: "{{ item.name }}"
+#       classic: "{{ item.classic }}"
+#     when: item.install
+#     with_items:
+#     - { name: glow, classic: no, install: yes }
+#     - { name: powershell, classic: yes, install: "{{ pwsh_install }}" }
+  - name: Install glow
     shell: |
-      ln -sf /snap/bin/pwsh /bin/pwsh
-      ln -sf /snap/bin/glow /bin/glow
+      cd /tmp
+      wget https://github.com/charmbracelet/glow/releases/download/v{{ glow_version }}/glow_{{ glow_version }}_amd64.deb
+      apt install ./glow_1.5.1_amd64.deb
 
   - name: Install Azure CLI
     shell: |
@@ -124,11 +125,12 @@
     when: go_install
   - name: Download go tar file
     shell: |
+      mkdir -p /opt/go
       wget https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz
       tar -C {{ go_install_dir}}/ -xzf go{{ go_version }}.linux-amd64.tar.gz
       mv {{ go_install_dir }}/go {{ go_install_dir }}/{{ go_version }}
       rm go{{ go_version }}.linux-amd64.tar.gz*
-      rm {{ go_install_dir }}/current
+      rm -f {{ go_install_dir }}/current
       ln -s {{ go_install_dir }}/{{ go_version }} {{ go_install_dir }}/current
     when: (golang_version_exists is failed) and go_install
 
@@ -172,6 +174,7 @@
     become: false
     community.general.cargo:
       name: stylua
+      locked: true
 
   - name: install lazygit
     become: false
@@ -212,7 +215,7 @@
     when: update and (not nvim_chad)
   - name: install nvim NvChad config
     become: false
-    shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && ln -s ${HOME}/projects/nvimlsp/custom ${HOME}/.config/nvim/lua/custom"
+    shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && git clone https://github.com/NvChad/NvChad ${HOME}/.config/nvim --depth 1 && ln -s ${HOME}/projects/nvimlsp/custom ${HOME}/.config/nvim/lua/custom"
     when: (not update) and nvim_chad
 
   - name: check tmux-plugins is installed

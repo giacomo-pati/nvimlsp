@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -10,7 +10,7 @@
 #umask 022
 
 # if running bash include .bashrc if it exists
-test -f "$HOME/.bashrc" && . "$HOME/.bashrc"
+test -f "$HOME/.bashrc" && test "$SHELL" != "/bin/zsh" && . "$HOME/.bashrc"
 
 mkdir -p $HOME/.profile_paths
 
@@ -80,7 +80,8 @@ else
   export PULUMI_ACCESS_TOKEN="..."
   export PULUMI_SECRET_PROVIDER=azurekeyvault://${PULUMI_KEYVAULT}.vault.azure.net/keys/azapphost
 fi
-test -f "$HOME/.profile_paths" && . "$HOME/.profile_paths"
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
 which stratum >/dev/null && eval "$(stratum completion zsh)" && complete -o default -F __start_stratum s
 which pulumi >/dev/null && eval "$(pulumi gen-completion zsh)" && complete -o default -F __start_pulumi pu
 which zoxide >/dev/null && eval "$(zoxide init zsh)"

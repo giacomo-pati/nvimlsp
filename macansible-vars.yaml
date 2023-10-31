@@ -11,6 +11,7 @@ brew_pkgs:
 - black
 - ca-certificates
 - cargo-c
+- cmake
 - cpanminus
 - curl
 - docker

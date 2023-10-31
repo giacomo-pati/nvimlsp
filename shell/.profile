@@ -9,7 +9,7 @@
 #umask 022
 
 # if running bash include .bashrc if it exists and we are not running in zshell
-ps fwaux|grep -v grep|grep $$|grep zsh >/dev/null
+ps waux|grep -v grep|grep $$|grep zsh >/dev/null
 if [ $? != 0 ]; then  
   test -f "$HOME/.bashrc" && . "$HOME/.bashrc"
 else
@@ -86,6 +86,8 @@ else
   export PULUMI_ACCESS_TOKEN="..."
   export PULUMI_SECRET_PROVIDER=azurekeyvault://${PULUMI_KEYVAULT}.vault.azure.net/keys/azapphost
 fi
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
 test -f "$HOME/.profile_paths" && . "$HOME/.profile_paths"
 which stratum >/dev/null && eval "$(stratum completion zsh)" && complete -o default -F __start_stratum s
 which pulumi >/dev/null && eval "$(pulumi gen-completion zsh)" && complete -o default -F __start_pulumi pu

@@ -15,7 +15,7 @@ import (
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
-	graph "github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2021-03-01/resourcegraph"
+	graph "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resourcegraph/armresourcegraph"
 	"github.com/Azure/go-autorest/autorest/azure/auth"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"

@@ -25,6 +25,10 @@ M.mason = {
 	ensure_installed = {
 		"bash-language-server",
 		"dockerfile-language-server",
+		"delve",
+		"glint",
+		"gofumpt",
+		"goimports-reviser",
 		"gopls",
 		"json-lsp",
 		"lua-language-server",

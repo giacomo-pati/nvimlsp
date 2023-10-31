@@ -50,14 +50,14 @@
   - name: prepare home directory
     shell: mkdir -p ${HOME}/.profile_paths
 
-  - name: vscode-json-language-server exists
-    shell: "ls /opt/homebrew/bin/vscode-json-language-server"
-    register: vscode_json_language_server_exists
-    ignore_errors: yes
-  - name: Install alternative name for vscode-json-languageserver
-    become: true
-    shell: ln -s /opt/homegrew/bin/vscode-json-languageserver /opt/homebrew/bin/vscode-json-language-server
-    when: vscode_json_language_server_exists is failed
+  # - name: vscode-json-language-server exists
+  #   shell: "ls /opt/homebrew/bin/vscode-json-language-server"
+  #   register: vscode_json_language_server_exists
+  #   ignore_errors: yes
+  # - name: Install alternative name for vscode-json-languageserver
+  #   become: true
+  #   shell: ln -s /opt/homegrew/bin/vscode-json-languageserver /opt/homebrew/bin/vscode-json-language-server
+  #   when: vscode_json_language_server_exists is failed
 
   - name: Install latest neovim gem
     become: true

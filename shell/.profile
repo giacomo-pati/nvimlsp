@@ -131,4 +131,4 @@ if which pulumi >/dev/null; then
   }
 fi
 
-export PATH=$PATH:$(find ~/.profile_paths -name \*.path -print0 | xargs -0 cat | tr '\n' ':')
+export PATH=$(find ~/.profile_paths -name \*.path -print0 | xargs -0 cat | tr '\n' ':')$PATH

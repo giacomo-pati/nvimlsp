@@ -252,7 +252,7 @@
   - name: Add PATH for golang
     become: false
     shell: |
-      echo $(dirname "{{ go_install_dir }}")/current/bin >${HOME}/.profile_paths/go.path
+      echo "{{ go_install_dir }}/current/bin" >${HOME}/.profile_paths/go.path
       echo ${HOME}/go/bin >${HOME}/.profile_paths/go_bin.path
     when: go_install
 

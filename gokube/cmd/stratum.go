@@ -15,8 +15,8 @@ import (
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	graph "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resourcegraph/armresourcegraph"
-	"github.com/Azure/go-autorest/autorest/azure/auth"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 )
@@ -87,18 +87,23 @@ func (info *stratumInfo) askForStratumEnv() *aksEnvironmentType {
 	log.Fatalf("Env '%s' not found, this should not happen", answers.Environment)
 	return nil
 }
+
 func (info *stratumInfo) fetchStratumClusters() {
-	// Create and authorize a ResourceGraph client
-	graphClient := graph.New()
-	authorizer, err := auth.NewAuthorizerFromCLI()
+	cred, err := azidentity.NewAzureCLICredential(nil)
 	if err != nil {
-		log.Fatalf("cannot get authorization: %v", err)
+		log.Fatalf("failed to obtain a credential: %v", err)
 	}
-	graphClient.Authorizer = authorizer
+
+	// Create and authorize a ResourceGraph client
+	graphClient, err := graph.NewClient(cred, nil)
+	if err != nil {
+		log.Fatalf("failed to obtain a graph client: %v", err)
+	}
 
 	// Set options
+	qrorf := graph.ResultFormatObjectArray
 	RequestOptions := graph.QueryRequestOptions{
-		ResultFormat: "objectArray",
+		ResultFormat: &qrorf,
 	}
 
 	// Create the query request
@@ -110,15 +115,17 @@ resources
  | project aksName=name, subscriptionId, resourceGroup, stratumClusterName=tags["Instance"]
 `
 	Request := graph.QueryRequest{
-		Subscriptions: &[]string{},
-		Query:         &query,
-		Options:       &RequestOptions,
+		Query:            &query,
+		Facets:           []*graph.FacetRequest{},
+		ManagementGroups: []*string{},
+		Options:          &RequestOptions,
+		Subscriptions:    []*string{},
 	}
 
 	// Run the query and get the results
 	// TODO: Make this call to not block us as in the STRATUM Launch demo and
 	// use an embedded cache
-	results, err := graphClient.Resources(context.Background(), Request)
+	results, err := graphClient.Resources(context.Background(), Request, nil)
 	if err != nil {
 		log.Fatalf("cannot execute query: %v", err)
 	}
@@ -152,10 +159,13 @@ resources
 
 	info.aksEnvironments = res
 }
+
 func (info *stratumInfo) connect(env *aksEnvironmentType) error {
 	log.Printf("Connecting to environment %s", env.StratumClusterName)
-	azargs := []string{"aks", "get-credentials", "--name", env.AksName, "--subscription", env.SubscriptionID,
-		"--resource-group", env.ResourceGroup, "--overwrite-existing"}
+	azargs := []string{
+		"aks", "get-credentials", "--name", env.AksName, "--subscription", env.SubscriptionID,
+		"--resource-group", env.ResourceGroup, "--overwrite-existing",
+	}
 	isAdmin := false
 	for _, v := range os.Args[2:] {
 		if strings.EqualFold(v, "--admin") || strings.EqualFold(v, "-a") {

@@ -45,18 +45,18 @@ brew_pkgs:
 - zsh
 brew_cask_pkgs:
 - adobe-acrobat-reader
-- cakebrew                
-- discord                 
-- font-hack-nerd-font     
-- gimp                    
-- google-chrome           
-- inkscape     
-- iterm2                  
+- cakebrew
+- discord
+- font-hack-nerd-font
+- gimp
+- google-chrome
+- inkscape
+- iterm2
 - makemkv
-- mos                     
-- powershell              
-- spotify                 
-- telegram                
+- mos
+- powershell
+- spotify
+- telegram
 - visual-studio-code
 - vlc
 python_pkgs:

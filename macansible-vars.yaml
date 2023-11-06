@@ -64,11 +64,6 @@ python_pkgs:
 - neovim-remote
 - pynvim
 npm_pkgs:
-- bash-language-server
-- dockerfile-language-server-nodejs
-- eslint_d
 - neovim
 - npm
 - '@fsouza/prettierd'
-- vscode-json-languageserver
-- yaml-language-server

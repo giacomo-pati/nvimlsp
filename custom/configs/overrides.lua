@@ -26,6 +26,7 @@ M.mason = {
 		"bash-language-server",
 		"dockerfile-language-server",
 		"delve",
+		"eslint_d",
 		"glint",
 		"gofumpt",
 		"goimports-reviser",
@@ -33,6 +34,7 @@ M.mason = {
 		"json-lsp",
 		"lua-language-server",
 		"powershell-editor-services",
+		"prettierd",
 		"yaml-language-server",
 	},
 }

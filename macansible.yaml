@@ -50,15 +50,6 @@
   - name: prepare home directory
     shell: mkdir -p ${HOME}/.profile_paths
 
-  # - name: vscode-json-language-server exists
-  #   shell: "ls /opt/homebrew/bin/vscode-json-language-server"
-  #   register: vscode_json_language_server_exists
-  #   ignore_errors: yes
-  # - name: Install alternative name for vscode-json-languageserver
-  #   become: true
-  #   shell: ln -s /opt/homegrew/bin/vscode-json-languageserver /opt/homebrew/bin/vscode-json-language-server
-  #   when: vscode_json_language_server_exists is failed
-
   - name: Install latest neovim gem
     become: true
     community.general.gem:
@@ -102,11 +93,14 @@
     shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && cp -a ./nvim ${HOME}/.config/"
     when: (not update) and (not nvim_chad)
   - name: update nvim config
-    shell: "cp -a ./nvim ${HOME}/.config/"
+    shell: "rm -rf ${HOME}/.config/nvim/ && cp -a ./nvim ${HOME}/.config/"
     when: update and (not nvim_chad)
   - name: install nvim NvChad config
     shell: "mkdir -p ${HOME}/.config && rm -rf ${HOME}/.local/share/nvim/ ${HOME}/.config/nvim/ ${HOME}/.cache/nvim/ && git clone https://github.com/NvChad/NvChad ${HOME}/.config/nvim --depth 1 && ln -s ${HOME}/projects/nvimlsp/custom ${HOME}/.config/nvim/lua/custom"
     when: (not update) and nvim_chad
+  - name: update nvim NvChad config
+    shell: "cd ${HOME}/nvim && git pull"
+    when: update and nvim_chad
 
   - name: check tmux-plugins is installed
     stat:

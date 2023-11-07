@@ -109,6 +109,7 @@ local plugins = {
 				["<leader>"] = {
 					b = { name = "+Buffer" },
 					l = { name = "+LSP" },
+					d = { name = "+DAP" },
 				},
 			})
 		end,

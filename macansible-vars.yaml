@@ -1,7 +1,6 @@
 gathering_facts: true
 go_install: true
-nerd_font: "Hack"
-nerd_font_version: "v3.0.2"
+nerd_font: "JetBrainsMono"
 nvim_chad: true
 pwsh_install: true
 update: false

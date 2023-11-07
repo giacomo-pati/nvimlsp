@@ -9,6 +9,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/utils/strings/slices"
 )
 
 func executeNsCmd() {
@@ -50,7 +51,8 @@ func executeNsCmd() {
 	}
 	sort.Strings(namespaces)
 	defaultNs := "default"
-	if apiconfig.Contexts[apiconfig.CurrentContext].Namespace != "" {
+	ctxNs := apiconfig.Contexts[apiconfig.CurrentContext].Namespace
+	if ctxNs != "" && slices.Contains(namespaces, ctxNs) {
 		defaultNs = apiconfig.Contexts[apiconfig.CurrentContext].Namespace
 	}
 	simpleQs := []*survey.Question{

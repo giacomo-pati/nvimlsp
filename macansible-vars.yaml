@@ -1,7 +1,5 @@
 gathering_facts: true
 go_install: true
-nerd_font: "JetBrainsMono"
-nerd_font_version: "v3.0.2"
 nvim_chad: true
 pwsh_install: true
 update: false
@@ -52,6 +50,7 @@ brew_cask_pkgs:
 - google-chrome
 - inkscape
 - iterm2
+- font-jetbrains-mono-nerd-font
 - makemkv
 - mos
 - powershell

@@ -64,20 +64,6 @@
       rm -rf dive.deb
 
   post_tasks:
-  - name: ensure fonts directory
-    file:
-      path: "{{ lookup('env', 'HOME') }}/.fonts"
-      state: directory
-
-  - name: Download Nerd Font
-    ansible.builtin.unarchive:
-      src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_version }}/{{ nerd_font }}.zip"
-      dest: "{{ lookup('env', 'HOME') }}/.fonts/"
-      remote_src: yes
-
-  - name: cache fonts
-    shell: fc-cache -fv
-
   - name: install stylua rust package
     community.general.cargo:
       name: stylua

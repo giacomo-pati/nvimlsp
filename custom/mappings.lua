@@ -26,6 +26,17 @@ local M = {
 				"<cmd>bd<cr>",
 				"Buffer delete",
 			},
+		},
+		v = {
+			["<leader>sv"] = {
+				"<Cmd>lua require('spectre').open_visual({select_word=true})<CR>",
+				"Visual search",
+			},
+		},
+	},
+	lspconfig = {
+		plugin = true,
+		n = {
 			["<leader>lr"] = {
 				function()
 					require("nvchad.renamer").open()
@@ -61,7 +72,9 @@ local M = {
 				"Enable diagnostics",
 			},
 			["<leader>lf"] = {
-				"<Cmd>update<CR>:lua vim.lsp.buf.format()<CR>",
+				function()
+					vim.lsp.buf.format({ async = true })
+				end,
 				"Format",
 			},
 			["<leader>lx"] = {
@@ -76,106 +89,13 @@ local M = {
 				"<Cmd>SymbolsOutline<CR>",
 				"Outlines",
 			},
-			["<leader>db"] = {
-				function()
-					require("dap").toggle_breakpoint()
-				end,
-				"Toggle breakpoint",
-			},
-			["<leader>dc"] = {
-				function()
-					require("dap").continue()
-				end,
-				"Continue",
-			},
-			["<leader>dt"] = {
-				function()
-					require("dap-go").debug_test()
-				end,
-				"Continue Test",
-			},
-			["<leader>ds"] = {
-				function()
-					require("dap").step_over()
-				end,
-				"Step over",
-			},
-			["<leader>di"] = {
-				function()
-					require("dap").step_into()
-				end,
-				"Step into",
-			},
-			["<leader>do"] = {
-				function()
-					require("dap").step_out()
-				end,
-				"Step out",
-			},
-			["<leader>du"] = {
-				function()
-					require("dapui").toggle()
-				end,
-				"Toggle UI",
-			},
-			["<leader>dp"] = {
-				function()
-					require("dap").repl.open()
-				end,
-				"Step out",
-			},
-			-- ["<leader>dl"] = {
-			-- 	function()
-			-- 		require("config.dap").nvim_dap_load_launchjs()
-			-- 	end,
-			-- 	"Reload .vscode/launch.json (?!?!)",
-			-- },
-			["<leader>de"] = {
-				function()
-					require("telescope").extensions.dap.commands({})
-				end,
-				"Commands",
-			},
-			["<leader>df"] = {
-				function()
-					require("telescope").extensions.dap.configurations({})
-				end,
-				"Configurations",
-			},
-			["<leader>dr"] = {
-				function()
-					require("telescope").extensions.dap.list_breakpoints({})
-				end,
-				"List breakpoints",
-			},
-			["<leader>dv"] = {
-				function()
-					require("telescope").extensions.dap.variables({})
-				end,
-				"Variables",
-			},
-			["<leader>dm"] = {
-				function()
-					require("telescope").extensions.dap.frames({})
-				end,
-				"Frames",
-			},
-		},
-		v = {
-			["<leader>sv"] = {
-				"<Cmd>lua require('spectre').open_visual({select_word=true})<CR>",
-				"Visual search",
-			},
 		},
 	},
 	dap = {
 		plugin = true,
 		n = {
-			["<leader>db"] = {
-				"<cmd>DapToggleBreakpoint<CR>",
-				"Add breakpoint at line",
-			},
-			["<leader>dus"] = {
+			["<leader>db"] = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
+			["<leader>dl"] = {
 				function()
 					local widgets = require("dap.ui.widgets")
 					local sidebar = widgets.sidebar(widgets.scopes)
@@ -183,6 +103,30 @@ local M = {
 				end,
 				"Open debugging sidebar",
 			},
+			["<leader>dc"] = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+			["<leader>dt"] = { "<cmd>lua require('dap-go').debug_test()<cr>", "Continue Test" },
+			["<leader>ds"] = { "<cmd>lua require('dap').step_over()<cr>", "Step over" },
+			["<leader>di"] = { "<cmd>lua require('dap').step_into()<cr>", "Step into" },
+			["<leader>do"] = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
+			["<leader>du"] = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle UI" },
+			["<leader>dp"] = { "<cmd>lua require('dap').repl.open()<cr>", "Step out" },
+			-- ["<leader>dl"] = { "cmd>lua require('config.dap').nvim_dap_load_launchjs()<cr>", "Reload .vscode/launch.json (?!?!)" },
+			["<leader>de"] = { "<cmd>lua require('telescope').extensions.dap.commands({})<cr>", "Commands" },
+			["<leader>df"] = {
+				"<cmd>lua require('telescope').extensions.dap.configurations({})<cr>",
+				"Configurations",
+			},
+			["<leader>dr"] = {
+				"<cmd>lua require('telescope').extensions.dap.list_breakpoints({})<cr>",
+				"List breakpoints",
+			},
+			["<leader>dv"] = { "<cmd>lua require('telescope').extensions.dap.variables({})<cr>", "Variables" },
+			["<leader>dm"] = { "<cmd>lua require('telescope').extensions.dap.frames({})<cr>", "Frames" },
+			["<F8>"] = { "<cmd>lua require('dap').step_over()<cr>", "Step over" },
+			["<S-F8>"] = { "<cmd>lua require('dap').step_out()<cr>", "Step out" },
+			["<F7>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step into" },
+			["<F9>"] = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+			["<S-F9>"] = { "<cmd>lua require('dap-go').debug_test()<cr>", "Continue Test" },
 		},
 	},
 	["dap-go"] = {

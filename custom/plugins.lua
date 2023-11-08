@@ -39,7 +39,19 @@ local plugins = {
 		"nvim-tree/nvim-tree.lua",
 		opts = overrides.nvimtree,
 	},
-
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = "nvim-telescope/telescope-dap.nvim",
+		opts = function()
+			local conf = require("plugins.configs.telescope")
+			conf.defaults.mappings.i = {
+				["<C-j>"] = require("telescope.actions").move_selection_next,
+				["<Esc>"] = require("telescope.actions").close,
+			}
+			conf.extensions_list = { "themes", "terms", "fzf", "dap" }
+			return conf
+		end,
+	},
 	-- Install a plugins
 
 	{
@@ -57,6 +69,27 @@ local plugins = {
 		config = function(_, opts)
 			require("dap-go").setup(opts)
 			require("core.utils").load_mappings("dap-go")
+		end,
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = "mfussenegger/nvim-dap",
+		config = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
+			dapui.setup()
+
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
 		end,
 	},
 	{
@@ -107,8 +140,8 @@ local plugins = {
 			wk.register({
 				-- add groups
 				["<leader>"] = {
-					b = { name = "+Buffer" },
 					l = { name = "+LSP" },
+					b = { name = "+Buffer" },
 					d = { name = "+DAP" },
 				},
 			})

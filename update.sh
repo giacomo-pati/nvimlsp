@@ -8,7 +8,15 @@ fi
 
 echo "Execute Ansible playboot"
 if [ "$(uname)" = "Darwin" ]; then
-  ansible-playbook macansible.yaml -e "update=true"
+  if [ $# -gt 0 ]; then
+    ansible-playbook macansible.yaml -e "update=true" --start-at-task "$1"
+  else
+    ansible-playbook macansible.yaml -e "update=true"
+  fi
 else
-  ansible-playbook ansible.yaml -e "update=true"
+  if [ $# -gt 0 ]; then
+    ansible-playbook ansible.yaml -e "update=true" --start-at-task "$1"
+  else
+    ansible-playbook ansible.yaml -e "update=true"
+  fi
 fi

@@ -26,5 +26,5 @@ else
     ansible-playbook ansible.yaml --start-at-task "$1"
   else
     ansible-playbook ansible.yaml
-  if
+  fi
 fi

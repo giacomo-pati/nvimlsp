@@ -18,3 +18,5 @@ Use `ide.sh` to open up a Tmux based setup with NeoVIM
 NeoVIM's configured menu key (leader key) is the ','
 
 For a general key mapping overview use sequence ',ch'
+
+For full key drilldown use command ':WhichKey'

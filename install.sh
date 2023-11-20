@@ -20,7 +20,7 @@ if [ "$(uname)" = "Darwin" ]; then
     ansible-playbook macansible.yaml --start-at-task "$1"
   else
     ansible-playbook macansible.yaml
-  if
+  fi
 else
   if [ $# -gt 0 ]; then
     ansible-playbook ansible.yaml --start-at-task "$1"

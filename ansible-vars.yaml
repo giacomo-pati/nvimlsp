@@ -1,4 +1,4 @@
-azcli_version: 2.53.0
+azcli_version: 2.54.0
 azcli_install: true
 gathering_facts: false
 glow_version: "1.5.1"
@@ -12,7 +12,7 @@ java_install: false
 maven_version: 3.9.3
 maven_install: true
 nvim_chad: true
-pulumi_version: 3.92.0
+pulumi_version: 3.94.2
 pulumi_install: true
 pwsh_install: true
 update: false

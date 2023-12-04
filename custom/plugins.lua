@@ -129,6 +129,10 @@ local plugins = {
 		end,
 	},
 	{
+		"wellle/context.vim",
+		lazy = false,
+	},
+	{
 		"folke/which-key.nvim",
 		disable = false,
 		config = function()

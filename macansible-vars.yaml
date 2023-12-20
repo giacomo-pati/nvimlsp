@@ -51,6 +51,45 @@ brew_cask_pkgs:
 - inkscape
 - iterm2
 - font-jetbrains-mono-nerd-font
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  NORMAL  󰈚 Empty  󰅚 0  0                                                                                     Ln 0, Col 0   {} plain text   󰉖 nvimlsp
+
+
+- qmk-toolbox
 - makemkv
 - mos
 - powershell

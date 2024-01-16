@@ -58,6 +58,10 @@ local plugins = {
 		build = "make",
 	},
 	{
+		"ray-x/guihua.lua",
+		build = "cd lua/fzy && make",
+	},
+	{
 		"ray-x/go.nvim",
 		dependencies = { -- optional packages
 			"ray-x/guihua.lua",
@@ -107,6 +111,13 @@ local plugins = {
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				dapui.close()
 			end
+		end,
+	},
+	{
+		"theHamsta/nvim-dap-virtual-text",
+		lazy = false,
+		config = function(_, opts)
+			require("nvim-dap-virtual-text").setup()
 		end,
 	},
 	-- {

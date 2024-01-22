@@ -11,7 +11,8 @@ if [ "$(uname)" = "Darwin" ]; then
     ansible-playbook macansible.yaml 
   fi
 else
-  if [[ "$PROXY_URL" =~ '\.rcbd\.' ]]; then 
+  echo "$PROXY_URL" 
+  if [[ "$PROXY_URL" =~ '\.rcbd\.' ]]; then
     echo "We are on a RCBD instance"
     RCBD=true
   else 

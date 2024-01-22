@@ -15,6 +15,7 @@ else
     echo "We are on a RCBD instance"
     RCBD=true
   else 
+    echo "We are NOT on a RCBD instance"
     RCBD=false
     sudo apt install software-properties-common
     sudo apt-add-repository ppa:ansible/ansible -y

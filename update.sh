@@ -16,6 +16,7 @@ else
     echo "We are on a RCBD instance"
     RCBD=true
   else 
+    echo "We are NOT on a RCBD instance"
     RCBD=false
   fi
   if [ $# -gt 0 ]; then

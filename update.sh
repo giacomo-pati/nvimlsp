@@ -13,6 +13,7 @@ if [ "$(uname)" != "Darwin" ]; then
 else
   echo "Execute Ansible playboot"
   if [[ "$PROXY_URL" =~ '\.rcbd\.' ]]; then 
+    echo "We are on a RCBD instance"
     RCBD=true
   else 
     RCBD=false

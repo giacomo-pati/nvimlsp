@@ -12,6 +12,7 @@ if [ "$(uname)" = "Darwin" ]; then
   fi
 else
   if [[ "$PROXY_URL" =~ '\.rcbd\.' ]]; then 
+    echo "We are on a RCBD instance"
     RCBD=true
   else 
     RCBD=false

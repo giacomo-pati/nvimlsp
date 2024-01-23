@@ -7,20 +7,18 @@
   pre_tasks:
   - name: Install update-manager-core
     apt: name=update-manager-core
-    when: (not update) or (not rcbd)
+    when: not update
 
   - name: Update apt repo and cache
     apt:
       update_cache: yes
       force_apt_get: yes
       cache_valid_time: 3600
-    when: not rcbd
 
   - name: Upgrade all packages on servers
     apt:
       upgrade: dist
       force_apt_get: yes
-    when: not rcbd
 
 #   - name: Add PPA repositories
 #     ansible.builtin.apt_repository:

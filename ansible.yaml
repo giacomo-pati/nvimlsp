@@ -20,12 +20,12 @@
       upgrade: dist
       force_apt_get: yes
 
-#   - name: Add PPA repositories
-#     ansible.builtin.apt_repository:
-#       repo: "{{ item }}"
-#     with_items:
-#       - ppa:neovim-ppa/unstable
-#       - ppa:cwchien/gradle
+  - name: Add PPA repositories
+    ansible.builtin.apt_repository:
+      repo: "{{ item }}"
+    with_items:
+      - ppa:neovim-ppa/unstable
+        # - ppa:cwchien/gradle
 
   - name: Install various repositories
     shell: |
@@ -161,6 +161,7 @@
       src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_version }}/{{ nerd_font }}.zip
       dest: "{{ lookup('env', 'HOME') }}/.fonts/"
       remote_src: yes
+      validate_certs: false
 
   - name: cache fonts
     become: false
@@ -243,7 +244,7 @@
     become: false
     shell: |
       rm -rf $HOME/.oh-my-zsh
-      sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+      sh -c "$(wget --no-check-certificate https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
       cp -a ./shell/zshcustom/* ${HOME}/.oh-my-zsh/custom/
       cp -a ./shell/bin ./shell/.*profile* ./shell/.gitconfig ${HOME}/
       sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="agnoster"/' ${HOME}/.zshrc

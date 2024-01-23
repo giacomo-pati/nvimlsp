@@ -15,7 +15,6 @@ nvim_chad: true
 pulumi_version: 3.102.0
 pulumi_install: true
 pwsh_install: true
-rcbd: false
 update: false
 apt_pkgs:
   - apt-transport-https

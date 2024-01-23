@@ -11,24 +11,16 @@ if [ "$(uname)" = "Darwin" ]; then
     ansible-playbook macansible.yaml 
   fi
 else
-  echo $PROXY_URL | grep '\.rcbd\.' >/dev/null
-  if [ $? -eq 0 ]; then
-    echo "We are on a RCBD instance"
-    RCBD=true
-  else 
-    echo "We are NOT on a RCBD instance"
-    RCBD=false
-  fi
   sudo apt install software-properties-common
   sudo apt-add-repository ppa:ansible/ansible -y
   sudo apt update
   sudo apt install ansible -y
   echo "Install Ansible roles"
-  ansible-galaxy role install lean_delivery.java --force -e "rcbd=$RCBD" # tecris.maven
+  ansible-galaxy role install lean_delivery.java --force # tecris.maven
   echo "Execute Ansible playboot"
   if [ $# -gt 0 ]; then
-    ansible-playbook ansible.yaml --start-at-task "$1" -e "rcbd=$RCBD"
+    ansible-playbook ansible.yaml --start-at-task "$1"
   else
-    ansible-playbook ansible.yaml -e "rcbd=$RCBD"
+    ansible-playbook ansible.yaml
   fi
 fi

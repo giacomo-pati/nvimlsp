@@ -3,7 +3,7 @@ echo "$0"
 
 if [ "$(uname)" = "Darwin" ]; then
   echo "Update Ansible roles"
-  ansible-galaxy role install lean_delivery.java --force # tecris.maven --force
+  ansible-galaxy role install lean_delivery.java --force --ignore-certs # tecris.maven --force
   echo "Execute Ansible playboot"
   if [ $# -gt 0 ]; then
     ansible-playbook macansible.yaml -e "update=true" --start-at-task "$1"

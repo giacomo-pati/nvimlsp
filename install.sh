@@ -16,7 +16,7 @@ else
   sudo apt update
   sudo apt install ansible -y
   echo "Install Ansible roles"
-  ansible-galaxy role install lean_delivery.java --force # tecris.maven
+  ansible-galaxy role install lean_delivery.java --force --ignore-certs # tecris.maven
   echo "Execute Ansible playboot"
   if [ $# -gt 0 ]; then
     ansible-playbook ansible.yaml --start-at-task "$1"

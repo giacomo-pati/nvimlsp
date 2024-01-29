@@ -102,6 +102,8 @@ alias kns="gk ns"
 alias kc="gk c"
 alias kcd="gk cd"
 alias ks="gk s"
+alias jq="gojq"
+alias yq="gojq --yaml-input --yaml-output"
 if which pulumi >/dev/null; then
   alias pu=pulumi
   function plss {

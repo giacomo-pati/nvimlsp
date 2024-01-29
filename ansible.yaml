@@ -185,9 +185,9 @@
     become: false
     shell: "{{ go_install_dir }}/current/bin/go install github.com/cloudflare/cloudflare-go/cmd/flarectl@latest"
 
-  - name: install yq
+  - name: install goyq
     become: false
-    shell: "{{ go_install_dir }}/current/bin/go install github.com/mikefarah/yq/v4@latest"
+    shell: "{{ go_install_dir }}/current/bin/go install github.com/itchyny/gojq/cmd/gojq@latest"
 
   - name: install python packages
     become: false

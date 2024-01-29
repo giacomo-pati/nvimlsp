@@ -39,7 +39,6 @@ apt_pkgs:
   - gradle
   - graphviz
   - g++
-  - jq
   - libfuse2
   - lsb-release
   - locate

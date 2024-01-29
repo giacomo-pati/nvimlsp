@@ -11,6 +11,9 @@ if [ "$(uname)" = "Darwin" ]; then
     ansible-playbook macansible.yaml 
   fi
 else
+  echo 'tzdata tzdata/Areas select Europe' | sudo debconf-set-selections
+  echo 'tzdata tzdata/Zones/Europe select Paris' | sudo debconf-set-selections
+  DEBIAN_FRONTEND="noninteractive" sudo apt install -y tzdata
   sudo apt install software-properties-common
   sudo apt-add-repository ppa:ansible/ansible -y
   sudo apt update

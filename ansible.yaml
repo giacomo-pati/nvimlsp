@@ -21,11 +21,10 @@
       force_apt_get: yes
 
   - name: Add PPA repositories
-    ansible.builtin.apt_repository:
-      repo: "{{ item }}"
+    shell: add-apt-repository "{{ item }}"
     with_items:
       - ppa:neovim-ppa/unstable
-        # - ppa:cwchien/gradle
+      - ppa:cwchien/gradle
 
   - name: Install various repositories
     shell: |

@@ -220,7 +220,7 @@
   - name: upate nvim NvChad config
     become: false
     shell: "cd ${HOME}/.config/nvim && git pull"
-    when: (not update) and nvim_chad
+    when: update and nvim_chad
 
   - name: check tmux-plugins is installed
     become: false

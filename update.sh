@@ -13,8 +13,8 @@ if [ "$(uname)" = "Darwin" ]; then
 else
   echo "Execute Ansible playboot"
   if [ $# -gt 0 ]; then
-    ansible-playbook ansible.yaml --start-at-task "$1"
+    ansible-playbook ansible.yaml -e "update=true" --start-at-task "$1"
   else
-    ansible-playbook ansible.yaml
+    ansible-playbook ansible.yaml -e "update=true"
   fi
 fi

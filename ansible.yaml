@@ -23,7 +23,7 @@
   - name: Add PPA repositories
     shell: add-apt-repository "{{ item }}"
     with_items:
-      - ppa:neovim-ppa/unstable
+      - ppa:neovim-ppa/stable
       - ppa:cwchien/gradle
 
   - name: Install various repositories

@@ -6,6 +6,7 @@ update: false
 upgrade_homebrew_packages: true
 brew_pkgs:
 - bat
+- bitwarden
 - black
 - ca-certificates
 - cargo-c

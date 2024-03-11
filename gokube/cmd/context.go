@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/davecgh/go-spew/spew"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 )
@@ -116,6 +117,7 @@ func executeContextDeleteCmd() {
 }
 
 func defaultQuestion(config *api.Config) string {
+	spew.Dump(config.Contexts, config.CurrentContext, config.Contexts[config.CurrentContext])
 	if len(config.Contexts) > 0 && config.CurrentContext != "" && config.Contexts[config.CurrentContext] != nil {
 		return fmt.Sprintf("%s - %s", config.Contexts[config.CurrentContext].AuthInfo, config.CurrentContext)
 	}

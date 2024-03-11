@@ -11,7 +11,7 @@ import (
 )
 
 func getKubeConfigPath() (string, error) {
-	var kubeconfig string = os.Getenv("KUBECONFIG")
+	kubeconfig := os.Getenv("KUBECONFIG")
 	if kubeconfig == "" {
 		if home := homedir.HomeDir(); home != "" {
 			kubeconfig = filepath.Join(home, ".kube", "config")

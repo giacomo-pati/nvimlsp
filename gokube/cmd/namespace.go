@@ -47,7 +47,7 @@ func executeNsCmd() {
 
 	namespaces := []string{}
 	for _, v := range ns.Items {
-		namespaces = append(namespaces, v.ObjectMeta.Name)
+		namespaces = append(namespaces, v.Name)
 	}
 	sort.Strings(namespaces)
 	defaultNs := "default"

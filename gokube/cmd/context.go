@@ -7,6 +7,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/tools/clientcmd/api"
 )
 
 func executeContextCmd() {
@@ -84,7 +85,7 @@ func executeContextDeleteCmd() {
 			Prompt: &survey.Select{
 				Message: "Choose a context:",
 				Options: opt,
-				Default: fmt.Sprintf("%s - %s", config.Contexts[config.CurrentContext].AuthInfo, config.CurrentContext),
+				Default: defaultQuestion(config),
 			},
 			// Validate: survey.Required,
 		},
@@ -112,4 +113,11 @@ func executeContextDeleteCmd() {
 	}
 
 	fmt.Printf("Context %s deleted.\n", selCtxName)
+}
+
+func defaultQuestion(config *api.Config) string {
+	if len(config.Contexts) > 0 {
+		return fmt.Sprintf("%s - %s", config.Contexts[config.CurrentContext].AuthInfo, config.CurrentContext)
+	}
+	return ""
 }

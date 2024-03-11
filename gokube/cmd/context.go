@@ -116,10 +116,9 @@ func executeContextDeleteCmd() {
 	fmt.Printf("Context %s deleted.\n", selCtxName)
 }
 
-func defaultQuestion(config *api.Config) string {
-	spew.Dump(config.Contexts, config.CurrentContext, config.Contexts[config.CurrentContext])
+func defaultQuestion(config *api.Config) interface{} {
 	if len(config.Contexts) > 0 && config.CurrentContext != "" && config.Contexts[config.CurrentContext] != nil {
 		return fmt.Sprintf("%s - %s", config.Contexts[config.CurrentContext].AuthInfo, config.CurrentContext)
 	}
-	return ""
+	return nil
 }

@@ -116,7 +116,7 @@ func executeContextDeleteCmd() {
 }
 
 func defaultQuestion(config *api.Config) string {
-	if len(config.Contexts) > 0 {
+	if len(config.Contexts) > 0 && config.CurrentContext != "" && config.Contexts[config.CurrentContext] != nil {
 		return fmt.Sprintf("%s - %s", config.Contexts[config.CurrentContext].AuthInfo, config.CurrentContext)
 	}
 	return ""

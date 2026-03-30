@@ -10,7 +10,6 @@ brew_pkgs:
 - black
 - ca-certificates
 - cargo-c
-- cmake
 - cpanminus
 - curl
 - docker
@@ -43,8 +42,9 @@ brew_pkgs:
 - zoxide
 - zsh
 brew_cask_pkgs:
-- adobe-acrobat-reader
+# - adobe-acrobat-reader
 - cakebrew
+- cmake
 - discord
 - font-jetbrains-mono-nerd-font
 - gimp
@@ -58,6 +58,7 @@ brew_cask_pkgs:
 - mos
 - powershell
 - qmk-toolbox
+- signal
 - spotify
 - telegram
 - visual-studio-code

@@ -54,7 +54,6 @@ brew_cask_pkgs:
 - karabiner-elements
 - makemkv
 - microsoft-teams
-- microsoft-teams
 - mos
 - powershell
 - qmk-toolbox
